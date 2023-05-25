@@ -1,3 +1,5 @@
 .vscode/
-daily_develop/
 tensorrt/python/__pycache__/
+test
+cudahome
+link_favorites
