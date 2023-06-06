@@ -21,10 +21,10 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 MESSAGE(STATUS "CMAKE_EXPORT_COMPILE_COMMANDS: ${CMAKE_EXPORT_COMPILE_COMMANDS}")
 
 add_subdirectory(hello_world)
-add_subdirectory(add)
+add_subdirectory(element_wise)
 
 add_executable(kernel_caller kernel_caller.cc)
 
-set(kernels hello_world_kernel add_kernel)
+set(kernels hello_world_kernel element_wise_kernel)
 
 target_link_libraries(kernel_caller ${kernels})

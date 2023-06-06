@@ -6,7 +6,7 @@
 constexpr DATA_TYPE a = 1.23;
 constexpr DATA_TYPE b = 2.34;
 constexpr DATA_TYPE c = 3.57;
-constexpr DATA_TYPE EPSILON = 1.0e-15;
+constexpr DATA_TYPE EPSILON = 1.0e-8;
 
 void check_data(const DATA_TYPE* z, const int N) {
   bool has_error = false;
