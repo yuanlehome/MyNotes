@@ -1,6 +1,6 @@
 # 性能分析
 # nsight systems
-nsys nvprof -o f32df -f ./build/EmbEwLnNet_test &>log
+nsys nvprof -o [file_name] -f ./executable
 # dlprof
 dlprof --mode=tensorrt --force=true --reports=all --output_path=${model_dir}/dlprof_result [python .py]
 

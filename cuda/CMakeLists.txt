@@ -4,17 +4,20 @@ project(cuda_learn CXX CUDA)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
+set(CUDA_INCLUDE_DIRS "/usr/local/cuda/include")
+include_directories("${CUDA_INCLUDE_DIRS}")
+
 option(WITH_DOUBLE "use double or float precision" OFF)
 if(WITH_DOUBLE)
   message(STATUS "WITH_DOUBLE: ${WITH_DOUBLE}")
-  add_definitions(-DWITH_DOUBLE_PRECISION)
+  add_definitions(-DWITH_DOUBLE)
 endif()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++14")
 # target_compile_features(hello_world PUBLIC cxx_std_14)
 
 # setting nvcc arch flags
-set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -gencode arch=compute_75,code=sm_75 -gencode arch=compute_75,code=compute_75")
+set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -O3 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_75,code=compute_75")
 message(STATUS "CMAKE_CUDA_FLAGS:${CMAKE_CUDA_FLAGS}")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
