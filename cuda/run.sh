@@ -10,6 +10,6 @@ cmake .. -G Ninja -DWITH_DOUBLE=OFF
 ninja -j8
 
 # cuda-memcheck ./kernel_caller
-./kernel_caller
+# nvprof --profile-child-processes ./kernel_caller
 
-# nvprof --profile-child-processes
+./kernel_caller

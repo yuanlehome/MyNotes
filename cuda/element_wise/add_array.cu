@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <cstdio>
+
 #include "common.h"
 #include "kernel_caller_declare.h"
 
@@ -47,7 +48,7 @@ void add_array() {
   constexpr uint32_t N = 1e8 + 1;
   constexpr uint32_t M = sizeof(DATA_TYPE) * N;
 
-  MallocWraper cpu_allocator;
+  MallocWrapper cpu_allocator;
   DATA_TYPE* h_x = (DATA_TYPE*)cpu_allocator.allocate(M);
   DATA_TYPE* h_y = (DATA_TYPE*)cpu_allocator.allocate(M);
   DATA_TYPE* h_z = (DATA_TYPE*)cpu_allocator.allocate(M);
@@ -64,10 +65,11 @@ void add_array() {
     add_array_cpu(h_x, h_y, h_z, N);
   }
   cpu_timer.stop();
-  std::printf("cpu cost time: %f ms\n", cpu_timer.elapsed_time() / repeats);
+  std::printf("add_array_cpu cost time: %f ms\n",
+              cpu_timer.elapsed_time() / repeats);
   check_data(h_z, N);
 
-  GPUMallocWraper gpu_allocator;
+  GPUMallocWrapper gpu_allocator;
   DATA_TYPE* d_x = (DATA_TYPE*)gpu_allocator.allocate(M);
   DATA_TYPE* d_y = (DATA_TYPE*)gpu_allocator.allocate(M);
   DATA_TYPE* d_z = (DATA_TYPE*)gpu_allocator.allocate(M);
@@ -91,7 +93,8 @@ void add_array() {
     // CHECK(cudaDeviceSynchronize());
   }
   gpu_timer.stop();
-  std::printf("gpu cost time: %f ms\n", gpu_timer.elapsed_time() / repeats);
+  std::printf("add_array_gpu cost time: %f ms\n",
+              gpu_timer.elapsed_time() / repeats);
 
   CHECK(cudaMemcpy(h_z, d_z, M, cudaMemcpyDeviceToHost));
   check_data(h_z, N);

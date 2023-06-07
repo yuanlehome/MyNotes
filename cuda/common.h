@@ -37,9 +37,12 @@ static void print_header(const std::string& header, std::ostream& os) {
   os << "===" << std::string(73, '-') << "===\n";
 }
 
-class MallocWraper {
+//===----------------------------------------------------------------------===//
+// MallocWrapper
+//===----------------------------------------------------------------------===//
+class MallocWrapper {
  public:
-  MallocWraper() = default;
+  MallocWrapper() = default;
 
   void* allocate(size_t size) {
     void* ptr = std::malloc(size);
@@ -47,7 +50,7 @@ class MallocWraper {
     return ptr;
   }
 
-  ~MallocWraper() {
+  ~MallocWrapper() {
     for (void* ptr : ptrs_) {
       if (ptr) std::free(ptr);
     }
@@ -57,9 +60,12 @@ class MallocWraper {
   std::vector<void*> ptrs_;
 };
 
-class GPUMallocWraper {
+//===----------------------------------------------------------------------===//
+// GPUMallocWrapper
+//===----------------------------------------------------------------------===//
+class GPUMallocWrapper {
  public:
-  GPUMallocWraper() = default;
+  GPUMallocWrapper() = default;
 
   void* allocate(size_t size) {
     void* ptr{nullptr};
@@ -68,7 +74,7 @@ class GPUMallocWraper {
     return ptr;
   }
 
-  ~GPUMallocWraper() {
+  ~GPUMallocWrapper() {
     for (void* ptr : ptrs_) {
       if (ptr) CHECK(cudaFree(ptr));
     }
@@ -78,6 +84,9 @@ class GPUMallocWraper {
   std::vector<void*> ptrs_;
 };
 
+//===----------------------------------------------------------------------===//
+// Timer
+//===----------------------------------------------------------------------===//
 class Timer {
  public:
   Timer() = default;
@@ -100,6 +109,9 @@ class Timer {
   std::chrono::duration<float> elapsed_time_{0};
 };
 
+//===----------------------------------------------------------------------===//
+// GPUTimer
+//===----------------------------------------------------------------------===//
 class GPUTimer {
  public:
   GPUTimer() {
