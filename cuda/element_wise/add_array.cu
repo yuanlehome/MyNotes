@@ -67,7 +67,7 @@ void addArray() {
   }
   cpu_timer.stop();
   std::printf("add_array_cpu cost time: %f ms\n",
-              cpu_timer.elapsed_time() / repeats);
+              cpu_timer.elapsedTime() / repeats);
   checkData(h_z, N);
 
   GPUMallocWrapper gpu_allocator;
@@ -95,7 +95,7 @@ void addArray() {
   }
   gpu_timer.stop();
   std::printf("add_array_gpu cost time: %f ms\n",
-              gpu_timer.elapsed_time() / repeats);
+              gpu_timer.elapsedTime() / repeats);
 
   CHECK(cudaMemcpy(h_z, d_z, M, cudaMemcpyDeviceToHost));
   checkData(h_z, N);

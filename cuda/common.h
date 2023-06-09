@@ -99,7 +99,7 @@ class Timer {
     elapsed_time_ = std::chrono::steady_clock::now() - start_time_;
   }
 
-  float elapsed_time() const {
+  float elapsedTime() const {
     return 1000.0 * elapsed_time_.count();  // ms
   }
 
@@ -134,7 +134,7 @@ class GPUTimer {
     CHECK(cudaEventSynchronize(stop_));
   }
 
-  float elapsed_time() const {
+  float elapsedTime() const {
     float elapsed_time;
     CHECK(cudaEventElapsedTime(&elapsed_time, start_, stop_));  // ms
     return elapsed_time;
