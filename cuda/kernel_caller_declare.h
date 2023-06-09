@@ -1,5 +1,5 @@
 #pragma once
 
-void print_hello_world();
+void printHelloWorld();
 
-void add_array();
+void addArray();

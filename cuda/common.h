@@ -30,7 +30,7 @@ constexpr size_t repeats = 10;
     }                                              \
   } while (0)
 
-static void print_header(const std::string& header, std::ostream& os) {
+static void printHeader(const std::string& header, std::ostream& os) {
   unsigned padding = (80 - header.size()) / 2;
   os << "===" << std::string(73, '-') << "===\n";
   os << std::string(padding, ' ') << header << "\n";

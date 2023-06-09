@@ -4,10 +4,10 @@
 #include "kernel_caller_declare.h"
 
 int main(void) {
-  // print_header("from print_hello_world", std::cout);
-  // print_hello_world();
+  printHeader("from printHelloWorld", std::cout);
+  printHelloWorld();
 
-  print_header("from add_array", std::cout);
-  add_array();
+  printHeader("from addArray", std::cout);
+  addArray();
   return 0;
 }
