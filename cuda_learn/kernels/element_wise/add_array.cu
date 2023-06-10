@@ -5,6 +5,7 @@
 #include "common.h"
 #include "kernel_caller_declare.h"
 #include "kernel_utils.cuh"
+// #include <debug.h>
 
 constexpr DATA_TYPE a = 1.23;
 constexpr DATA_TYPE b = 2.34;
