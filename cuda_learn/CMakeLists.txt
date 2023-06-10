@@ -33,4 +33,4 @@ add_executable(kernel_caller kernel_caller.cc)
 
 set(KERNEL_LIB hello_world_kernel element_wise_kernel)
 
-target_link_libraries(kernel_caller PRIVATE ${KERNEL_LIB} dbg_macro)
+target_link_libraries(kernel_caller PRIVATE dbg_macro ${KERNEL_LIB})
