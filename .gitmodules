@@ -1,4 +1,0 @@
-[submodule "cuda_learn/third_party/dbg_macro"]
-	path = cuda_learn/third_party/dbg_macro
-	url = https://github.com/sharkdp/dbg-macro.git
-	ignore = dirty
