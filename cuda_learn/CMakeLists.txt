@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.20)
-
 project(cuda_learn CXX CUDA)
 
 include_directories(${PROJECT_SOURCE_DIR})
@@ -23,6 +22,12 @@ option(WITH_DOUBLE "use double or float precision" OFF)
 if(WITH_DOUBLE)
   message(STATUS "WITH_DOUBLE: ${WITH_DOUBLE}")
   add_definitions(-DWITH_DOUBLE)
+endif()
+
+option(WITH_DEBUG "use dbg_macro" OFF)
+if(NOT WITH_DEBUG)
+  message(STATUS "WITH_DEBUG: ${WITH_DEBUG}")
+  add_definitions(-DDBG_MACRO_DISABLE)
 endif()
 
 include(third_party)

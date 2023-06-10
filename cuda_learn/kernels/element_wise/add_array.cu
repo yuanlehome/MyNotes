@@ -2,10 +2,11 @@
 #include <cstdint>
 #include <cstdio>
 
+#include "dbg.h"
+
 #include "common.h"
 #include "kernel_caller_declare.h"
 #include "kernel_utils.cuh"
-#include "dbg.h"
 
 constexpr DATA_TYPE a = 1.23;
 constexpr DATA_TYPE b = 2.34;
