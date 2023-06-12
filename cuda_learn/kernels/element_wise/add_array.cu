@@ -10,18 +10,6 @@
 constexpr DATA_TYPE a = 1.23;
 constexpr DATA_TYPE b = 2.34;
 constexpr DATA_TYPE c = 3.57;
-constexpr DATA_TYPE EPSILON = 1.0e-8;
-
-void checkData(const DATA_TYPE* z, const uint32_t N) {
-  bool has_error = false;
-  for (size_t i = 0; i < N; i++) {
-    if (fabs(z[i] - c) > EPSILON) {
-      has_error = true;
-      break;
-    }
-  }
-  dbg(has_error);
-}
 
 void addArrayOnCPU(const DATA_TYPE* x,
                    const DATA_TYPE* y,
@@ -68,9 +56,9 @@ void addArray() {
     addArrayOnCPU(h_x, h_y, h_z, N);
   }
   cpu_timer.stop();
-  std::printf("add_array_cpu cost time: %f ms\n",
+  std::printf("addArrayOnCPU cost time: %f ms\n",
               cpu_timer.elapsedTime() / repeats);
-  checkData(h_z, N);
+  dbg(checkEqual(h_z, N, c));
 
   GPUMallocWrapper gpu_allocator;
   DATA_TYPE* d_x = (DATA_TYPE*)gpu_allocator.allocate(M);
@@ -91,16 +79,15 @@ void addArray() {
     addArrayOnGPU<<<grid, block>>>(d_x, d_y, d_z, N);
   }
   GPUTimer gpu_timer;
-  gpu_timer.start();
+  float total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
+    gpu_timer.start();
     addArrayOnGPU<<<grid, block>>>(d_x, d_y, d_z, N);
-    // CHECK(cudaGetLastError());
-    // CHECK(cudaDeviceSynchronize());
+    gpu_timer.stop();
+    total_time += gpu_timer.elapsedTime();
   }
-  gpu_timer.stop();
-  std::printf("add_array_gpu cost time: %f ms\n",
-              gpu_timer.elapsedTime() / repeats);
+  std::printf("addArrayOnGPU cost time: %f ms\n", total_time / repeats);
 
   CHECK(cudaMemcpy(h_z, d_z, M, cudaMemcpyDeviceToHost));
-  checkData(h_z, N);
+  dbg(checkEqual(h_z, N, c));
 }

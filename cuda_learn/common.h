@@ -6,6 +6,7 @@
 #include <ostream>
 #include <string>
 #include <vector>
+#include <cmath>
 
 #include <cuda_runtime_api.h>
 
@@ -17,6 +18,8 @@ using DATA_TYPE = float;
 
 constexpr size_t warm_up = 1;
 constexpr size_t repeats = 10;
+
+constexpr DATA_TYPE EPSILON = 1.0e-8;
 
 #define CHECK(call)                                \
   do {                                             \
@@ -145,3 +148,29 @@ class GPUTimer {
 
   cudaEvent_t stop_;
 };
+
+// Check x[i] == y
+static bool checkEqual(const DATA_TYPE* x, const uint32_t N, const DATA_TYPE y) {
+  bool has_error = false;
+  for (size_t i = 0; i < N; i++) {
+    if (fabs(x[i] - y) > EPSILON) {
+      has_error = true;
+      break;
+    }
+  }
+  return !has_error;
+}
+
+// Check x[i] == y[i]
+static bool checkEqual(const DATA_TYPE* x,
+                       const DATA_TYPE* y,
+                       const uint32_t N) {
+  bool has_error = false;
+  for (size_t i = 0; i < N; i++) {
+    if (fabs(x[i] - y[i]) > EPSILON) {
+      has_error = true;
+      break;
+    }
+  }
+  return !has_error;
+}
