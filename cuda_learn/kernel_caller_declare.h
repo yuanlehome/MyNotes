@@ -6,6 +6,4 @@ void addArray();
 
 void deviceQuery();
 
-void copyMatrix();
-
 void transposeSquareMatrix();
