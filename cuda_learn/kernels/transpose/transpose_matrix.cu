@@ -32,7 +32,6 @@ void transposeMatrix() {
   MallocWrapper cpu_allocator;
   DATA_TYPE* h_x = (DATA_TYPE*)cpu_allocator.allocate(M);
   DATA_TYPE* h_y = (DATA_TYPE*)cpu_allocator.allocate(M);
-  dbg(h_x, h_y);
 
   std::fill_n(h_x, N * N, a);
   std::fill_n(h_y, N * N, b);
@@ -43,7 +42,6 @@ void transposeMatrix() {
   GPUMallocWrapper gpu_allocator;
   DATA_TYPE* d_x = (DATA_TYPE*)gpu_allocator.allocate(M);
   DATA_TYPE* d_y = (DATA_TYPE*)gpu_allocator.allocate(M);
-  dbg(d_x, d_y);
 
   CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));
   CHECK(cudaMemcpy(d_y, h_y, M, cudaMemcpyHostToDevice));
@@ -67,6 +65,7 @@ void transposeMatrix() {
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();
   }
+  dbg(total_time, gpu_timer.totalTime());
   std::printf("matrixCopy cost time: %f ms\n", total_time / repeats);
 
   CHECK(cudaMemcpy(h_y, d_y, M, cudaMemcpyDeviceToHost));

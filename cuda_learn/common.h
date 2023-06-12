@@ -1,12 +1,12 @@
 #pragma once
 
 #include <chrono>
+#include <cmath>
 #include <cstdio>
 #include <cstdlib>
 #include <ostream>
 #include <string>
 #include <vector>
-#include <cmath>
 
 #include <cuda_runtime_api.h>
 
@@ -100,13 +100,18 @@ class Timer {
 
   void stop() {
     elapsed_time_ = std::chrono::steady_clock::now() - start_time_;
+    total_time_ += elapsed_time_;
   }
 
   float elapsedTime() const {
     return 1000.0 * elapsed_time_.count();  // ms
   }
 
+  float totalTime() const { return 1000.0 * total_time_.count(); }
+
  private:
+  std::chrono::duration<float> total_time_{0};
+
   std::chrono::time_point<std::chrono::steady_clock> start_time_;
 
   std::chrono::duration<float> elapsed_time_{0};
@@ -137,20 +142,27 @@ class GPUTimer {
     CHECK(cudaEventSynchronize(stop_));
   }
 
-  float elapsedTime() const {
+  float elapsedTime() {
     float elapsed_time;
     CHECK(cudaEventElapsedTime(&elapsed_time, start_, stop_));  // ms
+    total_time_ += elapsed_time;
     return elapsed_time;
   }
 
+  float totalTime() const { return total_time_; }
+
  private:
+  float total_time_{0.0};
+
   cudaEvent_t start_;
 
   cudaEvent_t stop_;
 };
 
 // Check x[i] == y
-static bool checkEqual(const DATA_TYPE* x, const uint32_t N, const DATA_TYPE y) {
+static bool checkEqual(const DATA_TYPE* x,
+                       const uint32_t N,
+                       const DATA_TYPE y) {
   bool has_error = false;
   for (size_t i = 0; i < N; i++) {
     if (fabs(x[i] - y) > EPSILON) {
