@@ -16,7 +16,6 @@ using DATA_TYPE = double;
 using DATA_TYPE = float;
 #endif
 
-constexpr size_t warm_up = 1;
 constexpr size_t repeats = 10;
 
 constexpr DATA_TYPE EPSILON = 1.0e-8;

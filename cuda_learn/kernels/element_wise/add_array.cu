@@ -46,9 +46,6 @@ void addArray() {
   std::fill_n(h_x, N, a);
   std::fill_n(h_y, N, b);
 
-  for (size_t i = 0; i < warm_up; i++) {
-    addArrayOnCPU(h_x, h_y, h_z, N);
-  }
   Timer cpu_timer;
   float total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
@@ -75,9 +72,6 @@ void addArray() {
   dim3 block(block_size);
   dim3 grid(grid_size);
 
-  for (size_t i = 0; i < warm_up; i++) {
-    addArrayOnGPU<<<grid, block>>>(d_x, d_y, d_z, N);
-  }
   GPUTimer gpu_timer;
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {

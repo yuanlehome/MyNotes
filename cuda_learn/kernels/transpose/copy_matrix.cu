@@ -11,31 +11,17 @@ constexpr DATA_TYPE b = 2.34;
 
 constexpr int TILE_DIM = 32;
 
-// Transpose matrix A to B of size (N x N)
-__global__ void transposeSquareMatrix_V1(const DATA_TYPE* A,
-                                         DATA_TYPE* B,
-                                         const uint32_t N) {
+// Copy matrix A to B of size (N x N)
+__global__ void matrixCopy(const DATA_TYPE* A, DATA_TYPE* B, const uint32_t N) {
   const int nx = threadIdx.x + blockIdx.x * TILE_DIM;
   const int ny = threadIdx.y + blockIdx.y * TILE_DIM;
+  const int idx = nx + ny * N;
   if (nx < N && ny < N) {
-    // 写非合并 读合并
-    B[ny + nx * N] = A[nx + ny * N];
+    B[idx] = A[idx];
   }
 }
 
-// Transpose matrix A to B of size (N x N)
-__global__ void transposeSquareMatrix_V2(const DATA_TYPE* A,
-                                         DATA_TYPE* B,
-                                         const uint32_t N) {
-  const int nx = threadIdx.x + blockIdx.x * TILE_DIM;
-  const int ny = threadIdx.y + blockIdx.y * TILE_DIM;
-  if (nx < N && ny < N) {
-    // 写合并 读非合并
-    B[nx + ny * N] = A[ny + nx * N];
-  }
-}
-
-void transposeSquareMatrix() {
+void copyMatrix() {
   constexpr uint32_t N = 1e4;
   constexpr uint32_t M = sizeof(DATA_TYPE) * N * N;
 
@@ -68,22 +54,13 @@ void transposeSquareMatrix() {
   float total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
     gpu_timer.start();
-    transposeSquareMatrix_V1<<<grid, block>>>(d_x, d_y, N);
+    matrixCopy<<<grid, block>>>(d_x, d_y, N);
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();
   }
   dbg(total_time, gpu_timer.totalTime());
-  std::printf("transposeSquareMatrix_V1 cost time: %f ms\n",
-              total_time / repeats);
+  std::printf("matrixCopy cost time: %f ms\n", total_time / repeats);
 
-  total_time = 0.0;
-  for (size_t i = 0; i < repeats; i++) {
-    gpu_timer.start();
-    transposeSquareMatrix_V2<<<grid, block>>>(d_x, d_y, N);
-    gpu_timer.stop();
-    total_time += gpu_timer.elapsedTime();
-  }
-  dbg(total_time, gpu_timer.totalTime());
-  std::printf("transposeSquareMatrix_V2 cost time: %f ms\n",
-              total_time / repeats);
+  CHECK(cudaMemcpy(h_y, d_y, M, cudaMemcpyDeviceToHost));
+  dbg(checkEqual(h_x, h_y, N * N));
 }
