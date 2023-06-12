@@ -1,6 +1,5 @@
 #include <algorithm>
 #include <cstdint>
-#include <cstdio>
 
 #include "dbg.h"
 
@@ -21,7 +20,7 @@ void checkData(const DATA_TYPE* z, const uint32_t N) {
       break;
     }
   }
-  std::printf("%s\n", has_error ? "has errors." : "no errors.");
+  dbg(has_error);
 }
 
 void addArrayOnCPU(const DATA_TYPE* x,
@@ -55,6 +54,7 @@ void addArray() {
   DATA_TYPE* h_x = (DATA_TYPE*)cpu_allocator.allocate(M);
   DATA_TYPE* h_y = (DATA_TYPE*)cpu_allocator.allocate(M);
   DATA_TYPE* h_z = (DATA_TYPE*)cpu_allocator.allocate(M);
+  dbg(h_x, h_y, h_z);
 
   std::fill_n(h_x, N, a);
   std::fill_n(h_y, N, b);
@@ -76,12 +76,14 @@ void addArray() {
   DATA_TYPE* d_x = (DATA_TYPE*)gpu_allocator.allocate(M);
   DATA_TYPE* d_y = (DATA_TYPE*)gpu_allocator.allocate(M);
   DATA_TYPE* d_z = (DATA_TYPE*)gpu_allocator.allocate(M);
+  dbg(d_x, d_y, d_z);
 
   CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));
   CHECK(cudaMemcpy(d_y, h_y, M, cudaMemcpyHostToDevice));
 
   const uint32_t block_size = 128;
   const uint32_t grid_size = (N + block_size - 1) / block_size;
+  dbg(block_size, grid_size);
   dim3 block(block_size);
   dim3 grid(grid_size);
 

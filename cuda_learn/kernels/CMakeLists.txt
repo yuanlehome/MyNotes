@@ -1,2 +1,3 @@
-add_subdirectory(hello_world)
+add_subdirectory(general)
 add_subdirectory(element_wise)
+add_subdirectory(transpose)

@@ -3,3 +3,7 @@
 void printHelloWorld();
 
 void addArray();
+
+void deviceQuery();
+
+void transposeMatrix();

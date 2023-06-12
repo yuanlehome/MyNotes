@@ -15,3 +15,6 @@ nvprof --metrics gld_throughput ./executable
 nvprof --metrics gld_efficiency ./executable
 # 查看每个线程束执行指令的平均数量
 nvprof --metrics inst_per_warp ./executable
+
+# 打印核函数使用的寄存器数量
+nvcc --ptxas-options=-v

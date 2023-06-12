@@ -6,8 +6,9 @@ include_directories(${PROJECT_SOURCE_DIR})
 set(CUDA_INCLUDE_DIRS "/usr/local/cuda/include")
 include_directories("${CUDA_INCLUDE_DIRS}")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++14")
-# target_compile_features(hello_world PUBLIC cxx_std_14)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++17")
+# target_compile_features(hello_world PUBLIC cxx_std_17)
+message(STATUS "CMAKE_CXX_FLAGS:${CMAKE_CXX_FLAGS}")
 
 # setting nvcc arch flags
 set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -O3 -arch=sm_75")
@@ -36,6 +37,6 @@ add_subdirectory(kernels)
 
 add_executable(kernel_caller kernel_caller.cc)
 
-set(KERNEL_LIB hello_world_kernel element_wise_kernel)
+set(KERNEL_LIB general_kernel element_wise_kernel)
 
-target_link_libraries(kernel_caller PRIVATE dbg_macro ${KERNEL_LIB})
+target_link_libraries(kernel_caller PRIVATE ${KERNEL_LIB})

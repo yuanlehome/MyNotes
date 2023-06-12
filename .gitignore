@@ -1,7 +1,7 @@
 .vscode/
 tensorrt/python/__pycache__/
 test
-cudahome
+cuda_old
 link_favorites
 cuda_learn/build
 cuda_learn/.cache
