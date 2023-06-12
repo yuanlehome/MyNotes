@@ -7,3 +7,5 @@ void addArray();
 void deviceQuery();
 
 void transposeSquareMatrix();
+
+void reduceSum();

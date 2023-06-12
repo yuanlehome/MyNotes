@@ -13,8 +13,11 @@ int main(void) {
   // printHeader("from deviceQuery", std::cout);
   // deviceQuery();
 
-  printHeader("from transposeSquareMatrix", std::cout);
-  transposeSquareMatrix();
+  // printHeader("from transposeSquareMatrix", std::cout);
+  // transposeSquareMatrix();
+
+  printHeader("from reduceSum", std::cout);
+  reduceSum();
 
   return 0;
 }
