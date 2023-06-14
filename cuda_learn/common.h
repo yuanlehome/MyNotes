@@ -20,6 +20,8 @@ constexpr size_t repeats = 10;
 
 constexpr DATA_TYPE EPSILON = 1.0e-8;
 
+constexpr int BLOCK_SIZE = 128;
+
 #define CHECK(call)                                \
   do {                                             \
     const cudaError_t error_code = call;           \

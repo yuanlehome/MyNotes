@@ -11,6 +11,18 @@ constexpr DATA_TYPE b = 2.34;
 
 constexpr int TILE_DIM = 32;
 
+// Print matrix with N x N
+void printMatrix(const DATA_TYPE* A, const int N) {
+  std::printf("\n");
+  for (int ny = 0; ny < N; ny++) {
+    for (int nx = 0; nx < N; nx++) {
+      std::printf("%g\t", A[ny * N + nx]);
+    }
+    std::printf("\n");
+  }
+  std::printf("\n");
+}
+
 // Copy matrix A to B of size (N x N)
 __global__ void matrixCopy(const DATA_TYPE* A, DATA_TYPE* B, const uint32_t N) {
   const int nx = threadIdx.x + blockIdx.x * TILE_DIM;
@@ -88,25 +100,27 @@ __global__ void transposeSquareMatrix_V4(const DATA_TYPE* A,
 }
 
 void transposeSquareMatrix() {
-  constexpr uint32_t N = 1e4;
+  constexpr uint32_t N = 1e1;
   constexpr uint32_t M = sizeof(DATA_TYPE) * N * N;
 
   MallocWrapper cpu_allocator;
   DATA_TYPE* h_x = (DATA_TYPE*)cpu_allocator.allocate(M);
   DATA_TYPE* h_y = (DATA_TYPE*)cpu_allocator.allocate(M);
 
-  std::fill_n(h_x, N * N, a);
-  std::fill_n(h_y, N * N, b);
+  std::fill_n(h_x, N * N / 2, a);
+  std::fill_n(h_x + N * N / 2, N * N / 2, b);
+
   dbg(checkEqual(h_x, N * N, a),
       checkEqual(h_y, N * N, b),
       checkEqual(h_x, h_y, N * N));
+
+  printMatrix(h_x, N);
 
   GPUMallocWrapper gpu_allocator;
   DATA_TYPE* d_x = (DATA_TYPE*)gpu_allocator.allocate(M);
   DATA_TYPE* d_y = (DATA_TYPE*)gpu_allocator.allocate(M);
 
   CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));
-  CHECK(cudaMemcpy(d_y, h_y, M, cudaMemcpyHostToDevice));
 
   const uint32_t block_size_x = TILE_DIM;
   const uint32_t block_size_y = block_size_x;
@@ -170,4 +184,7 @@ void transposeSquareMatrix() {
   dbg(total_time, gpu_timer.totalTime());
   std::printf("transposeSquareMatrix_V4 cost time: %f ms\n",
               total_time / repeats);
+
+  CHECK(cudaMemcpy(h_y, d_y, M, cudaMemcpyDeviceToHost));
+  printMatrix(h_y, N);
 }

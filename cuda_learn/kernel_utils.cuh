@@ -10,7 +10,7 @@ __forceinline__ __device__ T warpReduceSum(T val) {
 
 template <typename T>
 __forceinline__ __device__ T blockReduceSum(T val) {
-  static __shared__ T shared[32];
+  __shared__ T shared[32];
   int lane = threadIdx.x % warpSize;
   int wid = threadIdx.x / warpSize;
 
