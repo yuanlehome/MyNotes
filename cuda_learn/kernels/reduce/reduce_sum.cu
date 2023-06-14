@@ -45,7 +45,7 @@ DATA_TYPE reduceSumOnCPU_V3(DATA_TYPE* x, int start, int end) {
   return x[start];
 }
 
-// 数值正确 需二次 reduce 要求数据个数为 BLOCK_SIZE 的整数倍 改变原数组
+// 数值错误 要求数据个数为 BLOCK_SIZE 的整数倍 改变原数组
 // 每个 block 负责一块内存数据的 reduce
 __global__ void reduceSumOnGPU_V1(DATA_TYPE* d_x, DATA_TYPE* d_y) {
   const int tid = threadIdx.x;
@@ -60,12 +60,12 @@ __global__ void reduceSumOnGPU_V1(DATA_TYPE* d_x, DATA_TYPE* d_y) {
   }
 
   if (tid == 0) {
-    d_y[bid] = x[0];
+    atomicAdd(d_y, x[0]);
   }
 }
 
-// 数值正确 需二次 reduce 不要求数据个数为 BLOCK_SIZE 的整数倍 不改变原数组
-// 每个 block 负责一块内存数据的 reduce 使用共享内存
+// 数值错误 不要求数据个数为 BLOCK_SIZE 的整数倍 不改变原数组
+// 每个 block 负责一块内存数据 使用动态共享内存
 __global__ void reduceSumOnGPU_V2(const DATA_TYPE* d_x,
                                   DATA_TYPE* d_y,
                                   const int N) {
@@ -84,11 +84,11 @@ __global__ void reduceSumOnGPU_V2(const DATA_TYPE* d_x,
   }
 
   if (tid == 0) {
-    d_y[bid] = s_y[0];
+    atomicAdd(d_y, s_y[0]);
   }
 }
 
-// 数值正确 需二次 reduce 要求数据个数为 BLOCK_SIZE 的整数倍 不改变原数组
+// 数值错误 需二次 reduce 要求数据个数为 BLOCK_SIZE 的整数倍 不改变原数组
 // 每个 block 负责一块内存数据的 reduce
 __global__ void reduceSumOnGPU_V3(const DATA_TYPE* d_x, DATA_TYPE* d_y) {
   const int tid = threadIdx.x;
@@ -98,7 +98,7 @@ __global__ void reduceSumOnGPU_V3(const DATA_TYPE* d_x, DATA_TYPE* d_y) {
   DATA_TYPE value = blockReduceSum(x[tid]);
 
   if (tid == 0) {
-    d_y[bid] = value;
+    atomicAdd(d_y, value);
   }
 }
 
@@ -153,13 +153,14 @@ void reduceSum() {
   DATA_TYPE* d_x = (DATA_TYPE*)gpu_allocator.allocate(M);
   CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));
 
-  constexpr uint32_t RES_SIZE = sizeof(DATA_TYPE) * grid_size;
-  DATA_TYPE* d_y = (DATA_TYPE*)gpu_allocator.allocate(RES_SIZE);
-  DATA_TYPE* h_y = (DATA_TYPE*)cpu_allocator.allocate(RES_SIZE);
+  DATA_TYPE* d_y = (DATA_TYPE*)gpu_allocator.allocate(sizeof(DATA_TYPE));
 
   GPUTimer gpu_timer;
+  DATA_TYPE y = 0.0;
   float total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
+    CHECK(cudaMemcpy(
+        d_y, &y, sizeof(DATA_TYPE), cudaMemcpyHostToDevice));  // 清空结果
     gpu_timer.start();
     reduceSumOnGPU_V1<<<grid, block>>>(d_x, d_y);
     gpu_timer.stop();
@@ -167,12 +168,15 @@ void reduceSum() {
     CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));  // 恢复原数组
   }
   dbg(total_time, gpu_timer.totalTime());
-  CHECK(cudaMemcpy(h_y, d_y, RES_SIZE, cudaMemcpyDeviceToHost));
-  dbg(*h_y);
+  CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
+  dbg(y);
   std::printf("reduceSumOnGPU_V1 cost time: %f ms\n", total_time / repeats);
 
+  y = 0.0;
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
+    CHECK(cudaMemcpy(
+        d_y, &y, sizeof(DATA_TYPE), cudaMemcpyHostToDevice));  // 清空结果
     gpu_timer.start();
     reduceSumOnGPU_V2<<<grid, block, sizeof(DATA_TYPE) * block_size>>>(
         d_x, d_y, N);
@@ -180,19 +184,22 @@ void reduceSum() {
     total_time += gpu_timer.elapsedTime();
   }
   dbg(total_time, gpu_timer.totalTime());
-  CHECK(cudaMemcpy(h_y, d_y, RES_SIZE, cudaMemcpyDeviceToHost));
-  dbg(*(h_y + 12354));
+  CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
+  dbg(y);
   std::printf("reduceSumOnGPU_V2 cost time: %f ms\n", total_time / repeats);
 
+  y = 0.0;
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
+    CHECK(cudaMemcpy(
+        d_y, &y, sizeof(DATA_TYPE), cudaMemcpyHostToDevice));  // 清空结果
     gpu_timer.start();
     reduceSumOnGPU_V3<<<grid, block>>>(d_x, d_y);
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();
   }
   dbg(total_time, gpu_timer.totalTime());
-  CHECK(cudaMemcpy(h_y, d_y, RES_SIZE, cudaMemcpyDeviceToHost));
-  dbg(*(h_y + 12354));
+  CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
+  dbg(y);
   std::printf("reduceSumOnGPU_V3 cost time: %f ms\n", total_time / repeats);
 }
