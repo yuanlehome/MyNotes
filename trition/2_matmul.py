@@ -207,7 +207,7 @@ def op_test():
         # Label name for the lines
         line_names=["Torch", "Triton", "Paddle"],
         # Line styles
-        styles=[("green", "-"), ("blue", "-")],
+        styles=[("green", "-"), ("blue", "-"), ("red", "-")],
         ylabel="ms",  # Label name for the y-axis
         plot_name="matmul-performance",  # Name for the plot, used also as a file name for saving the plot.
         args={},
