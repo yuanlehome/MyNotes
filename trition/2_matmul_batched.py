@@ -1,4 +1,7 @@
 import torch
+import paddle
+
+import numpy as np
 
 import triton
 import triton.language as tl
@@ -305,11 +308,11 @@ def op_test():
         ],  # Different possible values for `x_name`
         line_arg="provider",  # Argument name whose value corresponds to a different line in the plot
         # Possible values for `line_arg`
-        line_vals=["cublas", "triton"],
+        line_vals=["torch", "triton", "paddle"],
         # Label name for the lines
-        line_names=["cuBLAS", "Triton"],
+        line_names=["Torch", "Triton", "Paddle"],
         # Line styles
-        styles=[("green", "-"), ("blue", "-")],
+        styles=[("green", "-"), ("blue", "-"), ("red", "-")],
         ylabel="ms",  # Label name for the y-axis
         plot_name="matmul-batched-performance",  # Name for the plot, used also as a file name for saving the plot.
         args={
@@ -320,8 +323,14 @@ def op_test():
 def benchmark(B, M, N, K, provider):
     a = torch.randn((B, M, K), device=device, dtype=dtype)
     b = torch.randn((B, K, N), device=device, dtype=dtype)
+    a_p = paddle.to_tensor(
+        np.random.randn(B, M, K), dtype="float16", place=paddle.CUDAPlace(0)
+    )
+    b_p = paddle.to_tensor(
+        np.random.randn(B, M, K), dtype="float16", place=paddle.CUDAPlace(0)
+    )
     quantiles = [0.5, 0.2, 0.8]
-    if provider == "cublas":
+    if provider == "torch":
         ms, min_ms, max_ms = triton.testing.do_bench(
             fn=lambda: torch.matmul(a, b), quantiles=quantiles
         )
@@ -329,9 +338,13 @@ def benchmark(B, M, N, K, provider):
         ms, min_ms, max_ms = triton.testing.do_bench(
             fn=lambda: batched_matmul(a, b), quantiles=quantiles
         )
+    if provider == "paddle":
+        ms, min_ms, max_ms = triton.testing.do_bench(
+            fn=lambda: paddle.matmul(a_p, b_p), quantiles=quantiles
+        )
     return ms, min_ms, max_ms
 
 
 if __name__ == "__main__":
     op_test()
-    benchmark.run(save_path="./perf_t4", print_data=True)
+    benchmark.run(save_path="./perf_a10", print_data=True)
