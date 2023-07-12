@@ -7,7 +7,7 @@ import triton.language as tl
 
 
 device = "cuda:0"
-dtype =  torch.float32  # for benchmark
+dtype = torch.float32  # for benchmark
 
 
 @triton.jit
@@ -47,6 +47,7 @@ def softmax(x: torch.Tensor) -> torch.Tensor:
         BLOCK_SIZE=BLOCK_SIZE,
     )
     return y
+
 
 def op_test():
     torch.manual_seed(0)
@@ -103,6 +104,6 @@ def benchmark(M, N, provider):
     return ms, min_ms, max_ms
 
 
-if  __name__ == "__main__":
+if __name__ == "__main__":
     op_test()
-    benchmark.run(save_path="./perf_a10", print_data=True)
+    benchmark.run(save_path="./perf_t4", print_data=True)

@@ -28,6 +28,7 @@ def add(x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
     add_kernel[grid](x, y, z, n_elements, BLOCK_SIZE=1024)
     return z
 
+
 def op_test():
     torch.manual_seed(0)
     size = 98432
@@ -55,7 +56,7 @@ def op_test():
         line_names=["Triton", "Torch", "Paddle"],  # Label name for the lines.
         styles=[("blue", "-"), ("green", "-"), ("red", "-")],  # Line styles.
         ylabel="ms",  # Label name for the y-axis.
-        plot_name="vector-add-performance",  # Name for the plot. Used also as a file name for saving the plot.
+        plot_name="elementwise-add-performance",  # Name for the plot. Used also as a file name for saving the plot.
         args={},  # Values for function arguments not in `x_names` and `y_name`.
     )
 )
@@ -70,9 +71,7 @@ def benchmark(size, provider):
     )
     quantiles = [0.5, 0.2, 0.8]
     if provider == "torch":
-        ms, min_ms, max_ms = triton.testing.do_bench(
-            lambda: x + y, quantiles=quantiles
-        )
+        ms, min_ms, max_ms = triton.testing.do_bench(lambda: x + y, quantiles=quantiles)
     if provider == "triton":
         ms, min_ms, max_ms = triton.testing.do_bench(
             lambda: add(x, y), quantiles=quantiles
@@ -84,7 +83,6 @@ def benchmark(size, provider):
     return ms, min_ms, max_ms
 
 
-
-if  __name__ == "__main__":
+if __name__ == "__main__":
     op_test()
-    benchmark.run(save_path="./perf_a10", print_data=True)
+    benchmark.run(save_path="./perf_t4", print_data=True)

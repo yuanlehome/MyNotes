@@ -43,6 +43,7 @@ def transpose(x: torch.Tensor) -> torch.Tensor:
     )
     return y
 
+
 def op_test():
     torch.manual_seed(0)
     x = torch.randn(size=[1823, 781], device=device, dtype=dtype)
@@ -95,7 +96,6 @@ def benchmark(M, N, provider):
     return ms, min_ms, max_ms
 
 
-if  __name__ == "__main__":
+if __name__ == "__main__":
     op_test()
-    benchmark.run(save_path="./perf_a10", print_data=True)
-
+    benchmark.run(save_path="./perf_t4", print_data=True)

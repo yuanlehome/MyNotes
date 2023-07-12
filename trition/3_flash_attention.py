@@ -6,7 +6,7 @@ import triton.language as tl
 
 
 device = "cuda:0"
-dtype = torch.float16 # for benchmark
+dtype = torch.float16  # for benchmark
 
 
 @triton.jit
@@ -248,7 +248,8 @@ except BaseException:
 
 BATCH, N_HEADS, N_CTX, D_HEAD = 4, 48, 4096, 64
 # vary seq length for fixed head and batch=4
-@triton.testing.perf_report(triton.testing.Benchmark(
+@triton.testing.perf_report(
+    triton.testing.Benchmark(
         x_names=["N_CTX"],
         x_vals=[2**i for i in range(10, 15)],
         line_arg="provider",
@@ -275,15 +276,9 @@ def benchmark(
     warmup = 25
     rep = 100
     if provider == "triton":
-        q = torch.randn(
-            (BATCH, H, N_CTX, D_HEAD), dtype=dtype, device=device
-        )
-        k = torch.randn(
-            (BATCH, H, N_CTX, D_HEAD), dtype=dtype, device=device
-        )
-        v = torch.randn(
-            (BATCH, H, N_CTX, D_HEAD), dtype=dtype, device=device
-        )
+        q = torch.randn((BATCH, H, N_CTX, D_HEAD), dtype=dtype, device=device)
+        k = torch.randn((BATCH, H, N_CTX, D_HEAD), dtype=dtype, device=device)
+        v = torch.randn((BATCH, H, N_CTX, D_HEAD), dtype=dtype, device=device)
         sm_scale = 1.3
         ms = triton.testing.do_bench(
             fn=lambda: attention(q, k, v, causal, sm_scale), warmup=warmup, rep=rep
@@ -292,12 +287,7 @@ def benchmark(
         lengths = torch.full((BATCH,), fill_value=N_CTX, device=device)
         cu_seqlens = torch.zeros((BATCH + 1,), device=device, dtype=torch.int32)
         cu_seqlens[1:] = lengths.cumsum(0)
-        qkv = torch.randn(
-            (BATCH * N_CTX, 3, H, D_HEAD),
-            dtype=dtype,
-            device=device,
-            requires_grad=True,
-        )
+        qkv = torch.randn((BATCH * N_CTX, 3, H, D_HEAD), dtype=dtype, device=device)
         ms = triton.testing.do_bench(
             fn=lambda: flash_attn_func(qkv, cu_seqlens, 0.0, N_CTX, causal=True),
             warmup=warmup,
@@ -305,7 +295,8 @@ def benchmark(
         )
     return ms
 
-if  __name__ == "__main__":
+
+if __name__ == "__main__":
     op_test()
     # only works on post-Ampere GPUs right now
     benchmark.run(save_path="./perf_a10", print_data=True)
