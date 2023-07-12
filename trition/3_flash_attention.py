@@ -258,7 +258,7 @@ configs = [
         line_names=["Triton"] + (["Flash"] if HAS_FLASH else []),
         styles=[("red", "-"), ("blue", "-")],
         ylabel="ms",
-        plot_name=f"fused-attention-batch{BATCH}-head{N_HEADS}-d{D_HEAD}-{mode}",
+        plot_name=f"fused-attention-batch{BATCH}-head{N_HEADS}-d{D_HEAD}-{mode}-causal:{causal}",
         args={
             "H": N_HEADS,
             "BATCH": BATCH,
@@ -316,4 +316,4 @@ def bench_flash_attention(
 
 
 # only works on post-Ampere GPUs right now
-bench_flash_attention.run(save_path=".", print_data=True)
+bench_flash_attention.run(save_path="./cache", print_data=True)

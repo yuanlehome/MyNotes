@@ -3,5 +3,6 @@ tensorrt/python/__pycache__/
 test
 cuda_old
 link_favorites
-cuda_learn/build
-cuda_learn/.cache
+cuda/build
+cuda/.cache
+trition/cache
