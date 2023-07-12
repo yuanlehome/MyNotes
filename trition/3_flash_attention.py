@@ -5,8 +5,12 @@ import triton
 import triton.language as tl
 
 
+device = "cuda:0"
+dtype = torch.float16 # for benchmark
+
+
 @triton.jit
-def _fwd_kernel(
+def fwd_kernel(
     Q,
     K,
     V,
@@ -147,86 +151,81 @@ def _fwd_kernel(
     tl.store(O_block_ptr, acc.to(tl.float16))
 
 
-class _attention(torch.autograd.Function):
-    @staticmethod
-    def forward(ctx, q, k, v, causal, sm_scale):
-        BLOCK = 128
-        # shape constraints
-        Lq, Lk, Lv = q.shape[-1], k.shape[-1], v.shape[-1]
-        assert Lq == Lk and Lk == Lv
-        assert Lk in {16, 32, 64, 128}
-        o = torch.empty_like(q)
-        grid = (triton.cdiv(q.shape[2], 128), q.shape[0] * q.shape[1], 1)
-        L = torch.empty(
-            (q.shape[0] * q.shape[1], q.shape[2]), device=q.device, dtype=torch.float32
+def attention(q, k, v, causal, sm_scale):
+    BLOCK = 128
+    # shape constraints
+    Lq, Lk, Lv = q.shape[-1], k.shape[-1], v.shape[-1]
+    assert Lq == Lk and Lk == Lv
+    assert Lk in {16, 32, 64, 128}
+    o = torch.empty_like(q)
+    grid = (triton.cdiv(q.shape[2], 128), q.shape[0] * q.shape[1], 1)
+    L = torch.empty(
+        (q.shape[0] * q.shape[1], q.shape[2]), device=q.device, dtype=torch.float32
+    )
+    m = torch.empty(
+        (q.shape[0] * q.shape[1], q.shape[2]), device=q.device, dtype=torch.float32
+    )
+
+    num_warps = 4 if Lk <= 64 else 8
+    if causal:
+        modes = [1] if q.shape[2] <= 2048 else [2, 3]
+    else:
+        modes = [0]
+    for mode in modes:
+        fwd_kernel[grid](
+            q,
+            k,
+            v,
+            sm_scale,
+            L,
+            m,
+            o,
+            q.stride(0),
+            q.stride(1),
+            q.stride(2),
+            q.stride(3),
+            k.stride(0),
+            k.stride(1),
+            k.stride(2),
+            k.stride(3),
+            v.stride(0),
+            v.stride(1),
+            v.stride(2),
+            v.stride(3),
+            o.stride(0),
+            o.stride(1),
+            o.stride(2),
+            o.stride(3),
+            q.shape[0],
+            q.shape[1],
+            q.shape[2],
+            BLOCK_M=128,
+            BLOCK_N=BLOCK,
+            BLOCK_DMODEL=Lk,
+            MODE=mode,
+            num_warps=num_warps,
+            num_stages=2,
         )
-        m = torch.empty(
-            (q.shape[0] * q.shape[1], q.shape[2]), device=q.device, dtype=torch.float32
-        )
 
-        num_warps = 4 if Lk <= 64 else 8
-        if causal:
-            modes = [1] if q.shape[2] <= 2048 else [2, 3]
-        else:
-            modes = [0]
-        for mode in modes:
-            _fwd_kernel[grid](
-                q,
-                k,
-                v,
-                sm_scale,
-                L,
-                m,
-                o,
-                q.stride(0),
-                q.stride(1),
-                q.stride(2),
-                q.stride(3),
-                k.stride(0),
-                k.stride(1),
-                k.stride(2),
-                k.stride(3),
-                v.stride(0),
-                v.stride(1),
-                v.stride(2),
-                v.stride(3),
-                o.stride(0),
-                o.stride(1),
-                o.stride(2),
-                o.stride(3),
-                q.shape[0],
-                q.shape[1],
-                q.shape[2],
-                BLOCK_M=128,
-                BLOCK_N=BLOCK,
-                BLOCK_DMODEL=Lk,
-                MODE=mode,
-                num_warps=num_warps,
-                num_stages=2,
-            )
-
-        return o
+    return o
 
 
-attention = _attention.apply
-
-
-@pytest.mark.parametrize("Z, H, N_CTX, D_HEAD", [(6, 9, 1024, 64)])
-@pytest.mark.parametrize("causal", [False, True])
-def test_op(Z, H, N_CTX, D_HEAD, causal, dtype=torch.float16):
+def op_test():
+    Z, H, N_CTX, D_HEAD = [6, 9, 1024, 64]
+    causal = True
     torch.manual_seed(20)
     q = torch.empty((Z, H, N_CTX, D_HEAD), dtype=dtype, device="cuda").normal_(
         mean=0.0, std=0.5
     )
-    k = torch.empty((Z, H, N_CTX, D_HEAD), dtype=dtype, device="cuda").normal_(
+    k = torch.empty((Z, H, N_CTX, D_HEAD), dtype=dtype, device=device).normal_(
         mean=0.0, std=0.5
     )
-    v = torch.empty((Z, H, N_CTX, D_HEAD), dtype=dtype, device="cuda").normal_(
+    v = torch.empty((Z, H, N_CTX, D_HEAD), dtype=dtype, device=device).normal_(
         mean=0.0, std=0.5
     )
     sm_scale = 0.5
     # reference implementation
-    M = torch.tril(torch.ones((N_CTX, N_CTX), device="cuda"))
+    M = torch.tril(torch.ones((N_CTX, N_CTX), device=device))
     p = torch.matmul(q, k.transpose(2, 3)) * sm_scale
     if causal:
         p[:, :, M == 0] = float("-inf")
@@ -249,8 +248,7 @@ except BaseException:
 
 BATCH, N_HEADS, N_CTX, D_HEAD = 4, 48, 4096, 64
 # vary seq length for fixed head and batch=4
-configs = [
-    triton.testing.Benchmark(
+@triton.testing.perf_report(triton.testing.Benchmark(
         x_names=["N_CTX"],
         x_vals=[2**i for i in range(10, 15)],
         line_arg="provider",
@@ -270,24 +268,21 @@ configs = [
     )
     for mode in ["fwd"]
     for causal in [False, True]
-]
-
-
-@triton.testing.perf_report(configs)
-def bench_flash_attention(
-    BATCH, H, N_CTX, D_HEAD, causal, mode, provider, dtype=torch.float16, device="cuda"
+)
+def benchmark(
+    BATCH, H, N_CTX, D_HEAD, causal, mode, provider, dtype=torch.float16, device=device
 ):
     warmup = 25
     rep = 100
     if provider == "triton":
         q = torch.randn(
-            (BATCH, H, N_CTX, D_HEAD), dtype=dtype, device="cuda", requires_grad=True
+            (BATCH, H, N_CTX, D_HEAD), dtype=dtype, device=device
         )
         k = torch.randn(
-            (BATCH, H, N_CTX, D_HEAD), dtype=dtype, device="cuda", requires_grad=True
+            (BATCH, H, N_CTX, D_HEAD), dtype=dtype, device=device
         )
         v = torch.randn(
-            (BATCH, H, N_CTX, D_HEAD), dtype=dtype, device="cuda", requires_grad=True
+            (BATCH, H, N_CTX, D_HEAD), dtype=dtype, device=device
         )
         sm_scale = 1.3
         ms = triton.testing.do_bench(
@@ -308,12 +303,9 @@ def bench_flash_attention(
             warmup=warmup,
             rep=rep,
         )
-    flops_per_matmul = 2.0 * BATCH * H * N_CTX * N_CTX * D_HEAD
-    total_flops = 2 * flops_per_matmul
-    if causal:
-        total_flops *= 0.5
-    return total_flops / ms * 1e-9
+    return ms
 
-
-# only works on post-Ampere GPUs right now
-bench_flash_attention.run(save_path="./cache", print_data=True)
+if  __name__ == "__main__":
+    op_test()
+    # only works on post-Ampere GPUs right now
+    benchmark.run(save_path="./perf_a10", print_data=True)

@@ -4,5 +4,3 @@ test
 cuda_old
 link_favorites
 cuda/build
-cuda/.cache
-trition/cache

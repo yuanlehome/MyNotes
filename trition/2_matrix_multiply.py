@@ -5,6 +5,7 @@ import triton.language as tl
 
 
 device = "cuda:0"
+dtype = torch.float16  # for benchmark
 
 
 @triton.autotune(
@@ -178,16 +179,16 @@ def matmul(a: torch.Tensor, b: torch.Tensor):
     )
     return c
 
-
-torch.manual_seed(0)
-a = torch.randn((512, 256), device=device, dtype=torch.float16)
-b = torch.randn((256, 512), device=device, dtype=torch.float16)
-c_torch = torch.matmul(a, b)
-c_triton = matmul(a, b)
-print(
-    f"The maximum difference between torch and triton is "
-    f"{torch.max(torch.abs(c_torch - c_triton))}"
-)
+def op_test():
+    torch.manual_seed(0)
+    a = torch.randn((512, 256), device=device, dtype=dtype)
+    b = torch.randn((256, 512), device=device, dtype=dtype)
+    c_torch = torch.matmul(a, b)
+    c_triton = matmul(a, b)
+    print(
+        f"The maximum difference between torch and triton is "
+        f"{torch.max(torch.abs(c_torch - c_triton))}"
+    )
 
 
 @triton.testing.perf_report(
@@ -203,14 +204,14 @@ print(
         line_names=["cuBLAS", "Triton"],
         # Line styles
         styles=[("green", "-"), ("blue", "-")],
-        ylabel="TFLOPS",  # Label name for the y-axis
+        ylabel="ms",  # Label name for the y-axis
         plot_name="matmul-performance",  # Name for the plot, used also as a file name for saving the plot.
         args={},
     )
 )
 def benchmark(M, N, K, provider):
-    a = torch.randn((M, K), device=device, dtype=torch.float16)
-    b = torch.randn((K, N), device=device, dtype=torch.float16)
+    a = torch.randn((M, K), device=device, dtype=dtype)
+    b = torch.randn((K, N), device=device, dtype=dtype)
     quantiles = [0.5, 0.2, 0.8]
     if provider == "cublas":
         ms, min_ms, max_ms = triton.testing.do_bench(
@@ -220,41 +221,9 @@ def benchmark(M, N, K, provider):
         ms, min_ms, max_ms = triton.testing.do_bench(
             fn=lambda: matmul(a, b), quantiles=quantiles
         )
-    gbps = lambda ms: 2 * M * N * K * 1e-12 / (ms * 1e-3)
-    return gbps(ms), gbps(max_ms), gbps(min_ms)
+    return ms, min_ms, max_ms
 
 
-benchmark.run(show_plots=True, print_data=True)
-# matmul-performance:
-#          M     cuBLAS     Triton
-# 0    256.0   3.216491   2.563755
-# 1    384.0   8.869534   6.291456
-# 2    512.0  15.155569   8.962188
-# 3    640.0  21.250324  11.578799
-# 4    768.0  30.442530  17.055152
-# 5    896.0  27.296719  13.016125
-# 6   1024.0  38.065152  17.019747
-# 7   1152.0  32.042754  13.985874
-# 8   1280.0  34.711863  16.451864
-# 9   1408.0  38.016309  15.747334
-# 10  1536.0  43.753969  17.698177
-# 11  1664.0  36.474373  16.612738
-# 12  1792.0  36.777092  19.071083
-# 13  1920.0  38.858749  17.191023
-# 14  2048.0  36.954221  16.876364
-# 15  2176.0  36.273123  16.252504
-# 16  2304.0  31.697951  15.688289
-# 17  2432.0  34.076486  15.612373
-# 18  2560.0  34.585923  15.774346
-# 19  2688.0  33.153739  16.026429
-# 20  2816.0  26.818883  15.159531
-# 21  2944.0  29.333108  14.797197
-# 22  3072.0  29.277716  15.142525
-# 23  3200.0  20.815546  15.163519
-# 24  3328.0  22.942690  14.939828
-# 25  3456.0  20.781684  14.847776
-# 26  3584.0  21.061785  12.549690
-# 27  3712.0  20.992902  14.422192
-# 28  3840.0  23.016174  14.097975
-# 29  3968.0  22.275461  12.880427
-# 30  4096.0  25.343227  13.639948
+if  __name__ == "__main__":
+    op_test()
+    benchmark.run(save_path="./perf_a10", print_data=True)
