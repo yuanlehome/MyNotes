@@ -240,4 +240,4 @@ def benchmark(M, N, K, provider):
 
 if __name__ == "__main__":
     op_test()
-    benchmark.run(save_path="./perf_a10", print_data=True)
+    benchmark.run(save_path="./perf_t4", print_data=True)
