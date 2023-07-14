@@ -4,3 +4,6 @@ test
 cuda_old
 link_favorites
 cuda/build
+trition/draft.py
+trition/perf_a10_cuda11.8_cudnn8.6/results.html
+trition/perf_t4_cuda11.7_cudnn8.4/results.html

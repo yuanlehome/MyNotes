@@ -216,11 +216,6 @@ def matmul_kernel(
     # `accumulator` will be converted back to fp16 after the loop
     accumulator = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
     for k in range(0, tl.cdiv(K, BLOCK_SIZE_K)):
-        # Note that for simplicity, we don't apply a mask here.
-        # This means that if K is not a multiple of BLOCK_SIZE_K,
-        # this will access out-of-bounds memory and produce an
-        # error or (worse!) incorrect results.
-
         mask_a = offsets_k[None, :] < K - k * BLOCK_SIZE_K
         mask_b = offsets_k[:, None] < K - k * BLOCK_SIZE_K
         a = tl.load(a_ptrs, mask=mask_a, other=0.0)
@@ -341,4 +336,4 @@ def benchmark(Batch, M, N, K, provider):
 
 if __name__ == "__main__":
     op_test()
-    benchmark.run(save_path="./perf_t4_cuda11.7_cudnn8.4", print_data=True)
+    # benchmark.run(save_path="./perf_t4_cuda11.7_cudnn8.4", print_data=True)

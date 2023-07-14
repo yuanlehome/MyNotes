@@ -50,7 +50,7 @@ def op_test():
     y_trition = transpose(x)
     print(
         f"The maximum difference between torch and triton is "
-        f"{torch.max(torch.abs(x.t() - y_trition))}"
+        f"{torch.max(torch.abs(torch.transpose(x, 0, 1) - y_trition))}"
     )
 
 
@@ -74,7 +74,9 @@ def op_test():
         styles=[("blue", "-"), ("green", "-"), ("red", "-")],  # line styles
         ylabel="ms",  # label name for the y-axis
         plot_name="transpose-performance",  # name for the plot. Used also as a file name for saving the plot.
-        args={"M": 4096},  # values for function arguments not in `x_names` and `y_name`
+        args={
+            "M": 4096,
+        },  # values for function arguments not in `x_names` and `y_name`
     )
 )
 def benchmark(M, N, provider):
@@ -84,18 +86,20 @@ def benchmark(M, N, provider):
     )
     quantiles = [0.5, 0.2, 0.8]
     if provider == "torch":
-        ms, min_ms, max_ms = triton.testing.do_bench(lambda: x.t(), quantiles=quantiles)
+        ms, min_ms, max_ms = triton.testing.do_bench(
+            lambda: torch.transpose(x, 0, 1), quantiles=quantiles
+        )
     if provider == "triton":
         ms, min_ms, max_ms = triton.testing.do_bench(
             lambda: transpose(x), quantiles=quantiles
         )
     if provider == "paddle":
         ms, min_ms, max_ms = triton.testing.do_bench(
-            lambda: paddle.t(x_p), quantiles=quantiles
+            lambda: paddle.transpose(x_p, [1, 0]), quantiles=quantiles
         )
     return ms, min_ms, max_ms
 
 
 if __name__ == "__main__":
     op_test()
-    benchmark.run(save_path="./perf_a10_cuda11.8_cudnn8.6", print_data=True)
+    # benchmark.run(save_path="./perf_a10_cuda11.8_cudnn8.6", print_data=True)

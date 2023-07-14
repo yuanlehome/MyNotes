@@ -147,7 +147,9 @@ def matmul_kernel(
         a_ptrs += stride_ak * BLOCK_SIZE_K
         b_ptrs += stride_bk * BLOCK_SIZE_K
     c = accumulator.to(tl.float16)
-
+    
+    # -----------------------------------------------------------
+    # Write back the block of the output matrix C
     offsets_cm = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
     offsets_cn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
     c_ptrs = c_ptr + (
@@ -240,4 +242,4 @@ def benchmark(M, N, K, provider):
 
 if __name__ == "__main__":
     op_test()
-    benchmark.run(save_path="./perf_t4_cuda11.7_cudnn8.4", print_data=True)
+    # benchmark.run(save_path="./perf_t4_cuda11.7_cudnn8.4", print_data=True)

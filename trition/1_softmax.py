@@ -80,7 +80,9 @@ def op_test():
         styles=[("blue", "-"), ("green", "-"), ("red", "-")],  # line styles
         ylabel="ms",  # label name for the y-axis
         plot_name="softmax-performance",  # name for the plot. Used also as a file name for saving the plot.
-        args={"M": 4096},  # values for function arguments not in `x_names` and `y_name`
+        args={
+            "M": 4096,
+        },  # values for function arguments not in `x_names` and `y_name`
     )
 )
 def benchmark(M, N, provider):
@@ -106,4 +108,4 @@ def benchmark(M, N, provider):
 
 if __name__ == "__main__":
     op_test()
-    benchmark.run(save_path="./perperf_a10_cuda11.8_cudnn8.6f_a10", print_data=True)
+    # benchmark.run(save_path="./perperf_a10_cuda11.8_cudnn8.6f_a10", print_data=True)

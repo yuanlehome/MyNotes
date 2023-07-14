@@ -151,12 +151,14 @@ def matmul_kernel(
         b = tl.load(b_ptrs, boundary_check=(0, 1))
         accumulator += tl.dot(
             a, b
-        )  # BLOCK_SIZE_MxBLOCK_SIZE_K dot BLOCK_SIZE_KxBLOCK_SIZE_N broadcast to BLOCK_SIZE_MxBLOCK_SIZE_N
+        )  # BLOCK_SIZE_MxBLOCK_SIZE_K dot BLOCK_SIZE_KxBLOCK_SIZE_N equal to BLOCK_SIZE_MxBLOCK_SIZE_N
         a_ptrs = tl.advance(a_ptrs, (0, BLOCK_SIZE_K))
         b_ptrs = tl.advance(b_ptrs, (BLOCK_SIZE_K, 0))
 
     c = accumulator.to(tl.float16)
 
+    # -----------------------------------------------------------
+    # Write back the block of the output matrix C
     c_ptrs = tl.make_block_ptr(
         base=c_ptr,
         shape=(M, N),
@@ -253,4 +255,4 @@ if __name__ == "__main__":
     op_test()
     # Higher register spilling when using block pointers
     # https://github.com/openai/triton/issues/1830
-    benchmark.run(save_path="./perf_t4_cuda11.7_cudnn8.4", print_data=True)
+    # benchmark.run(save_path="./perf_t4_cuda11.7_cudnn8.4", print_data=True)
