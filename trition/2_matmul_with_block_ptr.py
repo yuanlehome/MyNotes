@@ -127,34 +127,45 @@ def matmul_kernel(
     pid_m = first_pid_m + (pid % group_size_m)
     pid_n = (pid % num_pid_in_group) // group_size_m
 
-    offsets_am = (pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)) % M
-    offsets_bn = (pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)) % N
     offsets_k = tl.arange(0, BLOCK_SIZE_K)
-    a_ptrs = a_ptr + (
-        offsets_am[:, None] * stride_am + offsets_k[None, :] * stride_ak
-    )  # BLOCK_SIZE_Mx1 + 1xBLOCK_SIZE_K broadcast to BLOCK_SIZE_MxBLOCK_SIZE_K
-    b_ptrs = b_ptr + (
-        offsets_k[:, None] * stride_bk + offsets_bn[None, :] * stride_bn
-    )  # BLOCK_SIZE_Kx1 + 1xBLOCK_SIZE_N broadcast to BLOCK_SIZE_KxBLOCK_SIZE_N
+    a_ptrs = tl.make_block_ptr(
+        base=a_ptr,
+        shape=(M, K),
+        strides=(stride_am, stride_ak),
+        offsets=(pid_m * BLOCK_SIZE_M, 0),
+        block_shape=(BLOCK_SIZE_M, BLOCK_SIZE_K),
+        order=(1, 0),  # what does order mean?
+    )
+    b_ptrs = tl.make_block_ptr(
+        base=b_ptr,
+        shape=(K, N),
+        strides=(stride_bk, stride_bn),
+        offsets=(0, pid_n * BLOCK_SIZE_N),
+        block_shape=(BLOCK_SIZE_K, BLOCK_SIZE_N),
+        order=(1, 0),
+    )
 
     accumulator = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
-    for k in range(0, tl.cdiv(K, BLOCK_SIZE_K)):
-        mask_a = offsets_k[None, :] < K - k * BLOCK_SIZE_K
-        mask_b = offsets_k[:, None] < K - k * BLOCK_SIZE_K
-        a = tl.load(a_ptrs, mask=mask_a, other=0.0)
-        b = tl.load(b_ptrs, mask=mask_b, other=0.0)
-        accumulator += tl.dot(a, b)
-        a_ptrs += stride_ak * BLOCK_SIZE_K
-        b_ptrs += stride_bk * BLOCK_SIZE_K
+    for k in range(0, K, BLOCK_SIZE_K):
+        a = tl.load(a_ptrs, boundary_check=(0, 1))
+        b = tl.load(b_ptrs, boundary_check=(0, 1))
+        accumulator += tl.dot(
+            a, b
+        )  # BLOCK_SIZE_MxBLOCK_SIZE_K dot BLOCK_SIZE_KxBLOCK_SIZE_N broadcast to BLOCK_SIZE_MxBLOCK_SIZE_N
+        a_ptrs = tl.advance(a_ptrs, (0, BLOCK_SIZE_K))
+        b_ptrs = tl.advance(b_ptrs, (BLOCK_SIZE_K, 0))
+
     c = accumulator.to(tl.float16)
 
-    offsets_cm = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
-    offsets_cn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
-    c_ptrs = c_ptr + (
-        offsets_cm[:, None] * stride_cm + offsets_cn[None, :] * stride_cn
-    )  # BLOCK_SIZE_Mx1 + 1xBLOCK_SIZE_N broadcast to BLOCK_SIZE_MxBLOCK_SIZE_N
-    mask_c = (offsets_cm[:, None] < M) & (offsets_cn[None, :] < N)
-    tl.store(c_ptrs, c, mask=mask_c)
+    c_ptrs = tl.make_block_ptr(
+        base=c_ptr,
+        shape=(M, N),
+        strides=(stride_cm, stride_cn),
+        offsets=(pid_m * BLOCK_SIZE_M, pid_n * BLOCK_SIZE_N),
+        block_shape=(BLOCK_SIZE_M, BLOCK_SIZE_N),
+        order=(1, 0),
+    )
+    tl.store(c_ptrs, c, boundary_check=(0, 1))
 
 
 def matmul(a: torch.Tensor, b: torch.Tensor):
@@ -209,7 +220,7 @@ def op_test():
         # Line styles
         styles=[("green", "-"), ("blue", "-"), ("red", "-")],
         ylabel="ms",  # Label name for the y-axis
-        plot_name="matmul-performance",  # Name for the plot, used also as a file name for saving the plot.
+        plot_name="matmul-with-block-ptr-performance",  # Name for the plot, used also as a file name for saving the plot.
         args={},
     )
 )
@@ -240,4 +251,6 @@ def benchmark(M, N, K, provider):
 
 if __name__ == "__main__":
     op_test()
+    # Higher register spilling when using block pointers
+    # https://github.com/openai/triton/issues/1830
     benchmark.run(save_path="./perf_a10_cuda11.8_cudnn8.6", print_data=True)

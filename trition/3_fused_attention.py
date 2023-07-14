@@ -299,4 +299,4 @@ def benchmark(
 if __name__ == "__main__":
     op_test()
     # only works on post-Ampere GPUs right now
-    benchmark.run(save_path="./perf_a10", print_data=True)
+    benchmark.run(save_path="./perf_a10_cuda11.8_cudnn8.6", print_data=True)

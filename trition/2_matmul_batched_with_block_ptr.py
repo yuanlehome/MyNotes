@@ -117,7 +117,7 @@ dtype = torch.float16  # for benchmark
     key=["M", "N", "K"],
 )
 @triton.jit
-def matmul_kernel(
+def batched_matmul_kernel(
     # Pointers to matrices
     a_ptr,
     b_ptr,
@@ -144,9 +144,6 @@ def matmul_kernel(
     BLOCK_SIZE_K: tl.constexpr,
     GROUP_SIZE_M: tl.constexpr,
 ):
-    """Kernel for computing the matmul C = A x B.
-    A has shape (M, K), B has shape (K, N) and C has shape (M, N)
-    """
     # -----------------------------------------------------------
     # Map program ids `pid` to the block of C it should compute.
     # This is done in a grouped ordering to promote L2 data reuse
@@ -184,30 +181,22 @@ def matmul_kernel(
     # a_ptrs is a block of [BLOCK_SIZE_M, BLOCK_SIZE_K] pointers
     # b_ptrs is a block of [BLOCK_SIZE_K, BLOCK_SIZE_N] pointers
     # see above `Pointer Arithmetics` section for details
-
-    # pid_m * BLOCK_SIZE_M is the row index of the first element of the block of size BLOCK_SIZE_M
-    # We add tl.arange(0, BLOCK_SIZE_M) to get a vector of row indexes
-    offsets_am = (pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)) % M
-    offsets_bn = (pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)) % N
-    offsets_k = tl.arange(0, BLOCK_SIZE_K)
-
-    # a_offs[:, None] is a column vector of BLOCK_SIZE_M rows indexes
-    # We multiply by stride_am, to we get a column vector of memory offsets to each start of a row
-    # k_range_offs[None, :] is a row vector of size BLOCK_SIZE_K columns indexes
-    # We multiply stride_ak to get a row vector of memory offsets to each start of a column
-    # When we add both. We get a matrix of memory offsets.
-    # For A in RowMajor stride_ak will be 1, so k_range_offs[None, :] * stride_ak will be
-    # just 0,1,2,3,4,5....BLOCK_SIZE_K
-    a_ptrs = (
-        a_ptr
-        + stride_a_batch * batch_id
-        + (offsets_am[:, None] * stride_am + offsets_k[None, :] * stride_ak)
-    )  # BLOCK_SIZE_Mx1 + 1xBLOCK_SIZE_K broadcast to BLOCK_SIZE_MxBLOCK_SIZE_K
-    b_ptrs = (
-        b_ptr
-        + stride_b_batch * batch_id
-        + (offsets_k[:, None] * stride_bk + offsets_bn[None, :] * stride_bn)
-    )  # BLOCK_SIZE_Kx1 + 1xBLOCK_SIZE_N broadcast to BLOCK_SIZE_KxBLOCK_SIZE_N
+    a_ptrs = tl.make_block_ptr(
+        base=a_ptr + stride_a_batch * batch_id,
+        shape=(M, K),
+        strides=(stride_am, stride_ak),
+        offsets=(pid_m * BLOCK_SIZE_M, 0),
+        block_shape=(BLOCK_SIZE_M, BLOCK_SIZE_K),
+        order=(1, 0),  # what does order mean?
+    )
+    b_ptrs = tl.make_block_ptr(
+        base=b_ptr + stride_b_batch * batch_id,
+        shape=(K, N),
+        strides=(stride_bk, stride_bn),
+        offsets=(0, pid_n * BLOCK_SIZE_N),
+        block_shape=(BLOCK_SIZE_K, BLOCK_SIZE_N),
+        order=(1, 0),
+    )
 
     # -----------------------------------------------------------
     # Iterate to compute a block of the C matrix
@@ -215,35 +204,30 @@ def matmul_kernel(
     # of fp32 values for higher accuracy.
     # `accumulator` will be converted back to fp16 after the loop
     accumulator = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
-    for k in range(0, tl.cdiv(K, BLOCK_SIZE_K)):
-        # Note that for simplicity, we don't apply a mask here.
-        # This means that if K is not a multiple of BLOCK_SIZE_K,
-        # this will access out-of-bounds memory and produce an
-        # error or (worse!) incorrect results.
-
-        mask_a = offsets_k[None, :] < K - k * BLOCK_SIZE_K
-        mask_b = offsets_k[:, None] < K - k * BLOCK_SIZE_K
-        a = tl.load(a_ptrs, mask=mask_a, other=0.0)
-        b = tl.load(b_ptrs, mask=mask_b, other=0.0)
+    for k in range(0, K, BLOCK_SIZE_K):
+        a = tl.load(a_ptrs, boundary_check=(0, 1))
+        b = tl.load(b_ptrs, boundary_check=(0, 1))
         # We accumulate along the K dimension
-        accumulator += tl.dot(a, b)
+        accumulator += tl.dot(
+            a, b
+        )  # BLOCK_SIZE_MxBLOCK_SIZE_K dot BLOCK_SIZE_KxBLOCK_SIZE_N broadcast to BLOCK_SIZE_MxBLOCK_SIZE_N
         # Advance the ptrs to the next K block
-        a_ptrs += stride_ak * BLOCK_SIZE_K
-        b_ptrs += stride_bk * BLOCK_SIZE_K
+        a_ptrs = tl.advance(a_ptrs, (0, BLOCK_SIZE_K))
+        b_ptrs = tl.advance(b_ptrs, (BLOCK_SIZE_K, 0))
 
     c = accumulator.to(tl.float16)
 
     # -----------------------------------------------------------
     # Write back the block of the output matrix C
-    offsets_cm = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
-    offsets_cn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
-    c_ptrs = (
-        c_ptr
-        + stride_c_batch * batch_id
-        + (offsets_cm[:, None] * stride_cm + offsets_cn[None, :] * stride_cn)
-    )  # BLOCK_SIZE_Mx1 + 1xBLOCK_SIZE_N broadcast to BLOCK_SIZE_MxBLOCK_SIZE_N
-    mask_c = (offsets_cm[:, None] < M) & (offsets_cn[None, :] < N)
-    tl.store(c_ptrs, c, mask=mask_c)
+    c_ptrs = tl.make_block_ptr(
+        base=c_ptr + stride_c_batch * batch_id,
+        shape=(M, N),
+        strides=(stride_cm, stride_cn),
+        offsets=(pid_m * BLOCK_SIZE_M, pid_n * BLOCK_SIZE_N),
+        block_shape=(BLOCK_SIZE_M, BLOCK_SIZE_N),
+        order=(1, 0),
+    )
+    tl.store(c_ptrs, c, boundary_check=(0, 1))
 
 
 def batched_matmul(a, b):
@@ -262,7 +246,7 @@ def batched_matmul(a, b):
         triton.cdiv(M, META["BLOCK_SIZE_M"]) * triton.cdiv(N, META["BLOCK_SIZE_N"]),
         batch_size,
     )
-    matmul_kernel[grid](
+    batched_matmul_kernel[grid](
         a,
         b,
         c,
@@ -308,7 +292,7 @@ def op_test():
         # Line styles
         styles=[("green", "-"), ("blue", "-"), ("red", "-")],
         ylabel="ms",  # Label name for the y-axis
-        plot_name="matmul-batched-performance",  # Name for the plot, used also as a file name for saving the plot.
+        plot_name="matmul-batched-with-block-ptr-performance",  # Name for the plot, used also as a file name for saving the plot.
         args={
             "Batch": 8,
         },
