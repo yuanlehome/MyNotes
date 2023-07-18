@@ -42,3 +42,6 @@ https://github.com/openai/triton/issues/1794
 
 triton.language.where return float32 always even if input is float16 · Issue #1891 · openai/triton
 https://github.com/openai/triton/issues/1891
+
+Higher register spilling when using block pointers · Issue #1830 · openai/triton
+https://github.com/openai/triton/issues/1830
