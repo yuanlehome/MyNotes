@@ -11,6 +11,8 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.utils.data as Data
 
+from typing import Dict, List, Set, Tuple
+
 # device = 'cpu'
 device = "cuda"
 
@@ -76,32 +78,34 @@ tgt_len = 7  # dec_input(=dec_output) max sequence length
 d_model = 512  # Embedding Size（token embedding和position编码的维度）
 d_ff = 2048  # FeedForward dimension (两次线性层中的隐藏层 512->2048->512，线性层是用来做特征提取的），当然最后会再接一个projection层
 d_k = d_v = 64  # dimension of K(=Q), V（Q和K的维度需要相同，这里为了方便让K=V）
-n_layers = 6  # number of Encoder of Decoder Layer（Block的个数）
-n_heads = 8  # number of heads in Multi-Head Attention（有几套头）
+n_layers = 6  # number of Encoder and Decoder Layer（Block的个数）
+n_heads = 8  # number of heads in Multi-Head Attention
 
 
-def make_data(sentences):
+def make_data(
+    sentences: List[List[str]],
+) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     """把单词序列转换为数字序列"""
     enc_inputs, dec_inputs, dec_outputs = [], [], []
     for i in range(len(sentences)):
-        enc_input = [
-            [src_vocab[n] for n in sentences[i][0].split()]
-        ]  # [[1, 2, 3, 4, 0], [1, 2, 3, 5, 0]]
-        dec_input = [
-            [tgt_vocab[n] for n in sentences[i][1].split()]
-        ]  # [[6, 1, 2, 3, 4, 8], [6, 1, 2, 3, 5, 8]]
-        dec_output = [
-            [tgt_vocab[n] for n in sentences[i][2].split()]
-        ]  # [[1, 2, 3, 4, 8, 7], [1, 2, 3, 5, 8, 7]]
+        enc_input = [[src_vocab[n] for n in sentences[i][0].split()]]
+        dec_input = [[tgt_vocab[n] for n in sentences[i][1].split()]]
+        dec_output = [[tgt_vocab[n] for n in sentences[i][2].split()]]
 
         enc_inputs.extend(enc_input)
         dec_inputs.extend(dec_input)
         dec_outputs.extend(dec_output)
 
     return (
-        torch.LongTensor(enc_inputs),
-        torch.LongTensor(dec_inputs),
-        torch.LongTensor(dec_outputs),
+        torch.LongTensor(
+            enc_inputs
+        ),  # [[1, 2, 3, 4, 5, 6, 7, 0], [1, 2, 8, 4, 9, 6, 7, 0]]
+        torch.LongTensor(
+            dec_inputs
+        ),  # [[8, 1, 2, 3, 4, 5, 10], [8, 1, 2, 6, 7, 5, 10]]
+        torch.LongTensor(
+            dec_outputs
+        ),  # [[1, 2, 3, 4, 5, 10, 9], [1, 2, 6, 7, 5, 10, 9]]
     )
 
 
@@ -111,7 +115,12 @@ enc_inputs, dec_inputs, dec_outputs = make_data(sentences)
 class MyDataSet(Data.Dataset):
     """自定义DataLoader"""
 
-    def __init__(self, enc_inputs, dec_inputs, dec_outputs):
+    def __init__(
+        self,
+        enc_inputs: torch.Tensor,
+        dec_inputs: torch.Tensor,
+        dec_outputs: torch.Tensor,
+    ):
         super(MyDataSet, self).__init__()
         self.enc_inputs = enc_inputs
         self.dec_inputs = dec_inputs
@@ -120,7 +129,7 @@ class MyDataSet(Data.Dataset):
     def __len__(self):
         return self.enc_inputs.shape[0]
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx: int):
         return self.enc_inputs[idx], self.dec_inputs[idx], self.dec_outputs[idx]
 
 
@@ -129,8 +138,9 @@ loader = Data.DataLoader(MyDataSet(enc_inputs, dec_inputs, dec_outputs), 2, True
 
 # ====================================================================================================
 # Transformer模型
-# 位置编码，无需学习
 class PositionalEncoding(nn.Module):
+    """位置编码"""
+
     def __init__(self, d_model, dropout=0.1, max_len=5000):
         super(PositionalEncoding, self).__init__()
         self.dropout = nn.Dropout(p=dropout)
@@ -145,23 +155,22 @@ class PositionalEncoding(nn.Module):
         pe = pe.unsqueeze(0).transpose(0, 1)
         self.register_buffer("pe", pe)
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor):
         """
         x: [seq_len, batch_size, d_model]
         """
-        x = x + self.pe[: x.size(0), :]
+        x = x + self.pe[: x.shape[0], :]
         return self.dropout(x)
 
 
-def get_attn_mask(seq):
+def get_attn_subsequent_mask(seq: torch.Tensor) -> torch.Tensor:
     """建议打印出来看看是什么的输出（一目了然）
     seq: [batch_size, tgt_len]
     """
-    attn_shape = [seq.size(0), seq.size(1), seq.size(1)]
+    attn_shape = [seq.shape[0], seq.shape[1], seq.shape[1]]
     # attn_shape: [batch_size, tgt_len, tgt_len]
-    subsequence_mask = np.triu(np.ones(attn_shape), k=1)  # 生成一个上三角矩阵
-    subsequence_mask = torch.from_numpy(subsequence_mask).bool()
-    return subsequence_mask  # [batch_size, tgt_len, tgt_len]
+    mask = torch.triu(torch.ones(size=attn_shape, device=device)).bool()  # 生成一个上三角矩阵
+    return mask  # [batch_size, tgt_len, tgt_len]
 
 
 class ScaledDotProductAttention(nn.Module):
@@ -196,8 +205,6 @@ class MultiHeadAttention(nn.Module):
     Encoder的Self-Attention
     Decoder的Masked Self-Attention
     Encoder-Decoder的Attention
-    输入 seq_len x d_model
-    输出 seq_len x d_model
     """
 
     def __init__(self):
@@ -214,7 +221,7 @@ class MultiHeadAttention(nn.Module):
         input_K: [batch_size, len_k, d_model]
         input_V: [batch_size, len_v(=len_k), d_model]
         """
-        residual, batch_size = input_Q, input_Q.size(0)
+        residual, batch_size = input_Q, input_Q.shape[0]
         # 下面的多头的参数矩阵是放在一起做线性变换的，然后再拆成多个头，这是工程实现的技巧
         # B: batch_size, S:seq_len
         # (B, S, d_model) -proj-> (B, S, d_k * n_heads) -split-> (B, S, n_heads, d_k) -trans-> (B, n_heads, S, d_k)
@@ -354,8 +361,8 @@ class Decoder(nn.Module):
             self.pos_emb(dec_outputs.transpose(0, 1)).transpose(0, 1).to(device)
         )  # [batch_size, tgt_len, d_model]
         # Decoder输入序列的 mask 矩阵
-        dec_self_attn_mask = get_attn_mask(dec_inputs).to(
-            device
+        dec_self_attn_mask = get_attn_subsequent_mask(
+            dec_inputs
         )  # [batch_size, tgt_len, tgt_len]
 
         for layer in self.layers:
@@ -388,7 +395,7 @@ class Transformer(nn.Module):
         dec_outputs = self.decoder(dec_inputs, enc_outputs)
         # dec_outputs: [batch_size, tgt_len, d_model] -> dec_logits: [batch_size, tgt_len, tgt_vocab_size]
         dec_logits = self.projection(dec_outputs)
-        return dec_logits.view(-1, dec_logits.size(-1))
+        return dec_logits.view(-1, dec_logits.shape[-1])
 
 
 # ==========================================================================================
