@@ -25,6 +25,6 @@ void printHelloWorld() {
   dim3 block_size(2, 4);
   dim3 grid_size(1, 1);
   helloWorldV2<<<grid_size, block_size>>>();
-  CHECK(cudaGetLastError());
-  CHECK(cudaDeviceSynchronize());
+  CUDA_CHECK(cudaGetLastError());
+  CUDA_CHECK(cudaDeviceSynchronize());
 }

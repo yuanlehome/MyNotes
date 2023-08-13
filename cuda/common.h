@@ -22,7 +22,7 @@ constexpr DATA_TYPE EPSILON = 1.0e-8;
 
 constexpr int BLOCK_SIZE = 128;
 
-#define CHECK(call)                                \
+#define CUDA_CHECK(call)                                \
   do {                                             \
     const cudaError_t error_code = call;           \
     if (error_code != cudaSuccess) {               \
@@ -49,9 +49,8 @@ class MallocWrapper {
   MallocWrapper() = default;
 
   void* allocate(size_t size) {
-    void* ptr = std::malloc(size);
-    ptrs_.push_back(ptr);
-    return ptr;
+    ptrs_.push_back(std::malloc(size));
+    return ptrs_.back();
   }
 
   ~MallocWrapper() {
@@ -73,14 +72,14 @@ class GPUMallocWrapper {
 
   void* allocate(size_t size) {
     void* ptr{nullptr};
-    CHECK(cudaMalloc(&ptr, size));
+    CUDA_CHECK(cudaMalloc(&ptr, size));
     ptrs_.push_back(ptr);
     return ptr;
   }
 
   ~GPUMallocWrapper() {
     for (void* ptr : ptrs_) {
-      if (ptr) CHECK(cudaFree(ptr));
+      if (ptr) CUDA_CHECK(cudaFree(ptr));
     }
   }
 
@@ -111,11 +110,11 @@ class Timer {
   float totalTime() const { return 1000.0 * total_time_.count(); }
 
  private:
-  std::chrono::duration<float> total_time_{0};
+  std::chrono::duration<double> total_time_{0};
 
   std::chrono::time_point<std::chrono::steady_clock> start_time_;
 
-  std::chrono::duration<float> elapsed_time_{0};
+  std::chrono::duration<double> elapsed_time_{0};
 };
 
 //===----------------------------------------------------------------------===//
@@ -124,28 +123,28 @@ class Timer {
 class GPUTimer {
  public:
   GPUTimer() {
-    CHECK(cudaEventCreate(&start_));
-    CHECK(cudaEventCreate(&stop_));
+    CUDA_CHECK(cudaEventCreate(&start_));
+    CUDA_CHECK(cudaEventCreate(&stop_));
   }
 
   ~GPUTimer() {
-    CHECK(cudaEventDestroy(start_));
-    CHECK(cudaEventDestroy(stop_));
+    CUDA_CHECK(cudaEventDestroy(start_));
+    CUDA_CHECK(cudaEventDestroy(stop_));
   }
 
   void start() {
-    CHECK(cudaEventRecord(start_));
+    CUDA_CHECK(cudaEventRecord(start_));
     cudaEventQuery(start_);
   }
 
   void stop() {
-    CHECK(cudaEventRecord(stop_));
-    CHECK(cudaEventSynchronize(stop_));
+    CUDA_CHECK(cudaEventRecord(stop_));
+    CUDA_CHECK(cudaEventSynchronize(stop_));
   }
 
   float elapsedTime() {
-    float elapsed_time;
-    CHECK(cudaEventElapsedTime(&elapsed_time, start_, stop_));  // ms
+    float elapsed_time{0.0};
+    CUDA_CHECK(cudaEventElapsedTime(&elapsed_time, start_, stop_));  // ms
     total_time_ += elapsed_time;
     return elapsed_time;
   }

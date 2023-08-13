@@ -66,6 +66,7 @@ __global__ void transposeSquareMatrix_V3(const DATA_TYPE* A,
   int nx = threadIdx.x + blockIdx.x * TILE_DIM;
   int ny = threadIdx.y + blockIdx.y * TILE_DIM;
   if (nx < N && ny < N) {
+    // 写(共享内存)合并
     S[threadIdx.y][threadIdx.x] = A[nx + ny * N];
   }
   __syncthreads();
@@ -120,7 +121,7 @@ void transposeSquareMatrix() {
   DATA_TYPE* d_x = (DATA_TYPE*)gpu_allocator.allocate(M);
   DATA_TYPE* d_y = (DATA_TYPE*)gpu_allocator.allocate(M);
 
-  CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));
+  CUDA_CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));
 
   const uint32_t block_size_x = TILE_DIM;
   const uint32_t block_size_y = block_size_x;
@@ -185,6 +186,6 @@ void transposeSquareMatrix() {
   std::printf("transposeSquareMatrix_V4 cost time: %f ms\n",
               total_time / repeats);
 
-  CHECK(cudaMemcpy(h_y, d_y, M, cudaMemcpyDeviceToHost));
+  CUDA_CHECK(cudaMemcpy(h_y, d_y, M, cudaMemcpyDeviceToHost));
   printMatrix(h_y, N);
 }

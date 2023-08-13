@@ -1,7 +1,6 @@
 .vscode/
 tensorrt/python/__pycache__/
 test
-cuda_old
-link_favorites
+cuda/.cache/
 cuda/build
-trition/draft.py
+link_favorites

@@ -3,7 +3,7 @@
 
 void deviceQuery() {
   int device_count = 0;
-  CHECK(cudaGetDeviceCount(&device_count));
+  CUDA_CHECK(cudaGetDeviceCount(&device_count));
 
   if (device_count == 0) {
     std::printf("There are no available device(s) that support CUDA\n");
@@ -12,16 +12,16 @@ void deviceQuery() {
   }
 
   int device_id = 0;
-  CHECK(cudaSetDevice(device_id));
+  CUDA_CHECK(cudaSetDevice(device_id));
   cudaDeviceProp device_prop;
-  CHECK(cudaGetDeviceProperties(&device_prop, device_id));
+  CUDA_CHECK(cudaGetDeviceProperties(&device_prop, device_id));
 
   std::printf("\nDevice %d: \"%s\"\n", device_id, device_prop.name);
 
   int driver_version = 0;
   int runtime_version = 0;
-  CHECK(cudaDriverGetVersion(&driver_version));
-  CHECK(cudaRuntimeGetVersion(&runtime_version));
+  CUDA_CHECK(cudaDriverGetVersion(&driver_version));
+  CUDA_CHECK(cudaRuntimeGetVersion(&runtime_version));
   std::printf(
       "  CUDA Driver Version / Runtime Version          %d.%d / %d.%d\n",
       driver_version / 1000,

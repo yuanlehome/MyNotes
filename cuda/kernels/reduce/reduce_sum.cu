@@ -123,13 +123,10 @@ __global__ void reduceSumOnGPU_V3(const DATA_TYPE* d_x,
 // 数值错误 要求数据个数为 BLOCK_SIZE 的整数倍 不改变原数组
 // 每个 block 负责一块内存数据的 reduce 调用 warp/block reduce function
 __global__ void reduceSumOnGPU_V4(const DATA_TYPE* d_x, DATA_TYPE* d_y) {
-  const int tid = threadIdx.x;
-  const int bid = blockIdx.x;
-  const DATA_TYPE* x = d_x + blockDim.x * bid;
-
-  DATA_TYPE val = blockReduceSum(x[tid]);
-
-  if (tid == 0) {
+  const DATA_TYPE* x = d_x + blockDim.x * blockIdx.x;
+  DATA_TYPE val = x[threadIdx.x];
+  val = blockReduceSum(val);
+  if (threadIdx.x == 0) {
     atomicAdd(d_y, val);
   }
 }
@@ -204,7 +201,7 @@ void reduceSum() {
 
   GPUMallocWrapper gpu_allocator;
   DATA_TYPE* d_x = (DATA_TYPE*)gpu_allocator.allocate(M);
-  CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));
+  CUDA_CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));
 
   DATA_TYPE* d_y = (DATA_TYPE*)gpu_allocator.allocate(sizeof(DATA_TYPE));
 
@@ -212,23 +209,23 @@ void reduceSum() {
   DATA_TYPE y = 0.0;
   float total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
-    CHECK(cudaMemcpy(
+    CUDA_CHECK(cudaMemcpy(
         d_y, &y, sizeof(DATA_TYPE), cudaMemcpyHostToDevice));  // 清空结果
     gpu_timer.start();
     reduceSumOnGPU_V1<<<grid, block>>>(d_x, d_y);
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();
-    CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));  // 恢复原数组
+    CUDA_CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));  // 恢复原数组
   }
   dbg(total_time, gpu_timer.totalTime());
-  CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
+  CUDA_CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
   dbg(y);
   std::printf("reduceSumOnGPU_V1 cost time: %f ms\n", total_time / repeats);
 
   y = 0.0;
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
-    CHECK(cudaMemcpy(
+    CUDA_CHECK(cudaMemcpy(
         d_y, &y, sizeof(DATA_TYPE), cudaMemcpyHostToDevice));  // 清空结果
     gpu_timer.start();
     reduceSumOnGPU_V2<<<grid, block, sizeof(DATA_TYPE) * block_size>>>(
@@ -237,7 +234,7 @@ void reduceSum() {
     total_time += gpu_timer.elapsedTime();
   }
   dbg(total_time, gpu_timer.totalTime());
-  CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
+  CUDA_CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
   dbg(y);
   std::printf("reduceSumOnGPU_V2 (dynamic shared memory) cost time: %f ms\n",
               total_time / repeats);
@@ -245,7 +242,7 @@ void reduceSum() {
   y = 0.0;
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
-    CHECK(cudaMemcpy(
+    CUDA_CHECK(cudaMemcpy(
         d_y, &y, sizeof(DATA_TYPE), cudaMemcpyHostToDevice));  // 清空结果
     gpu_timer.start();
     reduceSumOnGPU_V3<<<grid, block, sizeof(DATA_TYPE) * block_size>>>(
@@ -254,7 +251,7 @@ void reduceSum() {
     total_time += gpu_timer.elapsedTime();
   }
   dbg(total_time, gpu_timer.totalTime());
-  CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
+  CUDA_CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
   dbg(y);
   std::printf("reduceSumOnGPU_V3 (__syncwarp) cost time: %f ms\n",
               total_time / repeats);
@@ -262,7 +259,7 @@ void reduceSum() {
   y = 0.0;
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
-    CHECK(cudaMemcpy(
+    CUDA_CHECK(cudaMemcpy(
         d_y, &y, sizeof(DATA_TYPE), cudaMemcpyHostToDevice));  // 清空结果
     gpu_timer.start();
     reduceSumOnGPU_V4<<<grid, block>>>(d_x, d_y);
@@ -270,7 +267,7 @@ void reduceSum() {
     total_time += gpu_timer.elapsedTime();
   }
   dbg(total_time, gpu_timer.totalTime());
-  CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
+  CUDA_CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
   dbg(y);
   std::printf("reduceSumOnGPU_V4 (warp/block reduce) cost time: %f ms\n",
               total_time / repeats);
@@ -278,17 +275,17 @@ void reduceSum() {
   y = 0.0;
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
-    CHECK(cudaMemcpy(
+    CUDA_CHECK(cudaMemcpy(
         d_y, &y, sizeof(DATA_TYPE), cudaMemcpyHostToDevice));  // 清空结果
     gpu_timer.start();
     reduceSumOnGPU_V5<<<10240, 128>>>(d_x, d_x, N);
     reduceSumOnGPU_V5<<<1, 1024>>>(d_x, d_y, 10240);
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();
-    CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));  // 恢复原数组
+    CUDA_CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));  // 恢复原数组
   }
   dbg(total_time, gpu_timer.totalTime());
-  CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
+  CUDA_CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
   dbg(y);
   std::printf("reduceSumOnGPU_V5 (提高线程利用率) cost time: %f ms\n",
               total_time / repeats);

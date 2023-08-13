@@ -63,8 +63,8 @@ void addArray() {
   DATA_TYPE* d_y = (DATA_TYPE*)gpu_allocator.allocate(M);
   DATA_TYPE* d_z = (DATA_TYPE*)gpu_allocator.allocate(M);
 
-  CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));
-  CHECK(cudaMemcpy(d_y, h_y, M, cudaMemcpyHostToDevice));
+  CUDA_CHECK(cudaMemcpy(d_x, h_x, M, cudaMemcpyHostToDevice));
+  CUDA_CHECK(cudaMemcpy(d_y, h_y, M, cudaMemcpyHostToDevice));
 
   const uint32_t block_size = 128;
   const uint32_t grid_size = (N + block_size - 1) / block_size;
@@ -82,6 +82,6 @@ void addArray() {
   }
   std::printf("addArrayOnGPU cost time: %f ms\n", total_time / repeats);
 
-  CHECK(cudaMemcpy(h_z, d_z, M, cudaMemcpyDeviceToHost));
+  CUDA_CHECK(cudaMemcpy(h_z, d_z, M, cudaMemcpyDeviceToHost));
   dbg(checkEqual(h_z, N, c));
 }
