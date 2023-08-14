@@ -96,8 +96,7 @@ __global__ void reduceSumOnGPU_V3(const DATA_TYPE* d_x,
                                   const int N) {
   extern __shared__ DATA_TYPE s_y[];
   const int tid = threadIdx.x;
-  const int bid = blockIdx.x;
-  const int idx = tid + blockDim.x * bid;
+  const int idx = tid + blockDim.x * blockIdx.x;
   s_y[tid] = idx < N ? d_x[idx] : 0.0;
   __syncthreads();
 
@@ -120,11 +119,13 @@ __global__ void reduceSumOnGPU_V3(const DATA_TYPE* d_x,
   }
 }
 
-// 数值错误 要求数据个数为 BLOCK_SIZE 的整数倍 不改变原数组
-// 每个 block 负责一块内存数据的 reduce 调用 warp/block reduce function
-__global__ void reduceSumOnGPU_V4(const DATA_TYPE* d_x, DATA_TYPE* d_y) {
-  const DATA_TYPE* x = d_x + blockDim.x * blockIdx.x;
-  DATA_TYPE val = x[threadIdx.x];
+// 数值错误 不要求数据个数为 BLOCK_SIZE 的整数倍 不改变原数组
+// 每个 block 负责一块内存数据的 reduce 调用 block reduce function
+__global__ void reduceSumOnGPU_V4(const DATA_TYPE* d_x,
+                                  DATA_TYPE* d_y,
+                                  const int N) {
+  const int idx = threadIdx.x + blockDim.x * blockIdx.x;
+  DATA_TYPE val = idx < N ? d_x[idx] : 0.0;
   val = blockReduceSum(val);
   if (threadIdx.x == 0) {
     atomicAdd(d_y, val);
@@ -262,7 +263,7 @@ void reduceSum() {
     CUDA_CHECK(cudaMemcpy(
         d_y, &y, sizeof(DATA_TYPE), cudaMemcpyHostToDevice));  // 清空结果
     gpu_timer.start();
-    reduceSumOnGPU_V4<<<grid, block>>>(d_x, d_y);
+    reduceSumOnGPU_V4<<<grid, block>>>(d_x, d_y, N);
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();
   }
