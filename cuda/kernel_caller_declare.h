@@ -6,6 +6,6 @@ void addArray();
 
 void deviceQuery();
 
-void transposeSquareMatrix();
+void transposeMatrix();
 
 void reduceSum();

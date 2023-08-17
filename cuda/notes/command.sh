@@ -1,12 +1,18 @@
-# 性能分析
+# ===-------------------------------------------------------------------------===
+#                                   性能分析
+# ===-------------------------------------------------------------------------===
+# 
 # nsight systems
+# 
 nsys nvprof -o [file_name] -f ./executable
+# 
 # dlprof
+# 
 dlprof --mode=tensorrt --force=true --reports=all --output_path=${model_dir}/dlprof_result [python .py]
-
 dlprofviewer -b 0.0.0.0 -p 8110 [*/dlprof_dldb.sqlite]
-
-# nvprof 命令
+# 
+# nvprof
+# 
 # 查看线程束的活跃比例
 nvprof --metrics achieved_occupancy ./executable
 # 查看全局内存吞吐量（global memory load throughput）
@@ -15,6 +21,18 @@ nvprof --metrics gld_throughput ./executable
 nvprof --metrics gld_efficiency ./executable
 # 查看每个线程束执行指令的平均数量
 nvprof --metrics inst_per_warp ./executable
+# 查看全局/共享内存访问事务数量（load/store）
+nvprof  --metrics shared_load_transactions ./executable
+nvprof  --metrics shared_load_transactions_per_request ./executable
+nvprof  --metrics shared_store_transactions ./executable
+nvprof  --metrics shared_store_transactions_per_request ./executable
+nvprof  --metrics gld_transactions ./executable
+nvprof  --metrics gld_transactions_per_request ./executable
+nvprof  --metrics gst_transactions ./executable
+nvprof  --metrics gst_transactions_per_request ./executable
 
+# 
+# nvcc
+# 
 # 打印核函数使用的寄存器数量
 nvcc --ptxas-options=-v
