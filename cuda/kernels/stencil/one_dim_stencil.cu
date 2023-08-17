@@ -9,10 +9,10 @@ constexpr int STENCIL_PADDING_SIZE = STENCIL_SIZE / 2;
 
 __constant__ DATA_TYPE coef[STENCIL_PADDING_SIZE];
 
-__global__ void stencil_1d(DATA_TYPE* in, DATA_TYPE* out) {
+__global__ void stencil_1d(const DATA_TYPE* in, DATA_TYPE* out) {
   __shared__ DATA_TYPE smem[BLOCK_SIZE + 2 * STENCIL_PADDING_SIZE];
-  int idx = threadIdx.x + blockDim.x * blockIdx.x;
-  int sidx = threadIdx.x + STENCIL_PADDING_SIZE;
+  const int idx = threadIdx.x + blockDim.x * blockIdx.x;
+  const int sidx = threadIdx.x + STENCIL_PADDING_SIZE;
   smem[sidx] = in[idx];
 
   if (threadIdx.x < STENCIL_PADDING_SIZE) {
