@@ -13,3 +13,5 @@ ninja -j8
 # nvprof --profile-child-processes ./kernel_caller
 
 ./kernel_caller
+
+# nvprof --metrics shared_load_transactions_per_request,shared_store_transactions_per_request ./kernel_caller

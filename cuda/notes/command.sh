@@ -22,10 +22,8 @@ nvprof --metrics gld_efficiency ./executable
 # 查看每个线程束执行指令的平均数量
 nvprof --metrics inst_per_warp ./executable
 # 查看全局/共享内存访问事务数量（load/store）
-nvprof  --metrics shared_load_transactions ./executable
-nvprof  --metrics shared_load_transactions_per_request ./executable
-nvprof  --metrics shared_store_transactions ./executable
-nvprof  --metrics shared_store_transactions_per_request ./executable
+nvprof  --metrics shared_load_transactions,shared_store_transactions ./executable
+nvprof  --metrics shared_load_transactions_per_request,shared_store_transactions_per_request ./executable
 nvprof  --metrics gld_transactions ./executable
 nvprof  --metrics gld_transactions_per_request ./executable
 nvprof  --metrics gst_transactions ./executable
