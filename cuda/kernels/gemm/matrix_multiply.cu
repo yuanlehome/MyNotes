@@ -2,7 +2,7 @@
 
 #include "common.h"
 #include "kernel_caller_declare.h"
-#include "kernel_utils.cuh"
+#include "kernel_utils.cu.h"
 
 constexpr int TILE_DIM = 32;
 

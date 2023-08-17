@@ -1,5 +1,4 @@
 add_subdirectory(element_wise)
 add_subdirectory(general)
-add_subdirectory(gemm)
 add_subdirectory(reduce)
 add_subdirectory(transpose)
