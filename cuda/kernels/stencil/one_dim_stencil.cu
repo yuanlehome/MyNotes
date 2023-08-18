@@ -4,6 +4,7 @@
 #include "kernel_caller_declare.h"
 #include "kernel_utils.cu.h"
 
+constexpr int BLOCK_SIZE = 128;
 constexpr int STENCIL_SIZE = 9;
 constexpr int STENCIL_PADDING_SIZE = STENCIL_SIZE / 2;
 
@@ -25,13 +26,12 @@ __global__ void stencil_1d(const DATA_TYPE* in, DATA_TYPE* out) {
   }
   __syncthreads();
 
-  if (idx < STENCIL_PADDING_SIZE ||
-      idx >= gridDim.x * blockDim.x - STENCIL_PADDING_SIZE)
-    return;
-
-  DATA_TYPE value = 0.0;
-  for (int i = 1; i <= STENCIL_PADDING_SIZE; i++) {
-    value += coef[i - 1] * (smem[sidx + i] - smem[sidx - i]);
+  if (idx >= STENCIL_PADDING_SIZE &&
+      idx < gridDim.x * blockDim.x - STENCIL_PADDING_SIZE) {
+    DATA_TYPE value = 0.0;
+    for (int i = 1; i <= STENCIL_PADDING_SIZE; i++) {
+      value += coef[i - 1] * (smem[sidx + i] - smem[sidx - i]);
+    }
+    out[idx] = value;
   }
-  out[idx] = value;
 }

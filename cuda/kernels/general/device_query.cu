@@ -110,6 +110,12 @@ void deviceQuery() {
               device_prop.pciBusID,
               device_prop.pciDeviceID);
 
+  cudaSharedMemConfig config;
+  cudaDeviceGetSharedMemConfig(&config);
+  const char *sm_bank_size[] = {"Default", "FourByte", "EightByte"};
+  std::printf("  The current size of shared memory banks:       %s\n",
+              sm_bank_size[static_cast<int>(config)]);
+
   const char *compute_mode[] = {
       "Default (multiple host threads can use ::cudaSetDevice() with device "
       "simultaneously)",

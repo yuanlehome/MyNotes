@@ -4,6 +4,8 @@
 #include "kernel_caller_declare.h"
 #include "kernel_utils.cu.h"
 
+constexpr int BLOCK_SIZE = 128;
+
 constexpr DATA_TYPE a = 1.23;
 
 // 数值错误
@@ -138,18 +140,17 @@ __global__ void reduceSumOnGPU_V4(const DATA_TYPE* d_x,
 __global__ void reduceSumOnGPU_V5(const DATA_TYPE* d_x,
                                   DATA_TYPE* d_y,
                                   const int N) {
-  const int tid = threadIdx.x;
-  const int bid = blockIdx.x;
-
-  const int stride = gridDim.x * blockDim.x;
   DATA_TYPE val = 0.0;
-  for (int i = bid * blockDim.x + tid; i < N; i += stride) {
-    val += d_x[i];
+  const int stride = gridDim.x * blockDim.x;
+  int idx = blockIdx.x * blockDim.x + threadIdx.x;
+  while (idx < N) {
+    val += d_x[idx];
+    idx += stride;
   }
   val = blockReduceSum(val);
 
-  if (tid == 0) {
-    d_y[bid] = val;
+  if (threadIdx.x == 0) {
+    d_y[blockIdx.x] = val;
   }
 }
 
@@ -279,7 +280,8 @@ void reduceSum() {
     CUDA_CHECK(cudaMemcpy(
         d_y, &y, sizeof(DATA_TYPE), cudaMemcpyHostToDevice));  // 清空结果
     gpu_timer.start();
-    reduceSumOnGPU_V5<<<10240, 128>>>(d_x, d_x, N);
+    // 注意这里传的 d_x 和 d_y 相同 如果 block 之间没有同步的话 会有问题
+    reduceSumOnGPU_V5<<<10240, block_size>>>(d_x, d_x, N);
     reduceSumOnGPU_V5<<<1, 1024>>>(d_x, d_y, 10240);
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();

@@ -34,3 +34,5 @@ nvprof  --metrics gst_transactions_per_request ./executable
 # 
 # 打印核函数使用的寄存器数量
 nvcc --ptxas-options=-v
+# 关闭/启用 L1 Cache
+nvcc -Xptxas -dlcm=cg/ca
