@@ -1,1 +1,1 @@
-// ref to paddle/phi/kernels/gpudnn/softmax_gpudnn.h
+// https://github.com/Oneflow-Inc/oneflow/blob/master/oneflow/core/cuda/softmax.cuh

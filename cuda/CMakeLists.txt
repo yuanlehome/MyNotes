@@ -37,6 +37,6 @@ add_subdirectory(kernels)
 
 add_executable(kernel_caller kernel_caller.cc)
 
-set(KERNEL_LIB general_kernel element_wise_kernel transpose_kernel reduce_kernel)
+set(KERNEL_LIB trivial_kernel elementwise_kernel transpose_kernel reduce_kernel)
 
 target_link_libraries(kernel_caller PRIVATE ${KERNEL_LIB})
