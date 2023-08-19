@@ -128,13 +128,13 @@ __global__ void reduceSumOnGPU_V4(const DATA_TYPE* d_x,
                                   const int N) {
   const int idx = threadIdx.x + blockDim.x * blockIdx.x;
   DATA_TYPE val = idx < N ? d_x[idx] : 0.0;
-  val = blockReduceSum(val);
+  val = blockReduce<DATA_TYPE, SumOp>(val);
   if (threadIdx.x == 0) {
     atomicAdd(d_y, val);
   }
 }
 
-// V5 kernel 的计算有问题 但没想明白哪里的问题 待定!!!
+// 此 kernel 的计算结果似乎有问题 但没想明白哪里的问题 待定!!!
 // 数值错误 不要求数据个数为 BLOCK_SIZE 的整数倍 不改变原数组
 // 每个 block 负责连续的两块内存数据的 reduce 调用 block reduce function
 __global__ void reduceSumOnGPU_V5(const DATA_TYPE* d_x,
@@ -150,7 +150,7 @@ __global__ void reduceSumOnGPU_V5(const DATA_TYPE* d_x,
     // val += d_x[idx + 2 * blockDim.x];
     // val += d_x[idx + 3 * blockDim.x];
   }
-  val = blockReduceSum(val);
+  val = blockReduce<DATA_TYPE, SumOp>(val);
   if (threadIdx.x == 0) {
     atomicAdd(d_y, val);
   }
@@ -169,7 +169,7 @@ __global__ void reduceSumOnGPU_V6(const DATA_TYPE* d_x,
     val += d_x[idx];
     idx += stride;
   }
-  val = blockReduceSum(val);
+  val = blockReduce<DATA_TYPE, SumOp>(val);
 
   if (threadIdx.x == 0) {
     d_y[blockIdx.x] = val;
