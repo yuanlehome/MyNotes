@@ -4,7 +4,7 @@
 #include "kernel_caller_declare.h"
 #include "kernel_utils.cu.h"
 
-constexpr int BLOCK_SIZE = 128;
+constexpr int kBlockSize = 128;
 
 constexpr DATA_TYPE a = 1.23;
 
@@ -47,7 +47,7 @@ DATA_TYPE reduceSumOnCPU_V3(DATA_TYPE* x, int start, int end) {
   return x[start];
 }
 
-// 数值错误 要求数据个数为 BLOCK_SIZE 的整数倍 改变原数组
+// 数值错误 要求数据个数为 kBlockSize 的整数倍 改变原数组
 // 每个 block 负责一块内存数据的 reduce
 __global__ void reduceSumOnGPU_V1(DATA_TYPE* d_x, DATA_TYPE* d_y) {
   const int tid = threadIdx.x;
@@ -66,7 +66,7 @@ __global__ void reduceSumOnGPU_V1(DATA_TYPE* d_x, DATA_TYPE* d_y) {
   }
 }
 
-// 数值错误 不要求数据个数为 BLOCK_SIZE 的整数倍 不改变原数组
+// 数值错误 不要求数据个数为 kBlockSize 的整数倍 不改变原数组
 // 每个 block 负责一块内存数据 使用动态共享内存
 __global__ void reduceSumOnGPU_V2(const DATA_TYPE* d_x,
                                   DATA_TYPE* d_y,
@@ -90,7 +90,7 @@ __global__ void reduceSumOnGPU_V2(const DATA_TYPE* d_x,
   }
 }
 
-// 数值错误 不要求数据个数为 BLOCK_SIZE 的整数倍 不改变原数组
+// 数值错误 不要求数据个数为 kBlockSize 的整数倍 不改变原数组
 // 每个 block 负责一块内存数据 使用动态共享内存 使用 __syncwarp 替换
 // __syncthreads
 __global__ void reduceSumOnGPU_V3(const DATA_TYPE* d_x,
@@ -121,7 +121,7 @@ __global__ void reduceSumOnGPU_V3(const DATA_TYPE* d_x,
   }
 }
 
-// 数值错误 不要求数据个数为 BLOCK_SIZE 的整数倍 不改变原数组
+// 数值错误 不要求数据个数为 kBlockSize 的整数倍 不改变原数组
 // 每个 block 负责一块内存数据的 reduce 调用 block reduce function
 __global__ void reduceSumOnGPU_V4(const DATA_TYPE* d_x,
                                   DATA_TYPE* d_y,
@@ -135,7 +135,7 @@ __global__ void reduceSumOnGPU_V4(const DATA_TYPE* d_x,
 }
 
 // 此 kernel 的计算结果似乎有问题 但没想明白哪里的问题 待定!!!
-// 数值错误 不要求数据个数为 BLOCK_SIZE 的整数倍 不改变原数组
+// 数值错误 不要求数据个数为 kBlockSize 的整数倍 不改变原数组
 // 每个 block 负责连续的两块内存数据的 reduce 调用 block reduce function
 __global__ void reduceSumOnGPU_V5(const DATA_TYPE* d_x,
                                   DATA_TYPE* d_y,
@@ -156,7 +156,7 @@ __global__ void reduceSumOnGPU_V5(const DATA_TYPE* d_x,
   }
 }
 
-// 数值正确 需二次 reduce 不要求数据个数为 BLOCK_SIZE 的整数倍 不改变原数组
+// 数值正确 需二次 reduce 不要求数据个数为 kBlockSize 的整数倍 不改变原数组
 // 每个 block 负责不连续的多块内存数据的 reduce 其中每个线程负责跨度为整个 grid
 // 的内存 调用 warp/block reduce function
 __global__ void reduceSumOnGPU_V6(const DATA_TYPE* d_x,
@@ -217,7 +217,7 @@ void reduceSum() {
   // dbg(sum_on_cpu);
   // std::printf("reduceSumOnCPU_V3 cost time: %f ms\n", total_time / repeats);
 
-  const uint32_t block_size = BLOCK_SIZE;
+  const uint32_t block_size = kBlockSize;
   const uint32_t grid_size = (N + block_size - 1) / block_size;
   dbg(block_size, grid_size);
   dim3 block(block_size);
