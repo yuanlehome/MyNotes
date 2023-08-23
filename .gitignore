@@ -4,3 +4,4 @@ test
 cuda/.cache/
 cuda/build
 link_favorites
+resnet50

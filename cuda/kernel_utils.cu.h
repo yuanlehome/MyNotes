@@ -1,6 +1,7 @@
 #pragma once
 
-#define FULL_MASK 0xffffffff
+constexpr unsigned int kMask = 0xffffffff;
+constexpr unsigned int kWrapSize = 32;
 
 template <typename T>
 struct SumOp {
@@ -23,32 +24,33 @@ struct MinOp {
   }
 };
 
-template <typename T, template <typename> class ReduceOp>
+template <typename T, template <typename> class BinaryOp>
 __forceinline__ __device__ T warpReduce(T value) {
+#pragma unroll
   for (int offset = 16; offset > 0; offset >>= 1) {
-    value = ReduceOp<T>()(value, __shfl_down_sync(FULL_MASK, value, offset));
+    value = BinaryOp<T>()(value, __shfl_down_sync(kMask, value, offset));
   }
   return value;
 }
 
-template <typename T, template <typename> class ReduceOp>
+template <typename T, template <typename> class BinaryOp>
 __forceinline__ __device__ T blockReduce(T value) {
-  __shared__ T shared[32];
-  int lane_id = threadIdx.x % warpSize;
-  int warp_id = threadIdx.x / warpSize;
+  __shared__ T shared[kWrapSize];
+  int lane = threadIdx.x % warpSize;
+  int warp = threadIdx.x / warpSize;
 
-  value = warpReduce<T, ReduceOp>(value);
+  value = warpReduce<T, BinaryOp>(value);
   __syncthreads();
 
-  if (lane_id == 0) {
-    shared[warp_id] = value;
+  if (lane == 0) {
+    shared[warp] = value;
   }
   __syncthreads();
 
-  value = (threadIdx.x < blockDim.x / warpSize) ? shared[lane_id] : 0;
+  value = (threadIdx.x < blockDim.x / warpSize) ? shared[lane] : 0;
 
-  if (warp_id == 0) {
-    value = warpReduce<T, ReduceOp>(value);
+  if (warp == 0) {
+    value = warpReduce<T, BinaryOp>(value);
   }
 
   return value;

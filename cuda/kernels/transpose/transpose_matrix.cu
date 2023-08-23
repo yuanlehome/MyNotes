@@ -9,8 +9,8 @@
 constexpr DATA_TYPE a = 1.23;
 constexpr DATA_TYPE b = 2.34;
 
-constexpr int BLOCK_DIM_X = 32;
-constexpr int BLOCK_DIM_Y = 32;
+constexpr int kBlockDimX = 32;
+constexpr int kBlockDimY = 32;
 
 // Print matrix with M x N
 void printMatrix(const DATA_TYPE* A, const int M, const int N) {
@@ -40,8 +40,8 @@ __global__ void matrixCopyRow(const DATA_TYPE* A,
                               DATA_TYPE* B,
                               const uint32_t M,
                               const uint32_t N) {
-  const int nx = threadIdx.x + blockIdx.x * BLOCK_DIM_X;
-  const int ny = threadIdx.y + blockIdx.y * BLOCK_DIM_Y;
+  const int nx = threadIdx.x + blockIdx.x * kBlockDimX;
+  const int ny = threadIdx.y + blockIdx.y * kBlockDimY;
   const int idx_row = nx + ny * N;
   if (nx < N && ny < M) {
     B[idx_row] = A[idx_row];
@@ -53,8 +53,8 @@ __global__ void matrixCopyCol(const DATA_TYPE* A,
                               DATA_TYPE* B,
                               const uint32_t M,
                               const uint32_t N) {
-  const int nx = threadIdx.x + blockIdx.x * BLOCK_DIM_X;
-  const int ny = threadIdx.y + blockIdx.y * BLOCK_DIM_Y;
+  const int nx = threadIdx.x + blockIdx.x * kBlockDimX;
+  const int ny = threadIdx.y + blockIdx.y * kBlockDimY;
   const int idx_col = ny + nx * M;
   if (nx < N && ny < M) {
     B[idx_col] = A[idx_col];
@@ -66,8 +66,8 @@ __global__ void transposeMatrix_V1(const DATA_TYPE* A,
                                    DATA_TYPE* B,
                                    const uint32_t M,
                                    const uint32_t N) {
-  const int nx = threadIdx.x + blockIdx.x * BLOCK_DIM_X;
-  const int ny = threadIdx.y + blockIdx.y * BLOCK_DIM_Y;
+  const int nx = threadIdx.x + blockIdx.x * kBlockDimX;
+  const int ny = threadIdx.y + blockIdx.y * kBlockDimY;
   if (nx < N && ny < M) {
     // 写非合并 读合并
     B[ny + nx * M] = A[nx + ny * N];
@@ -79,8 +79,8 @@ __global__ void transposeMatrix_V2(const DATA_TYPE* A,
                                    DATA_TYPE* B,
                                    const uint32_t M,
                                    const uint32_t N) {
-  const int nx = threadIdx.x + blockIdx.x * BLOCK_DIM_X;
-  const int ny = threadIdx.y + blockIdx.y * BLOCK_DIM_Y;
+  const int nx = threadIdx.x + blockIdx.x * kBlockDimX;
+  const int ny = threadIdx.y + blockIdx.y * kBlockDimY;
   if (nx < N && ny < M) {
     // 写合并 读非合并
     B[ny + nx * M] = A[nx + ny * N];
@@ -93,17 +93,17 @@ __global__ void transposeMatrix_V3(const DATA_TYPE* A,
                                    DATA_TYPE* B,
                                    const uint32_t M,
                                    const uint32_t N) {
-  __shared__ DATA_TYPE S[BLOCK_DIM_Y][BLOCK_DIM_X];
-  int nx = threadIdx.x + blockIdx.x * BLOCK_DIM_X;
-  int ny = threadIdx.y + blockIdx.y * BLOCK_DIM_Y;
+  __shared__ DATA_TYPE S[kBlockDimY][kBlockDimX];
+  int nx = threadIdx.x + blockIdx.x * kBlockDimX;
+  int ny = threadIdx.y + blockIdx.y * kBlockDimY;
   if (nx < N && ny < M) {
     // 写(共享内存)合并
     S[threadIdx.y][threadIdx.x] = A[nx + ny * N];
   }
   __syncthreads();
 
-  nx = threadIdx.x + blockIdx.y * BLOCK_DIM_Y;
-  ny = threadIdx.y + blockIdx.x * BLOCK_DIM_X;
+  nx = threadIdx.x + blockIdx.y * kBlockDimY;
+  ny = threadIdx.y + blockIdx.x * kBlockDimX;
   if (nx < M && ny < N) {
     // 写合并 读(共享内存)非合并 从而导致 bank conflict
     B[nx + ny * M] = S[threadIdx.x][threadIdx.y];
@@ -116,16 +116,16 @@ __global__ void transposeMatrix_V4(const DATA_TYPE* A,
                                    DATA_TYPE* B,
                                    const uint32_t M,
                                    const uint32_t N) {
-  __shared__ DATA_TYPE S[BLOCK_DIM_Y][BLOCK_DIM_X + 1];
-  int nx = threadIdx.x + blockIdx.x * BLOCK_DIM_X;
-  int ny = threadIdx.y + blockIdx.y * BLOCK_DIM_Y;
+  __shared__ DATA_TYPE S[kBlockDimY][kBlockDimX + 1];
+  int nx = threadIdx.x + blockIdx.x * kBlockDimX;
+  int ny = threadIdx.y + blockIdx.y * kBlockDimY;
   if (nx < N && ny < M) {
     S[threadIdx.y][threadIdx.x] = A[nx + ny * N];
   }
   __syncthreads();
 
-  nx = threadIdx.x + blockIdx.y * BLOCK_DIM_Y;
-  ny = threadIdx.y + blockIdx.x * BLOCK_DIM_X;
+  nx = threadIdx.x + blockIdx.y * kBlockDimY;
+  ny = threadIdx.y + blockIdx.x * kBlockDimX;
   if (nx < M && ny < N) {
     // 写合并 读(共享内存)非合并 但 bank conflict 已被避免
     B[nx + ny * M] = S[threadIdx.x][threadIdx.y];
@@ -155,10 +155,10 @@ void transposeMatrix() {
 
   CUDA_CHECK(cudaMemcpy(d_x, h_x, SIZE, cudaMemcpyHostToDevice));
 
-  const uint32_t block_size_x = BLOCK_DIM_X;
-  const uint32_t block_size_y = BLOCK_DIM_Y;
-  const uint32_t grid_size_x = (N + BLOCK_DIM_X - 1) / BLOCK_DIM_X;
-  const uint32_t grid_size_y = (M + BLOCK_DIM_Y - 1) / BLOCK_DIM_Y;
+  const uint32_t block_size_x = kBlockDimX;
+  const uint32_t block_size_y = kBlockDimY;
+  const uint32_t grid_size_x = (N + block_size_x - 1) / block_size_x;
+  const uint32_t grid_size_y = (M + block_size_y - 1) / block_size_y;
 
   dbg(block_size_x, block_size_y, grid_size_x, grid_size_y);
   dim3 block(block_size_x, block_size_y);
