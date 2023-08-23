@@ -1,0 +1,1786 @@
+grep: warning: GREP_OPTIONS is deprecated; please use an alias or script
+I0823 09:51:19.683624 54709 executor.cc:187] Old Executor is Running.
+I0823 09:51:19.754860 54709 auto_mixed_precision_pass.cc:237] black_list has 
+I0823 09:51:19.754890 54709 auto_mixed_precision_pass.cc:239]  - conv2d_transpose
+I0823 09:51:19.754894 54709 auto_mixed_precision_pass.cc:239]  - cross_entropy
+I0823 09:51:19.754895 54709 auto_mixed_precision_pass.cc:239]  - cross_entropy2
+I0823 09:51:19.754899 54709 auto_mixed_precision_pass.cc:239]  - c_softmax_with_cross_entropy
+I0823 09:51:19.754900 54709 auto_mixed_precision_pass.cc:239]  - reduce_sum
+I0823 09:51:19.754902 54709 auto_mixed_precision_pass.cc:239]  - sigmoid_cross_entropy_with_logits
+I0823 09:51:19.754905 54709 auto_mixed_precision_pass.cc:239]  - cos_sim
+I0823 09:51:19.754907 54709 auto_mixed_precision_pass.cc:239]  - softmax_with_cross_entropy
+I0823 09:51:19.754909 54709 auto_mixed_precision_pass.cc:239]  - sum
+I0823 09:51:19.754912 54709 auto_mixed_precision_pass.cc:239]  - log
+I0823 09:51:19.754914 54709 auto_mixed_precision_pass.cc:239]  - square
+I0823 09:51:19.754916 54709 auto_mixed_precision_pass.cc:239]  - exp
+I0823 09:51:19.754918 54709 auto_mixed_precision_pass.cc:239]  - mean
+I0823 09:51:19.754920 54709 auto_mixed_precision_pass.cc:239]  - pool2d
+I0823 09:51:19.754923 54709 auto_mixed_precision_pass.cc:239]  - relu
+I0823 09:51:19.754925 54709 auto_mixed_precision_pass.cc:241] white_list has 
+I0823 09:51:19.754927 54709 auto_mixed_precision_pass.cc:243]  - pool2d
+I0823 09:51:19.754932 54709 auto_mixed_precision_pass.cc:251] graph size: 1
+I0823 09:51:19.755154 54709 auto_mixed_precision_pass.cc:258] subgraph 0 has 180 op nodes
+I0823 09:51:19.755163 54709 auto_mixed_precision_pass.cc:266] fetch is in graph 0
+I0823 09:51:19.755167 54709 auto_mixed_precision_pass.cc:266] softmax_0.tmp_0 is in graph 0
+I0823 09:51:19.755169 54709 auto_mixed_precision_pass.cc:266] linear_1.tmp_1 is in graph 0
+I0823 09:51:19.755172 54709 auto_mixed_precision_pass.cc:266] fc_0.b_0 is in graph 0
+I0823 09:51:19.755174 54709 auto_mixed_precision_pass.cc:266] linear_1.tmp_0 is in graph 0
+I0823 09:51:19.755177 54709 auto_mixed_precision_pass.cc:266] fc_0.w_0 is in graph 0
+I0823 09:51:19.755179 54709 auto_mixed_precision_pass.cc:266] pool2d_1.tmp_0 is in graph 0
+I0823 09:51:19.755182 54709 auto_mixed_precision_pass.cc:266] batch_norm_52.tmp_2 is in graph 0
+I0823 09:51:19.755184 54709 auto_mixed_precision_pass.cc:266] bn5c_branch2c_variance is in graph 0
+I0823 09:51:19.755187 54709 auto_mixed_precision_pass.cc:266] batch_norm_52.tmp_0 is in graph 0
+I0823 09:51:19.755189 54709 auto_mixed_precision_pass.cc:266] bn5c_branch2c_scale is in graph 0
+I0823 09:51:19.755192 54709 auto_mixed_precision_pass.cc:266] bn5c_branch2c_mean is in graph 0
+I0823 09:51:19.755194 54709 auto_mixed_precision_pass.cc:266] res5c_branch2c_weights is in graph 0
+I0823 09:51:19.755198 54709 auto_mixed_precision_pass.cc:266] bn5c_branch2b_variance is in graph 0
+I0823 09:51:19.755199 54709 auto_mixed_precision_pass.cc:266] batch_norm_51.tmp_1 is in graph 0
+I0823 09:51:19.755203 54709 auto_mixed_precision_pass.cc:266] batch_norm_51.tmp_0 is in graph 0
+I0823 09:51:19.755204 54709 auto_mixed_precision_pass.cc:266] bn5c_branch2b_mean is in graph 0
+I0823 09:51:19.755208 54709 auto_mixed_precision_pass.cc:266] bn5c_branch2b_scale is in graph 0
+I0823 09:51:19.755209 54709 auto_mixed_precision_pass.cc:266] bn5c_branch2b_offset is in graph 0
+I0823 09:51:19.755213 54709 auto_mixed_precision_pass.cc:266] conv2d_104.tmp_0 is in graph 0
+I0823 09:51:19.755214 54709 auto_mixed_precision_pass.cc:266] res5c_branch2b_weights is in graph 0
+I0823 09:51:19.755218 54709 auto_mixed_precision_pass.cc:266] batch_norm_50.tmp_1 is in graph 0
+I0823 09:51:19.755220 54709 auto_mixed_precision_pass.cc:266] batch_norm_50.tmp_0 is in graph 0
+I0823 09:51:19.755223 54709 auto_mixed_precision_pass.cc:266] bn5c_branch2a_mean is in graph 0
+I0823 09:51:19.755225 54709 auto_mixed_precision_pass.cc:266] relu_15.tmp_0 is in graph 0
+I0823 09:51:19.755228 54709 auto_mixed_precision_pass.cc:266] bn5c_branch2a_scale is in graph 0
+I0823 09:51:19.755239 54709 auto_mixed_precision_pass.cc:266] bn5c_branch2a_offset is in graph 0
+I0823 09:51:19.755242 54709 auto_mixed_precision_pass.cc:266] conv2d_103.tmp_0 is in graph 0
+I0823 09:51:19.755244 54709 auto_mixed_precision_pass.cc:266] res5c_branch2a_weights is in graph 0
+I0823 09:51:19.755247 54709 auto_mixed_precision_pass.cc:266] elementwise_add_14 is in graph 0
+I0823 09:51:19.755249 54709 auto_mixed_precision_pass.cc:266] batch_norm_49.tmp_2 is in graph 0
+I0823 09:51:19.755252 54709 auto_mixed_precision_pass.cc:266] bn5b_branch2c_variance is in graph 0
+I0823 09:51:19.755254 54709 auto_mixed_precision_pass.cc:266] batch_norm_49.tmp_0 is in graph 0
+I0823 09:51:19.755257 54709 auto_mixed_precision_pass.cc:266] bn5b_branch2c_mean is in graph 0
+I0823 09:51:19.755260 54709 auto_mixed_precision_pass.cc:266] res5b_branch2c_weights is in graph 0
+I0823 09:51:19.755262 54709 auto_mixed_precision_pass.cc:266] batch_norm_48.tmp_3 is in graph 0
+I0823 09:51:19.755266 54709 auto_mixed_precision_pass.cc:266] batch_norm_48.tmp_2 is in graph 0
+I0823 09:51:19.755268 54709 auto_mixed_precision_pass.cc:266] bn5b_branch2b_variance is in graph 0
+I0823 09:51:19.755270 54709 auto_mixed_precision_pass.cc:266] batch_norm_48.tmp_1 is in graph 0
+I0823 09:51:19.755273 54709 auto_mixed_precision_pass.cc:266] batch_norm_48.tmp_0 is in graph 0
+I0823 09:51:19.755275 54709 auto_mixed_precision_pass.cc:266] bn5b_branch2b_offset is in graph 0
+I0823 09:51:19.755278 54709 auto_mixed_precision_pass.cc:266] conv2d_101.tmp_0 is in graph 0
+I0823 09:51:19.755281 54709 auto_mixed_precision_pass.cc:266] res5b_branch2b_weights is in graph 0
+I0823 09:51:19.755283 54709 auto_mixed_precision_pass.cc:266] batch_norm_47.tmp_2 is in graph 0
+I0823 09:51:19.755286 54709 auto_mixed_precision_pass.cc:266] bn5b_branch2a_variance is in graph 0
+I0823 09:51:19.755288 54709 auto_mixed_precision_pass.cc:266] batch_norm_47.tmp_1 is in graph 0
+I0823 09:51:19.755290 54709 auto_mixed_precision_pass.cc:266] bn5b_branch2a_mean is in graph 0
+I0823 09:51:19.755293 54709 auto_mixed_precision_pass.cc:266] res5b_branch2a_weights is in graph 0
+I0823 09:51:19.755296 54709 auto_mixed_precision_pass.cc:266] bn5a_branch1_variance is in graph 0
+I0823 09:51:19.755298 54709 auto_mixed_precision_pass.cc:266] batch_norm_46.tmp_0 is in graph 0
+I0823 09:51:19.755301 54709 auto_mixed_precision_pass.cc:266] bn5a_branch1_scale is in graph 0
+I0823 09:51:19.755303 54709 auto_mixed_precision_pass.cc:266] bn5a_branch1_mean is in graph 0
+I0823 09:51:19.755306 54709 auto_mixed_precision_pass.cc:266] bn5a_branch1_offset is in graph 0
+I0823 09:51:19.755308 54709 auto_mixed_precision_pass.cc:266] conv2d_99.tmp_0 is in graph 0
+I0823 09:51:19.755311 54709 auto_mixed_precision_pass.cc:266] res5a_branch1_weights is in graph 0
+I0823 09:51:19.755313 54709 auto_mixed_precision_pass.cc:266] batch_norm_45.tmp_2 is in graph 0
+I0823 09:51:19.755316 54709 auto_mixed_precision_pass.cc:266] bn5a_branch2c_variance is in graph 0
+I0823 09:51:19.755318 54709 auto_mixed_precision_pass.cc:266] bn3d_branch2a_scale is in graph 0
+I0823 09:51:19.755321 54709 auto_mixed_precision_pass.cc:266] bn2a_branch2b_variance is in graph 0
+I0823 09:51:19.755323 54709 auto_mixed_precision_pass.cc:266] bn5c_branch2a_variance is in graph 0
+I0823 09:51:19.755326 54709 auto_mixed_precision_pass.cc:266] bn4b_branch2b_scale is in graph 0
+I0823 09:51:19.755328 54709 auto_mixed_precision_pass.cc:266] bn2b_branch2c_scale is in graph 0
+I0823 09:51:19.755331 54709 auto_mixed_precision_pass.cc:266] bn4b_branch2b_mean is in graph 0
+I0823 09:51:19.755333 54709 auto_mixed_precision_pass.cc:266] conv2d_74.tmp_0 is in graph 0
+I0823 09:51:19.755335 54709 auto_mixed_precision_pass.cc:266] relu_5.tmp_0 is in graph 0
+I0823 09:51:19.755338 54709 auto_mixed_precision_pass.cc:266] batch_norm_28.tmp_3 is in graph 0
+I0823 09:51:19.755342 54709 auto_mixed_precision_pass.cc:266] elementwise_add_5 is in graph 0
+I0823 09:51:19.755343 54709 auto_mixed_precision_pass.cc:266] bn3c_branch2c_mean is in graph 0
+I0823 09:51:19.755347 54709 auto_mixed_precision_pass.cc:266] bn2b_branch2b_variance is in graph 0
+I0823 09:51:19.755352 54709 auto_mixed_precision_pass.cc:266] bn4f_branch2b_mean is in graph 0
+I0823 09:51:19.755354 54709 auto_mixed_precision_pass.cc:266] bn2a_branch1_variance is in graph 0
+I0823 09:51:19.755357 54709 auto_mixed_precision_pass.cc:266] bn3c_branch2b_variance is in graph 0
+I0823 09:51:19.755358 54709 auto_mixed_precision_pass.cc:266] bn3c_branch2a_variance is in graph 0
+I0823 09:51:19.755362 54709 auto_mixed_precision_pass.cc:266] batch_norm_19.tmp_3 is in graph 0
+I0823 09:51:19.755364 54709 auto_mixed_precision_pass.cc:266] batch_norm_18.tmp_2 is in graph 0
+I0823 09:51:19.755367 54709 auto_mixed_precision_pass.cc:266] bn3a_branch1_mean is in graph 0
+I0823 09:51:19.755369 54709 auto_mixed_precision_pass.cc:266] batch_norm_49.tmp_1 is in graph 0
+I0823 09:51:19.755373 54709 auto_mixed_precision_pass.cc:266] bn3c_branch2a_scale is in graph 0
+I0823 09:51:19.755388 54709 auto_mixed_precision_pass.cc:266] batch_norm_1.tmp_1 is in graph 0
+I0823 09:51:19.755389 54709 auto_mixed_precision_pass.cc:266] bn2c_branch2a_offset is in graph 0
+I0823 09:51:19.755393 54709 auto_mixed_precision_pass.cc:266] res3c_branch2a_weights is in graph 0
+I0823 09:51:19.755395 54709 auto_mixed_precision_pass.cc:266] res4a_branch1_weights is in graph 0
+I0823 09:51:19.755398 54709 auto_mixed_precision_pass.cc:266] bn4d_branch2c_scale is in graph 0
+I0823 09:51:19.755399 54709 auto_mixed_precision_pass.cc:266] res4f_branch2c_weights is in graph 0
+I0823 09:51:19.755403 54709 auto_mixed_precision_pass.cc:266] elementwise_add_9 is in graph 0
+I0823 09:51:19.755404 54709 auto_mixed_precision_pass.cc:266] bn2a_branch2a_variance is in graph 0
+I0823 09:51:19.755407 54709 auto_mixed_precision_pass.cc:266] bn3b_branch2c_mean is in graph 0
+I0823 09:51:19.755410 54709 auto_mixed_precision_pass.cc:266] bn4a_branch1_offset is in graph 0
+I0823 09:51:19.755412 54709 auto_mixed_precision_pass.cc:266] batch_norm_11.tmp_1 is in graph 0
+I0823 09:51:19.755415 54709 auto_mixed_precision_pass.cc:266] conv2d_70.tmp_0 is in graph 0
+I0823 09:51:19.755417 54709 auto_mixed_precision_pass.cc:266] res3b_branch2c_weights is in graph 0
+I0823 09:51:19.755420 54709 auto_mixed_precision_pass.cc:266] bn3b_branch2b_variance is in graph 0
+I0823 09:51:19.755422 54709 auto_mixed_precision_pass.cc:266] bn3b_branch2b_scale is in graph 0
+I0823 09:51:19.755425 54709 auto_mixed_precision_pass.cc:266] bn2b_branch2b_offset is in graph 0
+I0823 09:51:19.755427 54709 auto_mixed_precision_pass.cc:266] relu_10.tmp_0 is in graph 0
+I0823 09:51:19.755430 54709 auto_mixed_precision_pass.cc:266] bn3b_branch2b_offset is in graph 0
+I0823 09:51:19.755432 54709 auto_mixed_precision_pass.cc:266] batch_norm_10.tmp_0 is in graph 0
+I0823 09:51:19.755435 54709 auto_mixed_precision_pass.cc:266] batch_norm_8.tmp_2 is in graph 0
+I0823 09:51:19.755438 54709 auto_mixed_precision_pass.cc:266] batch_norm_16.tmp_0 is in graph 0
+I0823 09:51:19.755440 54709 auto_mixed_precision_pass.cc:266] res3b_branch2b_weights is in graph 0
+I0823 09:51:19.755443 54709 auto_mixed_precision_pass.cc:266] batch_norm_16.tmp_3 is in graph 0
+I0823 09:51:19.755445 54709 auto_mixed_precision_pass.cc:266] bn2a_branch2b_mean is in graph 0
+I0823 09:51:19.755448 54709 auto_mixed_precision_pass.cc:266] conv2d_58.tmp_0 is in graph 0
+I0823 09:51:19.755450 54709 auto_mixed_precision_pass.cc:266] batch_norm_15.tmp_0 is in graph 0
+I0823 09:51:19.755453 54709 auto_mixed_precision_pass.cc:266] bn4c_branch2b_variance is in graph 0
+I0823 09:51:19.755455 54709 auto_mixed_precision_pass.cc:266] res2c_branch2a_weights is in graph 0
+I0823 09:51:19.755458 54709 auto_mixed_precision_pass.cc:266] relu_4.tmp_0 is in graph 0
+I0823 09:51:19.755460 54709 auto_mixed_precision_pass.cc:266] bn3a_branch1_variance is in graph 0
+I0823 09:51:19.755463 54709 auto_mixed_precision_pass.cc:266] batch_norm_14.tmp_1 is in graph 0
+I0823 09:51:19.755465 54709 auto_mixed_precision_pass.cc:266] batch_norm_18.tmp_3 is in graph 0
+I0823 09:51:19.755468 54709 auto_mixed_precision_pass.cc:266] batch_norm_14.tmp_0 is in graph 0
+I0823 09:51:19.755473 54709 auto_mixed_precision_pass.cc:266] batch_norm_51.tmp_2 is in graph 0
+I0823 09:51:19.755475 54709 auto_mixed_precision_pass.cc:266] bn3a_branch1_scale is in graph 0
+I0823 09:51:19.755478 54709 auto_mixed_precision_pass.cc:266] bn4a_branch1_variance is in graph 0
+I0823 09:51:19.755481 54709 auto_mixed_precision_pass.cc:266] bn3a_branch1_offset is in graph 0
+I0823 09:51:19.755483 54709 auto_mixed_precision_pass.cc:266] batch_norm_0.tmp_3 is in graph 0
+I0823 09:51:19.755486 54709 auto_mixed_precision_pass.cc:266] batch_norm_17.tmp_2 is in graph 0
+I0823 09:51:19.755488 54709 auto_mixed_precision_pass.cc:266] batch_norm_25.tmp_2 is in graph 0
+I0823 09:51:19.755491 54709 auto_mixed_precision_pass.cc:266] bn3a_branch2c_variance is in graph 0
+I0823 09:51:19.755493 54709 auto_mixed_precision_pass.cc:266] relu_0.tmp_0 is in graph 0
+I0823 09:51:19.755496 54709 auto_mixed_precision_pass.cc:266] bn4e_branch2c_mean is in graph 0
+I0823 09:51:19.755498 54709 auto_mixed_precision_pass.cc:266] bn3b_branch2b_mean is in graph 0
+I0823 09:51:19.755501 54709 auto_mixed_precision_pass.cc:266] bn4f_branch2c_variance is in graph 0
+I0823 09:51:19.755503 54709 auto_mixed_precision_pass.cc:266] bn3b_branch2a_offset is in graph 0
+I0823 09:51:19.755506 54709 auto_mixed_precision_pass.cc:266] batch_norm_9.tmp_0 is in graph 0
+I0823 09:51:19.755508 54709 auto_mixed_precision_pass.cc:266] res3a_branch2c_weights is in graph 0
+I0823 09:51:19.755510 54709 auto_mixed_precision_pass.cc:266] conv2d_75.tmp_0 is in graph 0
+I0823 09:51:19.755513 54709 auto_mixed_precision_pass.cc:266] bn2a_branch2a_mean is in graph 0
+I0823 09:51:19.755517 54709 auto_mixed_precision_pass.cc:266] bn3a_branch2b_variance is in graph 0
+I0823 09:51:19.755527 54709 auto_mixed_precision_pass.cc:266] conv2d_84.tmp_0 is in graph 0
+I0823 09:51:19.755532 54709 auto_mixed_precision_pass.cc:266] conv2d_71.tmp_0 is in graph 0
+I0823 09:51:19.755534 54709 auto_mixed_precision_pass.cc:266] conv2d_80.tmp_0 is in graph 0
+I0823 09:51:19.755537 54709 auto_mixed_precision_pass.cc:266] batch_norm_12.tmp_3 is in graph 0
+I0823 09:51:19.755538 54709 auto_mixed_precision_pass.cc:266] res4c_branch2a_weights is in graph 0
+I0823 09:51:19.755542 54709 auto_mixed_precision_pass.cc:266] bn3c_branch2b_mean is in graph 0
+I0823 09:51:19.755544 54709 auto_mixed_precision_pass.cc:266] batch_norm_12.tmp_0 is in graph 0
+I0823 09:51:19.755546 54709 auto_mixed_precision_pass.cc:266] batch_norm_18.tmp_0 is in graph 0
+I0823 09:51:19.755549 54709 auto_mixed_precision_pass.cc:266] batch_norm_44.tmp_1 is in graph 0
+I0823 09:51:19.755551 54709 auto_mixed_precision_pass.cc:266] batch_norm_23.tmp_0 is in graph 0
+I0823 09:51:19.755554 54709 auto_mixed_precision_pass.cc:266] bn3b_branch2c_scale is in graph 0
+I0823 09:51:19.755556 54709 auto_mixed_precision_pass.cc:266] bn2b_branch2c_offset is in graph 0
+I0823 09:51:19.755559 54709 auto_mixed_precision_pass.cc:266] batch_norm_19.tmp_1 is in graph 0
+I0823 09:51:19.755561 54709 auto_mixed_precision_pass.cc:266] conv2d_65.tmp_0 is in graph 0
+I0823 09:51:19.755563 54709 auto_mixed_precision_pass.cc:266] res3a_branch2b_weights is in graph 0
+I0823 09:51:19.755566 54709 auto_mixed_precision_pass.cc:266] batch_norm_40.tmp_3 is in graph 0
+I0823 09:51:19.755568 54709 auto_mixed_precision_pass.cc:266] batch_norm_33.tmp_2 is in graph 0
+I0823 09:51:19.755571 54709 auto_mixed_precision_pass.cc:266] batch_norm_11.tmp_3 is in graph 0
+I0823 09:51:19.755574 54709 auto_mixed_precision_pass.cc:266] bn3c_branch2c_scale is in graph 0
+I0823 09:51:19.755576 54709 auto_mixed_precision_pass.cc:266] res2a_branch2c_weights is in graph 0
+I0823 09:51:19.755578 54709 auto_mixed_precision_pass.cc:266] bn2c_branch2c_offset is in graph 0
+I0823 09:51:19.755581 54709 auto_mixed_precision_pass.cc:266] batch_norm_11.tmp_2 is in graph 0
+I0823 09:51:19.755584 54709 auto_mixed_precision_pass.cc:266] bn3c_branch2c_offset is in graph 0
+I0823 09:51:19.755586 54709 auto_mixed_precision_pass.cc:266] batch_norm_22.tmp_0 is in graph 0
+I0823 09:51:19.755589 54709 auto_mixed_precision_pass.cc:266] bn3a_branch2a_variance is in graph 0
+I0823 09:51:19.755594 54709 auto_mixed_precision_pass.cc:266] bn3a_branch2a_mean is in graph 0
+I0823 09:51:19.755596 54709 auto_mixed_precision_pass.cc:266] reshape2_0.tmp_0 is in graph 0
+I0823 09:51:19.755599 54709 auto_mixed_precision_pass.cc:266] bn3a_branch2a_offset is in graph 0
+I0823 09:51:19.755601 54709 auto_mixed_precision_pass.cc:266] bn2a_branch1_offset is in graph 0
+I0823 09:51:19.755604 54709 auto_mixed_precision_pass.cc:266] batch_norm_33.tmp_1 is in graph 0
+I0823 09:51:19.755606 54709 auto_mixed_precision_pass.cc:266] batch_norm_2.tmp_0 is in graph 0
+I0823 09:51:19.755609 54709 auto_mixed_precision_pass.cc:266] batch_norm_13.tmp_0 is in graph 0
+I0823 09:51:19.755612 54709 auto_mixed_precision_pass.cc:266] bn5a_branch2c_scale is in graph 0
+I0823 09:51:19.755614 54709 auto_mixed_precision_pass.cc:266] bn4f_branch2b_offset is in graph 0
+I0823 09:51:19.755617 54709 auto_mixed_precision_pass.cc:266] conv2d_77.tmp_0 is in graph 0
+I0823 09:51:19.755620 54709 auto_mixed_precision_pass.cc:266] batch_norm_16.tmp_1 is in graph 0
+I0823 09:51:19.755622 54709 auto_mixed_precision_pass.cc:266] res2b_branch2a_weights is in graph 0
+I0823 09:51:19.755627 54709 auto_mixed_precision_pass.cc:266] elementwise_add_2 is in graph 0
+I0823 09:51:19.755630 54709 auto_mixed_precision_pass.cc:266] elementwise_add_0 is in graph 0
+I0823 09:51:19.755632 54709 auto_mixed_precision_pass.cc:266] bn2b_branch2a_variance is in graph 0
+I0823 09:51:19.755635 54709 auto_mixed_precision_pass.cc:266] batch_norm_4.tmp_1 is in graph 0
+I0823 09:51:19.755637 54709 auto_mixed_precision_pass.cc:266] bn2a_branch2a_offset is in graph 0
+I0823 09:51:19.755640 54709 auto_mixed_precision_pass.cc:266] bn4f_branch2b_variance is in graph 0
+I0823 09:51:19.755642 54709 auto_mixed_precision_pass.cc:266] conv2d_66.tmp_0 is in graph 0
+I0823 09:51:19.755645 54709 auto_mixed_precision_pass.cc:266] batch_norm_20.tmp_1 is in graph 0
+I0823 09:51:19.755647 54709 auto_mixed_precision_pass.cc:266] bn2a_branch1_mean is in graph 0
+I0823 09:51:19.755649 54709 auto_mixed_precision_pass.cc:266] elementwise_add_8 is in graph 0
+I0823 09:51:19.755652 54709 auto_mixed_precision_pass.cc:266] elementwise_add_15 is in graph 0
+I0823 09:51:19.755654 54709 auto_mixed_precision_pass.cc:266] bn3d_branch2b_variance is in graph 0
+I0823 09:51:19.755657 54709 auto_mixed_precision_pass.cc:266] batch_norm_9.tmp_2 is in graph 0
+I0823 09:51:19.755659 54709 auto_mixed_precision_pass.cc:266] batch_norm_24.tmp_1 is in graph 0
+I0823 09:51:19.755662 54709 auto_mixed_precision_pass.cc:266] batch_norm_46.tmp_1 is in graph 0
+I0823 09:51:19.755664 54709 auto_mixed_precision_pass.cc:266] batch_norm_3.tmp_2 is in graph 0
+I0823 09:51:19.755667 54709 auto_mixed_precision_pass.cc:266] bn2c_branch2c_scale is in graph 0
+I0823 09:51:19.755669 54709 auto_mixed_precision_pass.cc:266] bn4c_branch2b_mean is in graph 0
+I0823 09:51:19.755672 54709 auto_mixed_precision_pass.cc:266] bn3b_branch2a_scale is in graph 0
+I0823 09:51:19.755674 54709 auto_mixed_precision_pass.cc:266] bn2b_branch2a_offset is in graph 0
+I0823 09:51:19.755676 54709 auto_mixed_precision_pass.cc:266] bn2a_branch2c_variance is in graph 0
+I0823 09:51:19.755679 54709 auto_mixed_precision_pass.cc:266] bn4d_branch2b_variance is in graph 0
+I0823 09:51:19.755682 54709 auto_mixed_precision_pass.cc:266] conv2d_63.tmp_0 is in graph 0
+I0823 09:51:19.755684 54709 auto_mixed_precision_pass.cc:266] batch_norm_37.tmp_3 is in graph 0
+I0823 09:51:19.755686 54709 auto_mixed_precision_pass.cc:266] bn2b_branch2a_mean is in graph 0
+I0823 09:51:19.755689 54709 auto_mixed_precision_pass.cc:266] elementwise_add_4 is in graph 0
+I0823 09:51:19.755692 54709 auto_mixed_precision_pass.cc:266] batch_norm_38.tmp_2 is in graph 0
+I0823 09:51:19.755694 54709 auto_mixed_precision_pass.cc:266] batch_norm_9.tmp_1 is in graph 0
+I0823 09:51:19.755697 54709 auto_mixed_precision_pass.cc:266] bn2b_branch2c_variance is in graph 0
+I0823 09:51:19.755699 54709 auto_mixed_precision_pass.cc:266] bn4f_branch2c_mean is in graph 0
+I0823 09:51:19.755702 54709 auto_mixed_precision_pass.cc:266] bn3c_branch2c_variance is in graph 0
+I0823 09:51:19.755707 54709 auto_mixed_precision_pass.cc:266] batch_norm_30.tmp_1 is in graph 0
+I0823 09:51:19.755710 54709 auto_mixed_precision_pass.cc:266] batch_norm_15.tmp_3 is in graph 0
+I0823 09:51:19.755712 54709 auto_mixed_precision_pass.cc:266] bn2a_branch2b_scale is in graph 0
+I0823 09:51:19.755714 54709 auto_mixed_precision_pass.cc:266] batch_norm_11.tmp_0 is in graph 0
+I0823 09:51:19.755717 54709 auto_mixed_precision_pass.cc:266] batch_norm_24.tmp_2 is in graph 0
+I0823 09:51:19.755719 54709 auto_mixed_precision_pass.cc:266] batch_norm_26.tmp_0 is in graph 0
+I0823 09:51:19.755722 54709 auto_mixed_precision_pass.cc:266] bn2a_branch2c_mean is in graph 0
+I0823 09:51:19.755725 54709 auto_mixed_precision_pass.cc:266] bn4f_branch2a_mean is in graph 0
+I0823 09:51:19.755728 54709 auto_mixed_precision_pass.cc:266] bn3b_branch2a_mean is in graph 0
+I0823 09:51:19.755730 54709 auto_mixed_precision_pass.cc:266] conv2d_57.tmp_0 is in graph 0
+I0823 09:51:19.755733 54709 auto_mixed_precision_pass.cc:266] bn3a_branch2b_scale is in graph 0
+I0823 09:51:19.755734 54709 auto_mixed_precision_pass.cc:266] res4a_branch2c_weights is in graph 0
+I0823 09:51:19.755738 54709 auto_mixed_precision_pass.cc:266] batch_norm_19.tmp_2 is in graph 0
+I0823 09:51:19.755739 54709 auto_mixed_precision_pass.cc:266] batch_norm_3.tmp_0 is in graph 0
+I0823 09:51:19.755743 54709 auto_mixed_precision_pass.cc:266] bn5b_branch2b_mean is in graph 0
+I0823 09:51:19.755745 54709 auto_mixed_precision_pass.cc:266] batch_norm_28.tmp_1 is in graph 0
+I0823 09:51:19.755748 54709 auto_mixed_precision_pass.cc:266] reshape2_0.tmp_1 is in graph 0
+I0823 09:51:19.755750 54709 auto_mixed_precision_pass.cc:266] bn4d_branch2a_variance is in graph 0
+I0823 09:51:19.755753 54709 auto_mixed_precision_pass.cc:266] batch_norm_12.tmp_2 is in graph 0
+I0823 09:51:19.755755 54709 auto_mixed_precision_pass.cc:266] conv2d_62.tmp_0 is in graph 0
+I0823 09:51:19.755757 54709 auto_mixed_precision_pass.cc:266] bn5b_branch2a_offset is in graph 0
+I0823 09:51:19.755760 54709 auto_mixed_precision_pass.cc:266] res2a_branch2b_weights is in graph 0
+I0823 09:51:19.755762 54709 auto_mixed_precision_pass.cc:266] batch_norm_0.tmp_2 is in graph 0
+I0823 09:51:19.755765 54709 auto_mixed_precision_pass.cc:266] bn2b_branch2a_scale is in graph 0
+I0823 09:51:19.755769 54709 auto_mixed_precision_pass.cc:266] bn4e_branch2b_mean is in graph 0
+I0823 09:51:19.755770 54709 auto_mixed_precision_pass.cc:266] bn3c_branch2a_offset is in graph 0
+I0823 09:51:19.755774 54709 auto_mixed_precision_pass.cc:266] batch_norm_0.tmp_0 is in graph 0
+I0823 09:51:19.755775 54709 auto_mixed_precision_pass.cc:266] bn3a_branch2c_scale is in graph 0
+I0823 09:51:19.755779 54709 auto_mixed_precision_pass.cc:266] bn3c_branch2a_mean is in graph 0
+I0823 09:51:19.755780 54709 auto_mixed_precision_pass.cc:266] elementwise_add_3 is in graph 0
+I0823 09:51:19.755784 54709 auto_mixed_precision_pass.cc:266] bn_conv1_mean is in graph 0
+I0823 09:51:19.755785 54709 auto_mixed_precision_pass.cc:266] batch_norm_19.tmp_0 is in graph 0
+I0823 09:51:19.755789 54709 auto_mixed_precision_pass.cc:266] conv2d_72.tmp_0 is in graph 0
+I0823 09:51:19.755790 54709 auto_mixed_precision_pass.cc:266] batch_norm_7.tmp_0 is in graph 0
+I0823 09:51:19.755793 54709 auto_mixed_precision_pass.cc:266] batch_norm_5.tmp_2 is in graph 0
+I0823 09:51:19.755795 54709 auto_mixed_precision_pass.cc:266] bn3c_branch2b_scale is in graph 0
+I0823 09:51:19.755798 54709 auto_mixed_precision_pass.cc:266] batch_norm_2.tmp_1 is in graph 0
+I0823 09:51:19.755800 54709 auto_mixed_precision_pass.cc:266] relu_13.tmp_0 is in graph 0
+I0823 09:51:19.755803 54709 auto_mixed_precision_pass.cc:266] bn2c_branch2b_offset is in graph 0
+I0823 09:51:19.755805 54709 auto_mixed_precision_pass.cc:266] conv2d_68.tmp_0 is in graph 0
+I0823 09:51:19.755808 54709 auto_mixed_precision_pass.cc:266] bn_conv1_variance is in graph 0
+I0823 09:51:19.755810 54709 auto_mixed_precision_pass.cc:266] conv2d_73.tmp_0 is in graph 0
+I0823 09:51:19.755813 54709 auto_mixed_precision_pass.cc:266] bn_conv1_scale is in graph 0
+I0823 09:51:19.755818 54709 auto_mixed_precision_pass.cc:266] bn3a_branch2b_offset is in graph 0
+I0823 09:51:19.755821 54709 auto_mixed_precision_pass.cc:266] feed is in graph 0
+I0823 09:51:19.755823 54709 auto_mixed_precision_pass.cc:266] bn3c_branch2b_offset is in graph 0
+I0823 09:51:19.755826 54709 auto_mixed_precision_pass.cc:266] res2a_branch2a_weights is in graph 0
+I0823 09:51:19.755828 54709 auto_mixed_precision_pass.cc:266] bn4d_branch2a_scale is in graph 0
+I0823 09:51:19.755831 54709 auto_mixed_precision_pass.cc:266] bn2c_branch2a_mean is in graph 0
+I0823 09:51:19.755833 54709 auto_mixed_precision_pass.cc:266] batch_norm_10.tmp_1 is in graph 0
+I0823 09:51:19.755836 54709 auto_mixed_precision_pass.cc:266] batch_norm_43.tmp_3 is in graph 0
+I0823 09:51:19.755838 54709 auto_mixed_precision_pass.cc:266] conv2d_59.tmp_0 is in graph 0
+I0823 09:51:19.755841 54709 auto_mixed_precision_pass.cc:266] conv2d_53.tmp_0 is in graph 0
+I0823 09:51:19.755843 54709 auto_mixed_precision_pass.cc:266] bn3d_branch2c_offset is in graph 0
+I0823 09:51:19.755846 54709 auto_mixed_precision_pass.cc:266] conv2d_55.tmp_0 is in graph 0
+I0823 09:51:19.755848 54709 auto_mixed_precision_pass.cc:266] bn3d_branch2a_offset is in graph 0
+I0823 09:51:19.755851 54709 auto_mixed_precision_pass.cc:266] batch_norm_13.tmp_2 is in graph 0
+I0823 09:51:19.755853 54709 auto_mixed_precision_pass.cc:266] bn2b_branch2b_mean is in graph 0
+I0823 09:51:19.755856 54709 auto_mixed_precision_pass.cc:266] batch_norm_29.tmp_2 is in graph 0
+I0823 09:51:19.755858 54709 auto_mixed_precision_pass.cc:266] bn2a_branch2c_offset is in graph 0
+I0823 09:51:19.755861 54709 auto_mixed_precision_pass.cc:266] batch_norm_29.tmp_1 is in graph 0
+I0823 09:51:19.755864 54709 auto_mixed_precision_pass.cc:266] relu_3.tmp_0 is in graph 0
+I0823 09:51:19.755867 54709 auto_mixed_precision_pass.cc:266] bn2a_branch2a_scale is in graph 0
+I0823 09:51:19.755869 54709 auto_mixed_precision_pass.cc:266] batch_norm_15.tmp_2 is in graph 0
+I0823 09:51:19.755872 54709 auto_mixed_precision_pass.cc:266] batch_norm_2.tmp_3 is in graph 0
+I0823 09:51:19.755873 54709 auto_mixed_precision_pass.cc:266] bn3a_branch2b_mean is in graph 0
+I0823 09:51:19.755877 54709 auto_mixed_precision_pass.cc:266] res5a_branch2c_weights is in graph 0
+I0823 09:51:19.755878 54709 auto_mixed_precision_pass.cc:266] batch_norm_17.tmp_1 is in graph 0
+I0823 09:51:19.755882 54709 auto_mixed_precision_pass.cc:266] batch_norm_37.tmp_0 is in graph 0
+I0823 09:51:19.755883 54709 auto_mixed_precision_pass.cc:266] res3b_branch2a_weights is in graph 0
+I0823 09:51:19.755887 54709 auto_mixed_precision_pass.cc:266] batch_norm_13.tmp_1 is in graph 0
+I0823 09:51:19.755889 54709 auto_mixed_precision_pass.cc:266] batch_norm_6.tmp_2 is in graph 0
+I0823 09:51:19.755892 54709 auto_mixed_precision_pass.cc:266] bn2a_branch2b_offset is in graph 0
+I0823 09:51:19.755894 54709 auto_mixed_precision_pass.cc:266] batch_norm_45.tmp_1 is in graph 0
+I0823 09:51:19.755896 54709 auto_mixed_precision_pass.cc:266] bn5a_branch2c_mean is in graph 0
+I0823 09:51:19.755899 54709 auto_mixed_precision_pass.cc:266] bn4b_branch2a_scale is in graph 0
+I0823 09:51:19.755903 54709 auto_mixed_precision_pass.cc:266] batch_norm_10.tmp_2 is in graph 0
+I0823 09:51:19.755904 54709 auto_mixed_precision_pass.cc:266] bn3b_branch2c_variance is in graph 0
+I0823 09:51:19.755906 54709 auto_mixed_precision_pass.cc:266] batch_norm_1.tmp_2 is in graph 0
+I0823 09:51:19.755909 54709 auto_mixed_precision_pass.cc:266] bn3b_branch2c_offset is in graph 0
+I0823 09:51:19.755911 54709 auto_mixed_precision_pass.cc:266] batch_norm_1.tmp_0 is in graph 0
+I0823 09:51:19.755914 54709 auto_mixed_precision_pass.cc:266] bn5a_branch2b_scale is in graph 0
+I0823 09:51:19.755916 54709 auto_mixed_precision_pass.cc:266] conv2d_56.tmp_0 is in graph 0
+I0823 09:51:19.755919 54709 auto_mixed_precision_pass.cc:266] bn3b_branch2a_variance is in graph 0
+I0823 09:51:19.755921 54709 auto_mixed_precision_pass.cc:266] res4b_branch2b_weights is in graph 0
+I0823 09:51:19.755924 54709 auto_mixed_precision_pass.cc:266] bn4e_branch2a_mean is in graph 0
+I0823 09:51:19.755929 54709 auto_mixed_precision_pass.cc:266] batch_norm_2.tmp_2 is in graph 0
+I0823 09:51:19.755931 54709 auto_mixed_precision_pass.cc:266] batch_norm_21.tmp_0 is in graph 0
+I0823 09:51:19.755934 54709 auto_mixed_precision_pass.cc:266] pool2d_0.tmp_0 is in graph 0
+I0823 09:51:19.755936 54709 auto_mixed_precision_pass.cc:266] batch_norm_47.tmp_3 is in graph 0
+I0823 09:51:19.755939 54709 auto_mixed_precision_pass.cc:266] bn4a_branch2c_offset is in graph 0
+I0823 09:51:19.755941 54709 auto_mixed_precision_pass.cc:266] bn2c_branch2a_variance is in graph 0
+I0823 09:51:19.755944 54709 auto_mixed_precision_pass.cc:266] res2a_branch1_weights is in graph 0
+I0823 09:51:19.755946 54709 auto_mixed_precision_pass.cc:266] batch_norm_37.tmp_2 is in graph 0
+I0823 09:51:19.755949 54709 auto_mixed_precision_pass.cc:266] batch_norm_39.tmp_0 is in graph 0
+I0823 09:51:19.755951 54709 auto_mixed_precision_pass.cc:266] conv2d_60.tmp_0 is in graph 0
+I0823 09:51:19.755954 54709 auto_mixed_precision_pass.cc:266] res2c_branch2b_weights is in graph 0
+I0823 09:51:19.755956 54709 auto_mixed_precision_pass.cc:266] batch_norm_3.tmp_1 is in graph 0
+I0823 09:51:19.755959 54709 auto_mixed_precision_pass.cc:266] batch_norm_34.tmp_2 is in graph 0
+I0823 09:51:19.755961 54709 auto_mixed_precision_pass.cc:266] elementwise_add_13 is in graph 0
+I0823 09:51:19.755964 54709 auto_mixed_precision_pass.cc:266] batch_norm_30.tmp_2 is in graph 0
+I0823 09:51:19.755966 54709 auto_mixed_precision_pass.cc:266] bn2b_branch2c_mean is in graph 0
+I0823 09:51:19.755970 54709 auto_mixed_precision_pass.cc:266] bn4a_branch2a_variance is in graph 0
+I0823 09:51:19.755971 54709 auto_mixed_precision_pass.cc:266] conv2d_102.tmp_0 is in graph 0
+I0823 09:51:19.755975 54709 auto_mixed_precision_pass.cc:266] batch_norm_41.tmp_3 is in graph 0
+I0823 09:51:19.755976 54709 auto_mixed_precision_pass.cc:266] bn4a_branch1_scale is in graph 0
+I0823 09:51:19.755980 54709 auto_mixed_precision_pass.cc:266] batch_norm_18.tmp_1 is in graph 0
+I0823 09:51:19.755981 54709 auto_mixed_precision_pass.cc:266] bn2c_branch2b_mean is in graph 0
+I0823 09:51:19.755985 54709 auto_mixed_precision_pass.cc:266] batch_norm_27.tmp_0 is in graph 0
+I0823 09:51:19.755986 54709 auto_mixed_precision_pass.cc:266] batch_norm_1.tmp_3 is in graph 0
+I0823 09:51:19.755990 54709 auto_mixed_precision_pass.cc:266] batch_norm_22.tmp_2 is in graph 0
+I0823 09:51:19.755992 54709 auto_mixed_precision_pass.cc:266] conv2d_69.tmp_0 is in graph 0
+I0823 09:51:19.755995 54709 auto_mixed_precision_pass.cc:266] bn2a_branch1_scale is in graph 0
+I0823 09:51:19.755997 54709 auto_mixed_precision_pass.cc:266] batch_norm_16.tmp_2 is in graph 0
+I0823 09:51:19.756000 54709 auto_mixed_precision_pass.cc:266] bn3a_branch2c_mean is in graph 0
+I0823 09:51:19.756002 54709 auto_mixed_precision_pass.cc:266] bn2b_branch2b_scale is in graph 0
+I0823 09:51:19.756006 54709 auto_mixed_precision_pass.cc:266] conv1_weights is in graph 0
+I0823 09:51:19.756007 54709 auto_mixed_precision_pass.cc:266] bn4b_branch2a_mean is in graph 0
+I0823 09:51:19.756011 54709 auto_mixed_precision_pass.cc:266] batch_norm_12.tmp_1 is in graph 0
+I0823 09:51:19.756012 54709 auto_mixed_precision_pass.cc:266] bn_conv1_offset is in graph 0
+I0823 09:51:19.756016 54709 auto_mixed_precision_pass.cc:266] batch_norm_6.tmp_0 is in graph 0
+I0823 09:51:19.756018 54709 auto_mixed_precision_pass.cc:266] conv2d_105.tmp_0 is in graph 0
+I0823 09:51:19.756021 54709 auto_mixed_precision_pass.cc:266] batch_norm_4.tmp_2 is in graph 0
+I0823 09:51:19.756023 54709 auto_mixed_precision_pass.cc:266] batch_norm_6.tmp_1 is in graph 0
+I0823 09:51:19.756026 54709 auto_mixed_precision_pass.cc:266] batch_norm_21.tmp_3 is in graph 0
+I0823 09:51:19.756029 54709 auto_mixed_precision_pass.cc:266] batch_norm_20.tmp_2 is in graph 0
+I0823 09:51:19.756031 54709 auto_mixed_precision_pass.cc:266] batch_norm_7.tmp_1 is in graph 0
+I0823 09:51:19.756034 54709 auto_mixed_precision_pass.cc:266] relu_14.tmp_0 is in graph 0
+I0823 09:51:19.756036 54709 auto_mixed_precision_pass.cc:266] bn5b_branch2a_scale is in graph 0
+I0823 09:51:19.756044 54709 auto_mixed_precision_pass.cc:266] bn2c_branch2b_variance is in graph 0
+I0823 09:51:19.756047 54709 auto_mixed_precision_pass.cc:266] elementwise_add_1 is in graph 0
+I0823 09:51:19.756049 54709 auto_mixed_precision_pass.cc:266] res3c_branch2c_weights is in graph 0
+I0823 09:51:19.756052 54709 auto_mixed_precision_pass.cc:266] bn4c_branch2a_scale is in graph 0
+I0823 09:51:19.756055 54709 auto_mixed_precision_pass.cc:266] bn2a_branch2c_scale is in graph 0
+I0823 09:51:19.756058 54709 auto_mixed_precision_pass.cc:266] bn3d_branch2a_variance is in graph 0
+I0823 09:51:19.756060 54709 auto_mixed_precision_pass.cc:266] bn4b_branch2b_variance is in graph 0
+I0823 09:51:19.756063 54709 auto_mixed_precision_pass.cc:266] bn2c_branch2a_scale is in graph 0
+I0823 09:51:19.756065 54709 auto_mixed_precision_pass.cc:266] batch_norm_38.tmp_3 is in graph 0
+I0823 09:51:19.756068 54709 auto_mixed_precision_pass.cc:266] save_infer_model/scale_0.tmp_1 is in graph 0
+I0823 09:51:19.756075 54709 auto_mixed_precision_pass.cc:266] bn4a_branch2a_mean is in graph 0
+I0823 09:51:19.756078 54709 auto_mixed_precision_pass.cc:266] bn5a_branch2b_offset is in graph 0
+I0823 09:51:19.756081 54709 auto_mixed_precision_pass.cc:266] bn4b_branch2c_mean is in graph 0
+I0823 09:51:19.756083 54709 auto_mixed_precision_pass.cc:266] relu_2.tmp_0 is in graph 0
+I0823 09:51:19.756086 54709 auto_mixed_precision_pass.cc:266] bn5a_branch2a_mean is in graph 0
+I0823 09:51:19.756088 54709 auto_mixed_precision_pass.cc:266] batch_norm_35.tmp_0 is in graph 0
+I0823 09:51:19.756091 54709 auto_mixed_precision_pass.cc:266] batch_norm_4.tmp_0 is in graph 0
+I0823 09:51:19.756093 54709 auto_mixed_precision_pass.cc:266] batch_norm_9.tmp_3 is in graph 0
+I0823 09:51:19.756096 54709 auto_mixed_precision_pass.cc:266] bn2c_branch2b_scale is in graph 0
+I0823 09:51:19.756099 54709 auto_mixed_precision_pass.cc:266] bn4c_branch2a_mean is in graph 0
+I0823 09:51:19.756101 54709 auto_mixed_precision_pass.cc:266] bn2c_branch2c_variance is in graph 0
+I0823 09:51:19.756104 54709 auto_mixed_precision_pass.cc:266] bn2c_branch2c_mean is in graph 0
+I0823 09:51:19.756107 54709 auto_mixed_precision_pass.cc:266] batch_norm_21.tmp_1 is in graph 0
+I0823 09:51:19.756110 54709 auto_mixed_precision_pass.cc:266] batch_norm_21.tmp_2 is in graph 0
+I0823 09:51:19.756112 54709 auto_mixed_precision_pass.cc:266] elementwise_add_6 is in graph 0
+I0823 09:51:19.756115 54709 auto_mixed_precision_pass.cc:266] batch_norm_36.tmp_0 is in graph 0
+I0823 09:51:19.756117 54709 auto_mixed_precision_pass.cc:266] batch_norm_14.tmp_2 is in graph 0
+I0823 09:51:19.756120 54709 auto_mixed_precision_pass.cc:266] batch_norm_25.tmp_0 is in graph 0
+I0823 09:51:19.756124 54709 auto_mixed_precision_pass.cc:266] res3d_branch2b_weights is in graph 0
+I0823 09:51:19.756125 54709 auto_mixed_precision_pass.cc:266] bn3d_branch2b_offset is in graph 0
+I0823 09:51:19.756129 54709 auto_mixed_precision_pass.cc:266] bn3d_branch2b_mean is in graph 0
+I0823 09:51:19.756130 54709 auto_mixed_precision_pass.cc:266] bn3d_branch2b_scale is in graph 0
+I0823 09:51:19.756134 54709 auto_mixed_precision_pass.cc:266] bn4d_branch2c_mean is in graph 0
+I0823 09:51:19.756135 54709 auto_mixed_precision_pass.cc:266] elementwise_add_10 is in graph 0
+I0823 09:51:19.756139 54709 auto_mixed_precision_pass.cc:266] batch_norm_7.tmp_2 is in graph 0
+I0823 09:51:19.756141 54709 auto_mixed_precision_pass.cc:266] batch_norm_22.tmp_1 is in graph 0
+I0823 09:51:19.756143 54709 auto_mixed_precision_pass.cc:266] conv2d_61.tmp_0 is in graph 0
+I0823 09:51:19.756146 54709 auto_mixed_precision_pass.cc:266] batch_norm_22.tmp_3 is in graph 0
+I0823 09:51:19.756150 54709 auto_mixed_precision_pass.cc:266] bn5a_branch2c_offset is in graph 0
+I0823 09:51:19.756151 54709 auto_mixed_precision_pass.cc:266] res3d_branch2c_weights is in graph 0
+I0823 09:51:19.756155 54709 auto_mixed_precision_pass.cc:266] batch_norm_5.tmp_0 is in graph 0
+I0823 09:51:19.756156 54709 auto_mixed_precision_pass.cc:266] conv2d_76.tmp_0 is in graph 0
+I0823 09:51:19.756162 54709 auto_mixed_precision_pass.cc:266] bn3a_branch2a_scale is in graph 0
+I0823 09:51:19.756165 54709 auto_mixed_precision_pass.cc:266] bn4d_branch2a_mean is in graph 0
+I0823 09:51:19.756167 54709 auto_mixed_precision_pass.cc:266] bn3d_branch2c_mean is in graph 0
+I0823 09:51:19.756170 54709 auto_mixed_precision_pass.cc:266] conv2d_96.tmp_0 is in graph 0
+I0823 09:51:19.756172 54709 auto_mixed_precision_pass.cc:266] bn3d_branch2c_scale is in graph 0
+I0823 09:51:19.756175 54709 auto_mixed_precision_pass.cc:266] bn3d_branch2c_variance is in graph 0
+I0823 09:51:19.756177 54709 auto_mixed_precision_pass.cc:266] res4d_branch2b_weights is in graph 0
+I0823 09:51:19.756181 54709 auto_mixed_precision_pass.cc:266] batch_norm_23.tmp_1 is in graph 0
+I0823 09:51:19.756182 54709 auto_mixed_precision_pass.cc:266] batch_norm_25.tmp_1 is in graph 0
+I0823 09:51:19.756186 54709 auto_mixed_precision_pass.cc:266] batch_norm_23.tmp_2 is in graph 0
+I0823 09:51:19.756187 54709 auto_mixed_precision_pass.cc:266] relu_6.tmp_0 is in graph 0
+I0823 09:51:19.756191 54709 auto_mixed_precision_pass.cc:266] res4a_branch2a_weights is in graph 0
+I0823 09:51:19.756192 54709 auto_mixed_precision_pass.cc:266] bn4a_branch2a_offset is in graph 0
+I0823 09:51:19.756196 54709 auto_mixed_precision_pass.cc:266] res3d_branch2a_weights is in graph 0
+I0823 09:51:19.756198 54709 auto_mixed_precision_pass.cc:266] bn4a_branch2a_scale is in graph 0
+I0823 09:51:19.756201 54709 auto_mixed_precision_pass.cc:266] res2c_branch2c_weights is in graph 0
+I0823 09:51:19.756203 54709 auto_mixed_precision_pass.cc:266] batch_norm_24.tmp_0 is in graph 0
+I0823 09:51:19.756206 54709 auto_mixed_precision_pass.cc:266] batch_norm_8.tmp_3 is in graph 0
+I0823 09:51:19.756208 54709 auto_mixed_precision_pass.cc:266] bn4b_branch2c_offset is in graph 0
+I0823 09:51:19.756211 54709 auto_mixed_precision_pass.cc:266] batch_norm_24.tmp_3 is in graph 0
+I0823 09:51:19.756213 54709 auto_mixed_precision_pass.cc:266] res4a_branch2b_weights is in graph 0
+I0823 09:51:19.756215 54709 auto_mixed_precision_pass.cc:266] conv2d_78.tmp_0 is in graph 0
+I0823 09:51:19.756218 54709 auto_mixed_precision_pass.cc:266] batch_norm_45.tmp_0 is in graph 0
+I0823 09:51:19.756222 54709 auto_mixed_precision_pass.cc:266] bn4a_branch2b_offset is in graph 0
+I0823 09:51:19.756223 54709 auto_mixed_precision_pass.cc:266] bn4a_branch2b_mean is in graph 0
+I0823 09:51:19.756227 54709 auto_mixed_precision_pass.cc:266] bn4a_branch2b_scale is in graph 0
+I0823 09:51:19.756228 54709 auto_mixed_precision_pass.cc:266] bn4a_branch2b_variance is in graph 0
+I0823 09:51:19.756232 54709 auto_mixed_precision_pass.cc:266] batch_norm_25.tmp_3 is in graph 0
+I0823 09:51:19.756234 54709 auto_mixed_precision_pass.cc:266] batch_norm_8.tmp_0 is in graph 0
+I0823 09:51:19.756237 54709 auto_mixed_precision_pass.cc:266] conv2d_79.tmp_0 is in graph 0
+I0823 09:51:19.756239 54709 auto_mixed_precision_pass.cc:266] bn4a_branch2c_mean is in graph 0
+I0823 09:51:19.756242 54709 auto_mixed_precision_pass.cc:266] bn4a_branch2c_scale is in graph 0
+I0823 09:51:19.756244 54709 auto_mixed_precision_pass.cc:266] batch_norm_50.tmp_3 is in graph 0
+I0823 09:51:19.756247 54709 auto_mixed_precision_pass.cc:266] bn5b_branch2b_scale is in graph 0
+I0823 09:51:19.756249 54709 auto_mixed_precision_pass.cc:266] bn4a_branch2c_variance is in graph 0
+I0823 09:51:19.756253 54709 auto_mixed_precision_pass.cc:266] conv2d_90.tmp_0 is in graph 0
+I0823 09:51:19.756254 54709 auto_mixed_precision_pass.cc:266] batch_norm_26.tmp_1 is in graph 0
+I0823 09:51:19.756258 54709 auto_mixed_precision_pass.cc:266] conv2d_54.tmp_0 is in graph 0
+I0823 09:51:19.756260 54709 auto_mixed_precision_pass.cc:266] batch_norm_26.tmp_2 is in graph 0
+I0823 09:51:19.756263 54709 auto_mixed_precision_pass.cc:266] inputs is in graph 0
+I0823 09:51:19.756265 54709 auto_mixed_precision_pass.cc:266] bn4a_branch1_mean is in graph 0
+I0823 09:51:19.756268 54709 auto_mixed_precision_pass.cc:266] batch_norm_28.tmp_0 is in graph 0
+I0823 09:51:19.756270 54709 auto_mixed_precision_pass.cc:266] bn5a_branch2b_variance is in graph 0
+I0823 09:51:19.756275 54709 auto_mixed_precision_pass.cc:266] conv2d_81.tmp_0 is in graph 0
+I0823 09:51:19.756278 54709 auto_mixed_precision_pass.cc:266] batch_norm_27.tmp_2 is in graph 0
+I0823 09:51:19.756280 54709 auto_mixed_precision_pass.cc:266] batch_norm_46.tmp_2 is in graph 0
+I0823 09:51:19.756283 54709 auto_mixed_precision_pass.cc:266] elementwise_add_7 is in graph 0
+I0823 09:51:19.756286 54709 auto_mixed_precision_pass.cc:266] batch_norm_29.tmp_3 is in graph 0
+I0823 09:51:19.756289 54709 auto_mixed_precision_pass.cc:266] relu_7.tmp_0 is in graph 0
+I0823 09:51:19.756291 54709 auto_mixed_precision_pass.cc:266] res4b_branch2a_weights is in graph 0
+I0823 09:51:19.756294 54709 auto_mixed_precision_pass.cc:266] batch_norm_27.tmp_1 is in graph 0
+I0823 09:51:19.756296 54709 auto_mixed_precision_pass.cc:266] bn4b_branch2a_offset is in graph 0
+I0823 09:51:19.756299 54709 auto_mixed_precision_pass.cc:266] bn4b_branch2a_variance is in graph 0
+I0823 09:51:19.756301 54709 auto_mixed_precision_pass.cc:266] elementwise_add_11 is in graph 0
+I0823 09:51:19.756304 54709 auto_mixed_precision_pass.cc:266] bn4f_branch2b_scale is in graph 0
+I0823 09:51:19.756306 54709 auto_mixed_precision_pass.cc:266] batch_norm_28.tmp_2 is in graph 0
+I0823 09:51:19.756309 54709 auto_mixed_precision_pass.cc:266] batch_norm_30.tmp_0 is in graph 0
+I0823 09:51:19.756312 54709 auto_mixed_precision_pass.cc:266] batch_norm_29.tmp_0 is in graph 0
+I0823 09:51:19.756314 54709 auto_mixed_precision_pass.cc:266] conv2d_67.tmp_0 is in graph 0
+I0823 09:51:19.756317 54709 auto_mixed_precision_pass.cc:266] batch_norm_31.tmp_1 is in graph 0
+I0823 09:51:19.756320 54709 auto_mixed_precision_pass.cc:266] bn4f_branch2c_scale is in graph 0
+I0823 09:51:19.756323 54709 auto_mixed_precision_pass.cc:266] res4b_branch2c_weights is in graph 0
+I0823 09:51:19.756326 54709 auto_mixed_precision_pass.cc:266] bn4b_branch2c_scale is in graph 0
+I0823 09:51:19.756328 54709 auto_mixed_precision_pass.cc:266] batch_norm_5.tmp_1 is in graph 0
+I0823 09:51:19.756331 54709 auto_mixed_precision_pass.cc:266] bn4b_branch2c_variance is in graph 0
+I0823 09:51:19.756333 54709 auto_mixed_precision_pass.cc:266] batch_norm_32.tmp_1 is in graph 0
+I0823 09:51:19.756336 54709 auto_mixed_precision_pass.cc:266] batch_norm_15.tmp_1 is in graph 0
+I0823 09:51:19.756338 54709 auto_mixed_precision_pass.cc:266] relu_8.tmp_0 is in graph 0
+I0823 09:51:19.756341 54709 auto_mixed_precision_pass.cc:266] bn4c_branch2a_offset is in graph 0
+I0823 09:51:19.756343 54709 auto_mixed_precision_pass.cc:266] batch_norm_17.tmp_0 is in graph 0
+I0823 09:51:19.756346 54709 auto_mixed_precision_pass.cc:266] bn4c_branch2a_variance is in graph 0
+I0823 09:51:19.756350 54709 auto_mixed_precision_pass.cc:266] batch_norm_31.tmp_0 is in graph 0
+I0823 09:51:19.756351 54709 auto_mixed_precision_pass.cc:266] elementwise_add_12 is in graph 0
+I0823 09:51:19.756354 54709 auto_mixed_precision_pass.cc:266] batch_norm_47.tmp_0 is in graph 0
+I0823 09:51:19.756357 54709 auto_mixed_precision_pass.cc:266] batch_norm_31.tmp_2 is in graph 0
+I0823 09:51:19.756359 54709 auto_mixed_precision_pass.cc:266] batch_norm_33.tmp_0 is in graph 0
+I0823 09:51:19.756362 54709 auto_mixed_precision_pass.cc:266] conv2d_87.tmp_0 is in graph 0
+I0823 09:51:19.756364 54709 auto_mixed_precision_pass.cc:266] batch_norm_31.tmp_3 is in graph 0
+I0823 09:51:19.756367 54709 auto_mixed_precision_pass.cc:266] res4c_branch2b_weights is in graph 0
+I0823 09:51:19.756369 54709 auto_mixed_precision_pass.cc:266] bn4c_branch2b_offset is in graph 0
+I0823 09:51:19.756372 54709 auto_mixed_precision_pass.cc:266] bn4c_branch2b_scale is in graph 0
+I0823 09:51:19.756376 54709 auto_mixed_precision_pass.cc:266] res4e_branch2b_weights is in graph 0
+I0823 09:51:19.756377 54709 auto_mixed_precision_pass.cc:266] batch_norm_32.tmp_0 is in graph 0
+I0823 09:51:19.756381 54709 auto_mixed_precision_pass.cc:266] batch_norm_34.tmp_1 is in graph 0
+I0823 09:51:19.756383 54709 auto_mixed_precision_pass.cc:266] batch_norm_32.tmp_2 is in graph 0
+I0823 09:51:19.756386 54709 auto_mixed_precision_pass.cc:266] batch_norm_5.tmp_3 is in graph 0
+I0823 09:51:19.756390 54709 auto_mixed_precision_pass.cc:266] batch_norm_32.tmp_3 is in graph 0
+I0823 09:51:19.756393 54709 auto_mixed_precision_pass.cc:266] res4c_branch2c_weights is in graph 0
+I0823 09:51:19.756395 54709 auto_mixed_precision_pass.cc:266] conv2d_86.tmp_0 is in graph 0
+I0823 09:51:19.756398 54709 auto_mixed_precision_pass.cc:266] bn4c_branch2c_offset is in graph 0
+I0823 09:51:19.756400 54709 auto_mixed_precision_pass.cc:266] bn4c_branch2c_mean is in graph 0
+I0823 09:51:19.756403 54709 auto_mixed_precision_pass.cc:266] bn4c_branch2c_scale is in graph 0
+I0823 09:51:19.756405 54709 auto_mixed_precision_pass.cc:266] res4e_branch2c_weights is in graph 0
+I0823 09:51:19.756408 54709 auto_mixed_precision_pass.cc:266] batch_norm_8.tmp_1 is in graph 0
+I0823 09:51:19.756410 54709 auto_mixed_precision_pass.cc:266] bn4c_branch2c_variance is in graph 0
+I0823 09:51:19.756413 54709 auto_mixed_precision_pass.cc:266] batch_norm_35.tmp_1 is in graph 0
+I0823 09:51:19.756417 54709 auto_mixed_precision_pass.cc:266] batch_norm_6.tmp_3 is in graph 0
+I0823 09:51:19.756419 54709 auto_mixed_precision_pass.cc:266] batch_norm_51.tmp_3 is in graph 0
+I0823 09:51:19.756421 54709 auto_mixed_precision_pass.cc:266] bn5b_branch2c_scale is in graph 0
+I0823 09:51:19.756424 54709 auto_mixed_precision_pass.cc:266] res2b_branch2b_weights is in graph 0
+I0823 09:51:19.756426 54709 auto_mixed_precision_pass.cc:266] relu_9.tmp_0 is in graph 0
+I0823 09:51:19.756429 54709 auto_mixed_precision_pass.cc:266] batch_norm_44.tmp_2 is in graph 0
+I0823 09:51:19.756431 54709 auto_mixed_precision_pass.cc:266] res4d_branch2a_weights is in graph 0
+I0823 09:51:19.756434 54709 auto_mixed_precision_pass.cc:266] bn4d_branch2a_offset is in graph 0
+I0823 09:51:19.756436 54709 auto_mixed_precision_pass.cc:266] conv2d_100.tmp_0 is in graph 0
+I0823 09:51:19.756439 54709 auto_mixed_precision_pass.cc:266] batch_norm_20.tmp_0 is in graph 0
+I0823 09:51:19.756443 54709 auto_mixed_precision_pass.cc:266] batch_norm_34.tmp_0 is in graph 0
+I0823 09:51:19.756444 54709 auto_mixed_precision_pass.cc:266] bn4b_branch2b_offset is in graph 0
+I0823 09:51:19.756448 54709 auto_mixed_precision_pass.cc:266] relu_1.tmp_0 is in graph 0
+I0823 09:51:19.756449 54709 auto_mixed_precision_pass.cc:266] bn4d_branch2c_variance is in graph 0
+I0823 09:51:19.756453 54709 auto_mixed_precision_pass.cc:266] res2b_branch2c_weights is in graph 0
+I0823 09:51:19.756454 54709 auto_mixed_precision_pass.cc:266] batch_norm_34.tmp_3 is in graph 0
+I0823 09:51:19.756457 54709 auto_mixed_precision_pass.cc:266] conv2d_88.tmp_0 is in graph 0
+I0823 09:51:19.756459 54709 auto_mixed_precision_pass.cc:266] batch_norm_38.tmp_0 is in graph 0
+I0823 09:51:19.756462 54709 auto_mixed_precision_pass.cc:266] bn4d_branch2b_offset is in graph 0
+I0823 09:51:19.756464 54709 auto_mixed_precision_pass.cc:266] bn4d_branch2b_mean is in graph 0
+I0823 09:51:19.756467 54709 auto_mixed_precision_pass.cc:266] bn4d_branch2b_scale is in graph 0
+I0823 09:51:19.756470 54709 auto_mixed_precision_pass.cc:266] res4f_branch2b_weights is in graph 0
+I0823 09:51:19.756474 54709 auto_mixed_precision_pass.cc:266] batch_norm_52.tmp_1 is in graph 0
+I0823 09:51:19.756476 54709 auto_mixed_precision_pass.cc:266] batch_norm_35.tmp_2 is in graph 0
+I0823 09:51:19.756479 54709 auto_mixed_precision_pass.cc:266] batch_norm_35.tmp_3 is in graph 0
+I0823 09:51:19.756481 54709 auto_mixed_precision_pass.cc:266] res4d_branch2c_weights is in graph 0
+I0823 09:51:19.756484 54709 auto_mixed_precision_pass.cc:266] bn3d_branch2a_mean is in graph 0
+I0823 09:51:19.756486 54709 auto_mixed_precision_pass.cc:266] conv2d_89.tmp_0 is in graph 0
+I0823 09:51:19.756489 54709 auto_mixed_precision_pass.cc:266] bn4d_branch2c_offset is in graph 0
+I0823 09:51:19.756491 54709 auto_mixed_precision_pass.cc:266] bn4e_branch2c_scale is in graph 0
+I0823 09:51:19.756494 54709 auto_mixed_precision_pass.cc:266] batch_norm_36.tmp_1 is in graph 0
+I0823 09:51:19.756496 54709 auto_mixed_precision_pass.cc:266] batch_norm_36.tmp_2 is in graph 0
+I0823 09:51:19.756500 54709 auto_mixed_precision_pass.cc:266] res4e_branch2a_weights is in graph 0
+I0823 09:51:19.756505 54709 auto_mixed_precision_pass.cc:266] bn4e_branch2a_offset is in graph 0
+I0823 09:51:19.756506 54709 auto_mixed_precision_pass.cc:266] bn4e_branch2a_scale is in graph 0
+I0823 09:51:19.756510 54709 auto_mixed_precision_pass.cc:266] bn4e_branch2a_variance is in graph 0
+I0823 09:51:19.756512 54709 auto_mixed_precision_pass.cc:266] batch_norm_37.tmp_1 is in graph 0
+I0823 09:51:19.756515 54709 auto_mixed_precision_pass.cc:266] conv2d_93.tmp_0 is in graph 0
+I0823 09:51:19.756523 54709 auto_mixed_precision_pass.cc:266] conv2d_91.tmp_0 is in graph 0
+I0823 09:51:19.756527 54709 auto_mixed_precision_pass.cc:266] bn4e_branch2b_offset is in graph 0
+I0823 09:51:19.756531 54709 auto_mixed_precision_pass.cc:266] bn4e_branch2b_scale is in graph 0
+I0823 09:51:19.756533 54709 auto_mixed_precision_pass.cc:266] bn4e_branch2b_variance is in graph 0
+I0823 09:51:19.756536 54709 auto_mixed_precision_pass.cc:266] batch_norm_38.tmp_1 is in graph 0
+I0823 09:51:19.756538 54709 auto_mixed_precision_pass.cc:266] batch_norm_40.tmp_1 is in graph 0
+I0823 09:51:19.756541 54709 auto_mixed_precision_pass.cc:266] conv2d_92.tmp_0 is in graph 0
+I0823 09:51:19.756543 54709 auto_mixed_precision_pass.cc:266] bn4e_branch2c_offset is in graph 0
+I0823 09:51:19.756546 54709 auto_mixed_precision_pass.cc:266] conv2d_64.tmp_0 is in graph 0
+I0823 09:51:19.756548 54709 auto_mixed_precision_pass.cc:266] bn4e_branch2c_variance is in graph 0
+I0823 09:51:19.756551 54709 auto_mixed_precision_pass.cc:266] batch_norm_39.tmp_1 is in graph 0
+I0823 09:51:19.756553 54709 auto_mixed_precision_pass.cc:266] batch_norm_50.tmp_2 is in graph 0
+I0823 09:51:19.756556 54709 auto_mixed_precision_pass.cc:266] batch_norm_41.tmp_1 is in graph 0
+I0823 09:51:19.756559 54709 auto_mixed_precision_pass.cc:266] batch_norm_39.tmp_2 is in graph 0
+I0823 09:51:19.756561 54709 auto_mixed_precision_pass.cc:266] relu_11.tmp_0 is in graph 0
+I0823 09:51:19.756564 54709 auto_mixed_precision_pass.cc:266] res4f_branch2a_weights is in graph 0
+I0823 09:51:19.756567 54709 auto_mixed_precision_pass.cc:266] bn4f_branch2a_offset is in graph 0
+I0823 09:51:19.756569 54709 auto_mixed_precision_pass.cc:266] bn4f_branch2a_scale is in graph 0
+I0823 09:51:19.756572 54709 auto_mixed_precision_pass.cc:266] bn4f_branch2a_variance is in graph 0
+I0823 09:51:19.756574 54709 auto_mixed_precision_pass.cc:266] batch_norm_40.tmp_0 is in graph 0
+I0823 09:51:19.756577 54709 auto_mixed_precision_pass.cc:266] conv2d_82.tmp_0 is in graph 0
+I0823 09:51:19.756579 54709 auto_mixed_precision_pass.cc:266] batch_norm_40.tmp_2 is in graph 0
+I0823 09:51:19.756582 54709 auto_mixed_precision_pass.cc:266] batch_norm_42.tmp_0 is in graph 0
+I0823 09:51:19.756584 54709 auto_mixed_precision_pass.cc:266] bn3a_branch2c_offset is in graph 0
+I0823 09:51:19.756587 54709 auto_mixed_precision_pass.cc:266] conv2d_94.tmp_0 is in graph 0
+I0823 09:51:19.756590 54709 auto_mixed_precision_pass.cc:266] batch_norm_41.tmp_0 is in graph 0
+I0823 09:51:19.756592 54709 auto_mixed_precision_pass.cc:266] conv2d_83.tmp_0 is in graph 0
+I0823 09:51:19.756595 54709 auto_mixed_precision_pass.cc:266] batch_norm_43.tmp_1 is in graph 0
+I0823 09:51:19.756598 54709 auto_mixed_precision_pass.cc:266] batch_norm_41.tmp_2 is in graph 0
+I0823 09:51:19.756600 54709 auto_mixed_precision_pass.cc:266] res3a_branch1_weights is in graph 0
+I0823 09:51:19.756603 54709 auto_mixed_precision_pass.cc:266] conv2d_95.tmp_0 is in graph 0
+I0823 09:51:19.756605 54709 auto_mixed_precision_pass.cc:266] res3a_branch2a_weights is in graph 0
+I0823 09:51:19.756608 54709 auto_mixed_precision_pass.cc:266] bn4f_branch2c_offset is in graph 0
+I0823 09:51:19.756611 54709 auto_mixed_precision_pass.cc:266] batch_norm_42.tmp_1 is in graph 0
+I0823 09:51:19.756613 54709 auto_mixed_precision_pass.cc:266] batch_norm_42.tmp_2 is in graph 0
+I0823 09:51:19.756616 54709 auto_mixed_precision_pass.cc:266] batch_norm_0.tmp_1 is in graph 0
+I0823 09:51:19.756618 54709 auto_mixed_precision_pass.cc:266] relu_12.tmp_0 is in graph 0
+I0823 09:51:19.756625 54709 auto_mixed_precision_pass.cc:266] res5a_branch2a_weights is in graph 0
+I0823 09:51:19.756628 54709 auto_mixed_precision_pass.cc:266] bn5b_branch2c_offset is in graph 0
+I0823 09:51:19.756630 54709 auto_mixed_precision_pass.cc:266] bn5a_branch2a_offset is in graph 0
+I0823 09:51:19.756633 54709 auto_mixed_precision_pass.cc:266] bn5a_branch2a_scale is in graph 0
+I0823 09:51:19.756635 54709 auto_mixed_precision_pass.cc:266] bn5c_branch2c_offset is in graph 0
+I0823 09:51:19.756639 54709 auto_mixed_precision_pass.cc:266] batch_norm_44.tmp_0 is in graph 0
+I0823 09:51:19.756640 54709 auto_mixed_precision_pass.cc:266] bn5a_branch2a_variance is in graph 0
+I0823 09:51:19.756644 54709 auto_mixed_precision_pass.cc:266] batch_norm_43.tmp_0 is in graph 0
+I0823 09:51:19.756645 54709 auto_mixed_precision_pass.cc:266] conv2d_85.tmp_0 is in graph 0
+I0823 09:51:19.756649 54709 auto_mixed_precision_pass.cc:266] batch_norm_43.tmp_2 is in graph 0
+I0823 09:51:19.756650 54709 auto_mixed_precision_pass.cc:266] res5a_branch2b_weights is in graph 0
+I0823 09:51:19.756654 54709 auto_mixed_precision_pass.cc:266] conv2d_97.tmp_0 is in graph 0
+I0823 09:51:19.756656 54709 auto_mixed_precision_pass.cc:266] bn5a_branch2b_mean is in graph 0
+I0823 09:51:19.756659 54709 auto_mixed_precision_pass.cc:266] res3c_branch2b_weights is in graph 0
+I0823 09:51:19.756661 54709 auto_mixed_precision_pass.cc:266] batch_norm_44.tmp_3 is in graph 0
+I0823 09:51:19.756664 54709 auto_mixed_precision_pass.cc:266] conv2d_98.tmp_0 is in graph 0
+I0823 09:51:19.756666 54709 auto_mixed_precision_pass.cc:286] Init done
+I0823 09:51:19.756752 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_0
+I0823 09:51:19.756793 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_1
+I0823 09:51:19.756819 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_2
+I0823 09:51:19.756862 54709 auto_mixed_precision_pass.cc:326] change op type: pool2d ---> pool2d_3
+I0823 09:51:19.756918 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_4
+I0823 09:51:19.756964 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_5
+I0823 09:51:19.756994 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_6
+I0823 09:51:19.757050 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_7
+I0823 09:51:19.757094 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_8
+I0823 09:51:19.757122 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_9
+I0823 09:51:19.757179 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_10
+I0823 09:51:19.757221 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_11
+I0823 09:51:19.757274 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_12
+I0823 09:51:19.757318 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_13
+I0823 09:51:19.757349 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_14
+I0823 09:51:19.757372 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_15
+I0823 09:51:19.757422 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_16
+I0823 09:51:19.757462 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_17
+I0823 09:51:19.757486 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_18
+I0823 09:51:19.757544 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_19
+I0823 09:51:19.757586 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_20
+I0823 09:51:19.757611 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_21
+I0823 09:51:19.757658 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_22
+I0823 09:51:19.757696 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_23
+I0823 09:51:19.757726 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_24
+I0823 09:51:19.757755 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_25
+I0823 09:51:19.757804 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_26
+I0823 09:51:19.757841 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_27
+I0823 09:51:19.757866 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_28
+I0823 09:51:19.757913 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_29
+I0823 09:51:19.757951 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_30
+I0823 09:51:19.757973 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_31
+I0823 09:51:19.758019 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_32
+I0823 09:51:19.758056 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_33
+I0823 09:51:19.758085 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_34
+I0823 09:51:19.758108 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_35
+I0823 09:51:19.758157 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_36
+I0823 09:51:19.758195 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_37
+I0823 09:51:19.758219 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_38
+I0823 09:51:19.758265 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_39
+I0823 09:51:19.758302 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_40
+I0823 09:51:19.758327 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_41
+I0823 09:51:19.758373 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_42
+I0823 09:51:19.758409 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_43
+I0823 09:51:19.758460 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_44
+I0823 09:51:19.758499 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_45
+I0823 09:51:19.758538 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_46
+I0823 09:51:19.758563 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_47
+I0823 09:51:19.758611 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_48
+I0823 09:51:19.758647 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_49
+I0823 09:51:19.758674 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_50
+I0823 09:51:19.758721 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_51
+I0823 09:51:19.758757 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_52
+I0823 09:51:19.758780 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_53
+I0823 09:51:19.758828 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_54
+I0823 09:51:19.758863 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_55
+I0823 09:51:19.758893 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_56
+I0823 09:51:19.758915 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_57
+I0823 09:51:19.758963 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_58
+I0823 09:51:19.759001 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_59
+I0823 09:51:19.759023 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_60
+I0823 09:51:19.759069 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_61
+I0823 09:51:19.759104 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_62
+I0823 09:51:19.759127 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_63
+I0823 09:51:19.759173 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_64
+I0823 09:51:19.759214 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_65
+I0823 09:51:19.759246 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_66
+I0823 09:51:19.759268 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_67
+I0823 09:51:19.759317 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_68
+I0823 09:51:19.759353 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_69
+I0823 09:51:19.759375 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_70
+I0823 09:51:19.759421 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_71
+I0823 09:51:19.759456 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_72
+I0823 09:51:19.759480 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_73
+I0823 09:51:19.759536 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_74
+I0823 09:51:19.759573 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_75
+I0823 09:51:19.759604 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_76
+I0823 09:51:19.759627 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_77
+I0823 09:51:19.759676 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_78
+I0823 09:51:19.759712 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_79
+I0823 09:51:19.759737 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_80
+I0823 09:51:19.759784 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_81
+I0823 09:51:19.759820 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_82
+I0823 09:51:19.759843 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_83
+I0823 09:51:19.759891 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_84
+I0823 09:51:19.759927 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_85
+I0823 09:51:19.759977 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_86
+I0823 09:51:19.760016 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_87
+I0823 09:51:19.760048 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_88
+I0823 09:51:19.760069 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_89
+I0823 09:51:19.760116 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_90
+I0823 09:51:19.760154 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_91
+I0823 09:51:19.760178 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_92
+I0823 09:51:19.760226 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_93
+I0823 09:51:19.760262 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_94
+I0823 09:51:19.760284 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_95
+I0823 09:51:19.760330 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_96
+I0823 09:51:19.760367 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_97
+I0823 09:51:19.760398 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_98
+I0823 09:51:19.760421 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_99
+I0823 09:51:19.760466 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_100
+I0823 09:51:19.760502 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_101
+I0823 09:51:19.760535 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_102
+I0823 09:51:19.760582 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_103
+I0823 09:51:19.760622 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_104
+I0823 09:51:19.760645 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_105
+I0823 09:51:19.760694 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_106
+I0823 09:51:19.760730 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_107
+I0823 09:51:19.760759 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_108
+I0823 09:51:19.760782 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_109
+I0823 09:51:19.760829 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_110
+I0823 09:51:19.760866 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_111
+I0823 09:51:19.760890 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_112
+I0823 09:51:19.760936 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_113
+I0823 09:51:19.760972 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_114
+I0823 09:51:19.760995 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_115
+I0823 09:51:19.761042 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_116
+I0823 09:51:19.761078 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_117
+I0823 09:51:19.761107 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_118
+I0823 09:51:19.761128 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_119
+I0823 09:51:19.761175 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_120
+I0823 09:51:19.761210 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_121
+I0823 09:51:19.761234 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_122
+I0823 09:51:19.761281 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_123
+I0823 09:51:19.761317 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_124
+I0823 09:51:19.761338 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_125
+I0823 09:51:19.761384 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_126
+I0823 09:51:19.761418 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_127
+I0823 09:51:19.761447 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_128
+I0823 09:51:19.761467 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_129
+I0823 09:51:19.761514 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_130
+I0823 09:51:19.761560 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_131
+I0823 09:51:19.761586 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_132
+I0823 09:51:19.761632 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_133
+I0823 09:51:19.761668 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_134
+I0823 09:51:19.761691 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_135
+I0823 09:51:19.761736 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_136
+I0823 09:51:19.761772 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_137
+I0823 09:51:19.761801 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_138
+I0823 09:51:19.761822 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_139
+I0823 09:51:19.761870 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_140
+I0823 09:51:19.761906 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_141
+I0823 09:51:19.761929 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_142
+I0823 09:51:19.761974 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_143
+I0823 09:51:19.762014 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_144
+I0823 09:51:19.762038 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_145
+I0823 09:51:19.762084 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_146
+I0823 09:51:19.762120 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_147
+I0823 09:51:19.762169 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_148
+I0823 09:51:19.762208 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_149
+I0823 09:51:19.762238 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_150
+I0823 09:51:19.762259 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_151
+I0823 09:51:19.762305 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_152
+I0823 09:51:19.762341 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_153
+I0823 09:51:19.762364 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_154
+I0823 09:51:19.762410 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_155
+I0823 09:51:19.762446 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_156
+I0823 09:51:19.762470 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_157
+I0823 09:51:19.762514 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_158
+I0823 09:51:19.762558 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_159
+I0823 09:51:19.762588 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_160
+I0823 09:51:19.762610 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_161
+I0823 09:51:19.762658 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_162
+I0823 09:51:19.762694 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_163
+I0823 09:51:19.762718 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_164
+I0823 09:51:19.762764 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_165
+I0823 09:51:19.762809 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_166
+I0823 09:51:19.762832 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_167
+I0823 09:51:19.762878 54709 auto_mixed_precision_pass.cc:326] change op type: conv2d ---> conv2d_168
+I0823 09:51:19.762914 54709 auto_mixed_precision_pass.cc:326] change op type: batch_norm ---> batch_norm_169
+I0823 09:51:19.762943 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_170
+I0823 09:51:19.762965 54709 auto_mixed_precision_pass.cc:326] change op type: relu ---> relu_171
+I0823 09:51:19.763002 54709 auto_mixed_precision_pass.cc:326] change op type: pool2d ---> pool2d_172
+I0823 09:51:19.763024 54709 auto_mixed_precision_pass.cc:326] change op type: reshape2 ---> reshape2_173
+I0823 09:51:19.763069 54709 auto_mixed_precision_pass.cc:326] change op type: matmul ---> matmul_174
+I0823 09:51:19.763095 54709 auto_mixed_precision_pass.cc:326] change op type: elementwise_add ---> elementwise_add_175
+I0823 09:51:19.763118 54709 auto_mixed_precision_pass.cc:326] change op type: softmax ---> softmax_176
+I0823 09:51:19.763135 54709 auto_mixed_precision_pass.cc:326] change op type: scale ---> scale_177
+I0823 09:51:19.763139 54709 auto_mixed_precision_pass.cc:294] SetOpUniqueType done
+I0823 09:51:19.763144 54709 auto_mixed_precision_pass.cc:478] support precision: feed run at low precision
+I0823 09:51:19.763160 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_0 run at low precision
+I0823 09:51:19.763168 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_1 run at low precision
+I0823 09:51:19.763173 54709 auto_mixed_precision_pass.cc:480] support precision: relu_2 not run at low precision
+I0823 09:51:19.763181 54709 auto_mixed_precision_pass.cc:478] support precision: pool2d_3 run at low precision
+I0823 09:51:19.763186 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_4 run at low precision
+I0823 09:51:19.763192 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_5 run at low precision
+I0823 09:51:19.763196 54709 auto_mixed_precision_pass.cc:480] support precision: relu_6 not run at low precision
+I0823 09:51:19.763201 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_7 run at low precision
+I0823 09:51:19.763207 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_8 run at low precision
+I0823 09:51:19.763211 54709 auto_mixed_precision_pass.cc:480] support precision: relu_9 not run at low precision
+I0823 09:51:19.763216 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_10 run at low precision
+I0823 09:51:19.763222 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_11 run at low precision
+I0823 09:51:19.763226 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_12 run at low precision
+I0823 09:51:19.763232 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_13 run at low precision
+I0823 09:51:19.763238 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_14 run at low precision
+I0823 09:51:19.763242 54709 auto_mixed_precision_pass.cc:480] support precision: relu_15 not run at low precision
+I0823 09:51:19.763247 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_16 run at low precision
+I0823 09:51:19.763252 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_17 run at low precision
+I0823 09:51:19.763257 54709 auto_mixed_precision_pass.cc:480] support precision: relu_18 not run at low precision
+I0823 09:51:19.763262 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_19 run at low precision
+I0823 09:51:19.763267 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_20 run at low precision
+I0823 09:51:19.763271 54709 auto_mixed_precision_pass.cc:480] support precision: relu_21 not run at low precision
+I0823 09:51:19.763275 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_22 run at low precision
+I0823 09:51:19.763281 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_23 run at low precision
+I0823 09:51:19.763285 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_24 run at low precision
+I0823 09:51:19.763290 54709 auto_mixed_precision_pass.cc:480] support precision: relu_25 not run at low precision
+I0823 09:51:19.763294 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_26 run at low precision
+I0823 09:51:19.763299 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_27 run at low precision
+I0823 09:51:19.763303 54709 auto_mixed_precision_pass.cc:480] support precision: relu_28 not run at low precision
+I0823 09:51:19.763307 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_29 run at low precision
+I0823 09:51:19.763314 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_30 run at low precision
+I0823 09:51:19.763317 54709 auto_mixed_precision_pass.cc:480] support precision: relu_31 not run at low precision
+I0823 09:51:19.763321 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_32 run at low precision
+I0823 09:51:19.763326 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_33 run at low precision
+I0823 09:51:19.763331 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_34 run at low precision
+I0823 09:51:19.763335 54709 auto_mixed_precision_pass.cc:480] support precision: relu_35 not run at low precision
+I0823 09:51:19.763339 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_36 run at low precision
+I0823 09:51:19.763345 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_37 run at low precision
+I0823 09:51:19.763348 54709 auto_mixed_precision_pass.cc:480] support precision: relu_38 not run at low precision
+I0823 09:51:19.763356 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_39 run at low precision
+I0823 09:51:19.763361 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_40 run at low precision
+I0823 09:51:19.763365 54709 auto_mixed_precision_pass.cc:480] support precision: relu_41 not run at low precision
+I0823 09:51:19.763370 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_42 run at low precision
+I0823 09:51:19.763374 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_43 run at low precision
+I0823 09:51:19.763378 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_44 run at low precision
+I0823 09:51:19.763384 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_45 run at low precision
+I0823 09:51:19.763389 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_46 run at low precision
+I0823 09:51:19.763393 54709 auto_mixed_precision_pass.cc:480] support precision: relu_47 not run at low precision
+I0823 09:51:19.763397 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_48 run at low precision
+I0823 09:51:19.763403 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_49 run at low precision
+I0823 09:51:19.763407 54709 auto_mixed_precision_pass.cc:480] support precision: relu_50 not run at low precision
+I0823 09:51:19.763411 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_51 run at low precision
+I0823 09:51:19.763417 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_52 run at low precision
+I0823 09:51:19.763420 54709 auto_mixed_precision_pass.cc:480] support precision: relu_53 not run at low precision
+I0823 09:51:19.763425 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_54 run at low precision
+I0823 09:51:19.763430 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_55 run at low precision
+I0823 09:51:19.763434 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_56 run at low precision
+I0823 09:51:19.763438 54709 auto_mixed_precision_pass.cc:480] support precision: relu_57 not run at low precision
+I0823 09:51:19.763443 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_58 run at low precision
+I0823 09:51:19.763448 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_59 run at low precision
+I0823 09:51:19.763453 54709 auto_mixed_precision_pass.cc:480] support precision: relu_60 not run at low precision
+I0823 09:51:19.763456 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_61 run at low precision
+I0823 09:51:19.763461 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_62 run at low precision
+I0823 09:51:19.763465 54709 auto_mixed_precision_pass.cc:480] support precision: relu_63 not run at low precision
+I0823 09:51:19.763470 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_64 run at low precision
+I0823 09:51:19.763475 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_65 run at low precision
+I0823 09:51:19.763479 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_66 run at low precision
+I0823 09:51:19.763484 54709 auto_mixed_precision_pass.cc:480] support precision: relu_67 not run at low precision
+I0823 09:51:19.763487 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_68 run at low precision
+I0823 09:51:19.763494 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_69 run at low precision
+I0823 09:51:19.763497 54709 auto_mixed_precision_pass.cc:480] support precision: relu_70 not run at low precision
+I0823 09:51:19.763501 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_71 run at low precision
+I0823 09:51:19.763506 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_72 run at low precision
+I0823 09:51:19.763510 54709 auto_mixed_precision_pass.cc:480] support precision: relu_73 not run at low precision
+I0823 09:51:19.763517 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_74 run at low precision
+I0823 09:51:19.763533 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_75 run at low precision
+I0823 09:51:19.763538 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_76 run at low precision
+I0823 09:51:19.763542 54709 auto_mixed_precision_pass.cc:480] support precision: relu_77 not run at low precision
+I0823 09:51:19.763546 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_78 run at low precision
+I0823 09:51:19.763551 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_79 run at low precision
+I0823 09:51:19.763554 54709 auto_mixed_precision_pass.cc:480] support precision: relu_80 not run at low precision
+I0823 09:51:19.763559 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_81 run at low precision
+I0823 09:51:19.763564 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_82 run at low precision
+I0823 09:51:19.763568 54709 auto_mixed_precision_pass.cc:480] support precision: relu_83 not run at low precision
+I0823 09:51:19.763572 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_84 run at low precision
+I0823 09:51:19.763577 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_85 run at low precision
+I0823 09:51:19.763582 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_86 run at low precision
+I0823 09:51:19.763587 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_87 run at low precision
+I0823 09:51:19.763592 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_88 run at low precision
+I0823 09:51:19.763595 54709 auto_mixed_precision_pass.cc:480] support precision: relu_89 not run at low precision
+I0823 09:51:19.763599 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_90 run at low precision
+I0823 09:51:19.763605 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_91 run at low precision
+I0823 09:51:19.763609 54709 auto_mixed_precision_pass.cc:480] support precision: relu_92 not run at low precision
+I0823 09:51:19.763613 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_93 run at low precision
+I0823 09:51:19.763618 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_94 run at low precision
+I0823 09:51:19.763622 54709 auto_mixed_precision_pass.cc:480] support precision: relu_95 not run at low precision
+I0823 09:51:19.763626 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_96 run at low precision
+I0823 09:51:19.763631 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_97 run at low precision
+I0823 09:51:19.763635 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_98 run at low precision
+I0823 09:51:19.763639 54709 auto_mixed_precision_pass.cc:480] support precision: relu_99 not run at low precision
+I0823 09:51:19.763643 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_100 run at low precision
+I0823 09:51:19.763649 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_101 run at low precision
+I0823 09:51:19.763653 54709 auto_mixed_precision_pass.cc:480] support precision: relu_102 not run at low precision
+I0823 09:51:19.763657 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_103 run at low precision
+I0823 09:51:19.763662 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_104 run at low precision
+I0823 09:51:19.763666 54709 auto_mixed_precision_pass.cc:480] support precision: relu_105 not run at low precision
+I0823 09:51:19.763670 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_106 run at low precision
+I0823 09:51:19.763677 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_107 run at low precision
+I0823 09:51:19.763682 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_108 run at low precision
+I0823 09:51:19.763686 54709 auto_mixed_precision_pass.cc:480] support precision: relu_109 not run at low precision
+I0823 09:51:19.763693 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_110 run at low precision
+I0823 09:51:19.763698 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_111 run at low precision
+I0823 09:51:19.763702 54709 auto_mixed_precision_pass.cc:480] support precision: relu_112 not run at low precision
+I0823 09:51:19.763706 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_113 run at low precision
+I0823 09:51:19.763711 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_114 run at low precision
+I0823 09:51:19.763715 54709 auto_mixed_precision_pass.cc:480] support precision: relu_115 not run at low precision
+I0823 09:51:19.763720 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_116 run at low precision
+I0823 09:51:19.763725 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_117 run at low precision
+I0823 09:51:19.763728 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_118 run at low precision
+I0823 09:51:19.763732 54709 auto_mixed_precision_pass.cc:480] support precision: relu_119 not run at low precision
+I0823 09:51:19.763736 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_120 run at low precision
+I0823 09:51:19.763741 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_121 run at low precision
+I0823 09:51:19.763744 54709 auto_mixed_precision_pass.cc:480] support precision: relu_122 not run at low precision
+I0823 09:51:19.763749 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_123 run at low precision
+I0823 09:51:19.763754 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_124 run at low precision
+I0823 09:51:19.763758 54709 auto_mixed_precision_pass.cc:480] support precision: relu_125 not run at low precision
+I0823 09:51:19.763762 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_126 run at low precision
+I0823 09:51:19.763768 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_127 run at low precision
+I0823 09:51:19.763772 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_128 run at low precision
+I0823 09:51:19.763777 54709 auto_mixed_precision_pass.cc:480] support precision: relu_129 not run at low precision
+I0823 09:51:19.763780 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_130 run at low precision
+I0823 09:51:19.763785 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_131 run at low precision
+I0823 09:51:19.763789 54709 auto_mixed_precision_pass.cc:480] support precision: relu_132 not run at low precision
+I0823 09:51:19.763793 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_133 run at low precision
+I0823 09:51:19.763798 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_134 run at low precision
+I0823 09:51:19.763803 54709 auto_mixed_precision_pass.cc:480] support precision: relu_135 not run at low precision
+I0823 09:51:19.763806 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_136 run at low precision
+I0823 09:51:19.763813 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_137 run at low precision
+I0823 09:51:19.763816 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_138 run at low precision
+I0823 09:51:19.763820 54709 auto_mixed_precision_pass.cc:480] support precision: relu_139 not run at low precision
+I0823 09:51:19.763824 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_140 run at low precision
+I0823 09:51:19.763829 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_141 run at low precision
+I0823 09:51:19.763832 54709 auto_mixed_precision_pass.cc:480] support precision: relu_142 not run at low precision
+I0823 09:51:19.763836 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_143 run at low precision
+I0823 09:51:19.763842 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_144 run at low precision
+I0823 09:51:19.763849 54709 auto_mixed_precision_pass.cc:480] support precision: relu_145 not run at low precision
+I0823 09:51:19.763852 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_146 run at low precision
+I0823 09:51:19.763857 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_147 run at low precision
+I0823 09:51:19.763862 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_148 run at low precision
+I0823 09:51:19.763867 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_149 run at low precision
+I0823 09:51:19.763871 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_150 run at low precision
+I0823 09:51:19.763875 54709 auto_mixed_precision_pass.cc:480] support precision: relu_151 not run at low precision
+I0823 09:51:19.763880 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_152 run at low precision
+I0823 09:51:19.763885 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_153 run at low precision
+I0823 09:51:19.763888 54709 auto_mixed_precision_pass.cc:480] support precision: relu_154 not run at low precision
+I0823 09:51:19.763892 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_155 run at low precision
+I0823 09:51:19.763898 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_156 run at low precision
+I0823 09:51:19.763901 54709 auto_mixed_precision_pass.cc:480] support precision: relu_157 not run at low precision
+I0823 09:51:19.763906 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_158 run at low precision
+I0823 09:51:19.763911 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_159 run at low precision
+I0823 09:51:19.763916 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_160 run at low precision
+I0823 09:51:19.763919 54709 auto_mixed_precision_pass.cc:480] support precision: relu_161 not run at low precision
+I0823 09:51:19.763923 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_162 run at low precision
+I0823 09:51:19.763928 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_163 run at low precision
+I0823 09:51:19.763932 54709 auto_mixed_precision_pass.cc:480] support precision: relu_164 not run at low precision
+I0823 09:51:19.763936 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_165 run at low precision
+I0823 09:51:19.763942 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_166 run at low precision
+I0823 09:51:19.763944 54709 auto_mixed_precision_pass.cc:480] support precision: relu_167 not run at low precision
+I0823 09:51:19.763949 54709 auto_mixed_precision_pass.cc:478] support precision: conv2d_168 run at low precision
+I0823 09:51:19.763954 54709 auto_mixed_precision_pass.cc:478] support precision: batch_norm_169 run at low precision
+I0823 09:51:19.763958 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_170 run at low precision
+I0823 09:51:19.763962 54709 auto_mixed_precision_pass.cc:480] support precision: relu_171 not run at low precision
+I0823 09:51:19.763965 54709 auto_mixed_precision_pass.cc:478] support precision: pool2d_172 run at low precision
+I0823 09:51:19.763971 54709 auto_mixed_precision_pass.cc:478] support precision: reshape2_173 run at low precision
+I0823 09:51:19.763978 54709 auto_mixed_precision_pass.cc:478] support precision: matmul_174 run at low precision
+I0823 09:51:19.763981 54709 auto_mixed_precision_pass.cc:478] support precision: elementwise_add_175 run at low precision
+I0823 09:51:19.763986 54709 auto_mixed_precision_pass.cc:478] support precision: softmax_176 run at low precision
+I0823 09:51:19.763996 54709 auto_mixed_precision_pass.cc:478] support precision: scale_177 run at low precision
+I0823 09:51:19.763999 54709 auto_mixed_precision_pass.cc:478] support precision: fetch run at low precision
+I0823 09:51:19.764003 54709 auto_mixed_precision_pass.cc:296] GetOpPrecision done
+I0823 09:51:19.764007 54709 auto_mixed_precision_pass.cc:509] var input ops: inputs is output of feed
+I0823 09:51:19.764012 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_53.tmp_0 is output of conv2d_0
+I0823 09:51:19.764019 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_0.tmp_0 is output of batch_norm_1
+I0823 09:51:19.764021 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_0.tmp_1 is output of batch_norm_1
+I0823 09:51:19.764024 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_0.tmp_2 is output of batch_norm_1
+I0823 09:51:19.764027 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_0.tmp_3 is output of relu_2
+I0823 09:51:19.764032 54709 auto_mixed_precision_pass.cc:509] var input ops: pool2d_0.tmp_0 is output of pool2d_3
+I0823 09:51:19.764036 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_54.tmp_0 is output of conv2d_4
+I0823 09:51:19.764039 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_1.tmp_0 is output of batch_norm_5
+I0823 09:51:19.764042 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_1.tmp_1 is output of batch_norm_5
+I0823 09:51:19.764045 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_1.tmp_2 is output of batch_norm_5
+I0823 09:51:19.764048 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_1.tmp_3 is output of relu_6
+I0823 09:51:19.764052 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_55.tmp_0 is output of conv2d_7
+I0823 09:51:19.764055 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_2.tmp_0 is output of batch_norm_8
+I0823 09:51:19.764058 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_2.tmp_1 is output of batch_norm_8
+I0823 09:51:19.764060 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_2.tmp_2 is output of batch_norm_8
+I0823 09:51:19.764065 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_2.tmp_3 is output of relu_9
+I0823 09:51:19.764068 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_56.tmp_0 is output of conv2d_10
+I0823 09:51:19.764072 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_3.tmp_0 is output of batch_norm_11
+I0823 09:51:19.764075 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_3.tmp_1 is output of batch_norm_11
+I0823 09:51:19.764077 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_3.tmp_2 is output of batch_norm_11
+I0823 09:51:19.764081 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_57.tmp_0 is output of conv2d_12
+I0823 09:51:19.764084 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_4.tmp_0 is output of batch_norm_13
+I0823 09:51:19.764086 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_4.tmp_1 is output of batch_norm_13
+I0823 09:51:19.764089 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_4.tmp_2 is output of batch_norm_13
+I0823 09:51:19.764092 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_0 is output of elementwise_add_14
+I0823 09:51:19.764096 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_0.tmp_0 is output of relu_15
+I0823 09:51:19.764101 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_58.tmp_0 is output of conv2d_16
+I0823 09:51:19.764103 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_5.tmp_0 is output of batch_norm_17
+I0823 09:51:19.764106 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_5.tmp_1 is output of batch_norm_17
+I0823 09:51:19.764109 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_5.tmp_2 is output of batch_norm_17
+I0823 09:51:19.764112 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_5.tmp_3 is output of relu_18
+I0823 09:51:19.764117 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_59.tmp_0 is output of conv2d_19
+I0823 09:51:19.764120 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_6.tmp_0 is output of batch_norm_20
+I0823 09:51:19.764122 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_6.tmp_1 is output of batch_norm_20
+I0823 09:51:19.764125 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_6.tmp_2 is output of batch_norm_20
+I0823 09:51:19.764132 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_6.tmp_3 is output of relu_21
+I0823 09:51:19.764135 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_60.tmp_0 is output of conv2d_22
+I0823 09:51:19.764138 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_7.tmp_0 is output of batch_norm_23
+I0823 09:51:19.764142 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_7.tmp_1 is output of batch_norm_23
+I0823 09:51:19.764144 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_7.tmp_2 is output of batch_norm_23
+I0823 09:51:19.764147 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_1 is output of elementwise_add_24
+I0823 09:51:19.764151 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_1.tmp_0 is output of relu_25
+I0823 09:51:19.764154 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_61.tmp_0 is output of conv2d_26
+I0823 09:51:19.764158 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_8.tmp_0 is output of batch_norm_27
+I0823 09:51:19.764161 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_8.tmp_1 is output of batch_norm_27
+I0823 09:51:19.764163 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_8.tmp_2 is output of batch_norm_27
+I0823 09:51:19.764166 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_8.tmp_3 is output of relu_28
+I0823 09:51:19.764170 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_62.tmp_0 is output of conv2d_29
+I0823 09:51:19.764173 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_9.tmp_0 is output of batch_norm_30
+I0823 09:51:19.764176 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_9.tmp_1 is output of batch_norm_30
+I0823 09:51:19.764178 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_9.tmp_2 is output of batch_norm_30
+I0823 09:51:19.764182 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_9.tmp_3 is output of relu_31
+I0823 09:51:19.764185 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_63.tmp_0 is output of conv2d_32
+I0823 09:51:19.764189 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_10.tmp_0 is output of batch_norm_33
+I0823 09:51:19.764191 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_10.tmp_1 is output of batch_norm_33
+I0823 09:51:19.764194 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_10.tmp_2 is output of batch_norm_33
+I0823 09:51:19.764197 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_2 is output of elementwise_add_34
+I0823 09:51:19.764201 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_2.tmp_0 is output of relu_35
+I0823 09:51:19.764204 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_64.tmp_0 is output of conv2d_36
+I0823 09:51:19.764207 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_11.tmp_0 is output of batch_norm_37
+I0823 09:51:19.764210 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_11.tmp_1 is output of batch_norm_37
+I0823 09:51:19.764212 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_11.tmp_2 is output of batch_norm_37
+I0823 09:51:19.764216 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_11.tmp_3 is output of relu_38
+I0823 09:51:19.764219 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_65.tmp_0 is output of conv2d_39
+I0823 09:51:19.764223 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_12.tmp_0 is output of batch_norm_40
+I0823 09:51:19.764225 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_12.tmp_1 is output of batch_norm_40
+I0823 09:51:19.764228 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_12.tmp_2 is output of batch_norm_40
+I0823 09:51:19.764231 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_12.tmp_3 is output of relu_41
+I0823 09:51:19.764237 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_66.tmp_0 is output of conv2d_42
+I0823 09:51:19.764241 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_13.tmp_0 is output of batch_norm_43
+I0823 09:51:19.764245 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_13.tmp_1 is output of batch_norm_43
+I0823 09:51:19.764246 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_13.tmp_2 is output of batch_norm_43
+I0823 09:51:19.764250 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_67.tmp_0 is output of conv2d_44
+I0823 09:51:19.764253 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_14.tmp_0 is output of batch_norm_45
+I0823 09:51:19.764256 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_14.tmp_1 is output of batch_norm_45
+I0823 09:51:19.764258 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_14.tmp_2 is output of batch_norm_45
+I0823 09:51:19.764262 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_3 is output of elementwise_add_46
+I0823 09:51:19.764267 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_3.tmp_0 is output of relu_47
+I0823 09:51:19.764271 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_68.tmp_0 is output of conv2d_48
+I0823 09:51:19.764276 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_15.tmp_0 is output of batch_norm_49
+I0823 09:51:19.764277 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_15.tmp_1 is output of batch_norm_49
+I0823 09:51:19.764281 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_15.tmp_2 is output of batch_norm_49
+I0823 09:51:19.764283 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_15.tmp_3 is output of relu_50
+I0823 09:51:19.764286 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_69.tmp_0 is output of conv2d_51
+I0823 09:51:19.764290 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_16.tmp_0 is output of batch_norm_52
+I0823 09:51:19.764292 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_16.tmp_1 is output of batch_norm_52
+I0823 09:51:19.764295 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_16.tmp_2 is output of batch_norm_52
+I0823 09:51:19.764298 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_16.tmp_3 is output of relu_53
+I0823 09:51:19.764302 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_70.tmp_0 is output of conv2d_54
+I0823 09:51:19.764305 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_17.tmp_0 is output of batch_norm_55
+I0823 09:51:19.764308 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_17.tmp_1 is output of batch_norm_55
+I0823 09:51:19.764310 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_17.tmp_2 is output of batch_norm_55
+I0823 09:51:19.764314 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_4 is output of elementwise_add_56
+I0823 09:51:19.764317 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_4.tmp_0 is output of relu_57
+I0823 09:51:19.764322 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_71.tmp_0 is output of conv2d_58
+I0823 09:51:19.764324 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_18.tmp_0 is output of batch_norm_59
+I0823 09:51:19.764328 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_18.tmp_1 is output of batch_norm_59
+I0823 09:51:19.764329 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_18.tmp_2 is output of batch_norm_59
+I0823 09:51:19.764333 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_18.tmp_3 is output of relu_60
+I0823 09:51:19.764336 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_72.tmp_0 is output of conv2d_61
+I0823 09:51:19.764340 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_19.tmp_0 is output of batch_norm_62
+I0823 09:51:19.764343 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_19.tmp_1 is output of batch_norm_62
+I0823 09:51:19.764348 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_19.tmp_2 is output of batch_norm_62
+I0823 09:51:19.764351 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_19.tmp_3 is output of relu_63
+I0823 09:51:19.764355 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_73.tmp_0 is output of conv2d_64
+I0823 09:51:19.764358 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_20.tmp_0 is output of batch_norm_65
+I0823 09:51:19.764361 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_20.tmp_1 is output of batch_norm_65
+I0823 09:51:19.764364 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_20.tmp_2 is output of batch_norm_65
+I0823 09:51:19.764367 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_5 is output of elementwise_add_66
+I0823 09:51:19.764370 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_5.tmp_0 is output of relu_67
+I0823 09:51:19.764374 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_74.tmp_0 is output of conv2d_68
+I0823 09:51:19.764377 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_21.tmp_0 is output of batch_norm_69
+I0823 09:51:19.764380 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_21.tmp_1 is output of batch_norm_69
+I0823 09:51:19.764382 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_21.tmp_2 is output of batch_norm_69
+I0823 09:51:19.764385 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_21.tmp_3 is output of relu_70
+I0823 09:51:19.764389 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_75.tmp_0 is output of conv2d_71
+I0823 09:51:19.764392 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_22.tmp_0 is output of batch_norm_72
+I0823 09:51:19.764395 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_22.tmp_1 is output of batch_norm_72
+I0823 09:51:19.764397 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_22.tmp_2 is output of batch_norm_72
+I0823 09:51:19.764401 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_22.tmp_3 is output of relu_73
+I0823 09:51:19.764405 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_76.tmp_0 is output of conv2d_74
+I0823 09:51:19.764407 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_23.tmp_0 is output of batch_norm_75
+I0823 09:51:19.764410 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_23.tmp_1 is output of batch_norm_75
+I0823 09:51:19.764412 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_23.tmp_2 is output of batch_norm_75
+I0823 09:51:19.764416 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_6 is output of elementwise_add_76
+I0823 09:51:19.764420 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_6.tmp_0 is output of relu_77
+I0823 09:51:19.764422 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_77.tmp_0 is output of conv2d_78
+I0823 09:51:19.764426 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_24.tmp_0 is output of batch_norm_79
+I0823 09:51:19.764428 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_24.tmp_1 is output of batch_norm_79
+I0823 09:51:19.764431 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_24.tmp_2 is output of batch_norm_79
+I0823 09:51:19.764434 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_24.tmp_3 is output of relu_80
+I0823 09:51:19.764437 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_78.tmp_0 is output of conv2d_81
+I0823 09:51:19.764441 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_25.tmp_0 is output of batch_norm_82
+I0823 09:51:19.764443 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_25.tmp_1 is output of batch_norm_82
+I0823 09:51:19.764446 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_25.tmp_2 is output of batch_norm_82
+I0823 09:51:19.764449 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_25.tmp_3 is output of relu_83
+I0823 09:51:19.764456 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_79.tmp_0 is output of conv2d_84
+I0823 09:51:19.764461 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_26.tmp_0 is output of batch_norm_85
+I0823 09:51:19.764462 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_26.tmp_1 is output of batch_norm_85
+I0823 09:51:19.764465 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_26.tmp_2 is output of batch_norm_85
+I0823 09:51:19.764468 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_80.tmp_0 is output of conv2d_86
+I0823 09:51:19.764472 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_27.tmp_0 is output of batch_norm_87
+I0823 09:51:19.764474 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_27.tmp_1 is output of batch_norm_87
+I0823 09:51:19.764477 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_27.tmp_2 is output of batch_norm_87
+I0823 09:51:19.764480 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_7 is output of elementwise_add_88
+I0823 09:51:19.764484 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_7.tmp_0 is output of relu_89
+I0823 09:51:19.764487 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_81.tmp_0 is output of conv2d_90
+I0823 09:51:19.764492 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_28.tmp_0 is output of batch_norm_91
+I0823 09:51:19.764493 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_28.tmp_1 is output of batch_norm_91
+I0823 09:51:19.764497 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_28.tmp_2 is output of batch_norm_91
+I0823 09:51:19.764499 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_28.tmp_3 is output of relu_92
+I0823 09:51:19.764503 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_82.tmp_0 is output of conv2d_93
+I0823 09:51:19.764506 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_29.tmp_0 is output of batch_norm_94
+I0823 09:51:19.764508 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_29.tmp_1 is output of batch_norm_94
+I0823 09:51:19.764511 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_29.tmp_2 is output of batch_norm_94
+I0823 09:51:19.764514 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_29.tmp_3 is output of relu_95
+I0823 09:51:19.764525 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_83.tmp_0 is output of conv2d_96
+I0823 09:51:19.764530 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_30.tmp_0 is output of batch_norm_97
+I0823 09:51:19.764532 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_30.tmp_1 is output of batch_norm_97
+I0823 09:51:19.764535 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_30.tmp_2 is output of batch_norm_97
+I0823 09:51:19.764539 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_8 is output of elementwise_add_98
+I0823 09:51:19.764542 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_8.tmp_0 is output of relu_99
+I0823 09:51:19.764545 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_84.tmp_0 is output of conv2d_100
+I0823 09:51:19.764549 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_31.tmp_0 is output of batch_norm_101
+I0823 09:51:19.764551 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_31.tmp_1 is output of batch_norm_101
+I0823 09:51:19.764556 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_31.tmp_2 is output of batch_norm_101
+I0823 09:51:19.764560 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_31.tmp_3 is output of relu_102
+I0823 09:51:19.764564 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_85.tmp_0 is output of conv2d_103
+I0823 09:51:19.764567 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_32.tmp_0 is output of batch_norm_104
+I0823 09:51:19.764570 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_32.tmp_1 is output of batch_norm_104
+I0823 09:51:19.764575 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_32.tmp_2 is output of batch_norm_104
+I0823 09:51:19.764580 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_32.tmp_3 is output of relu_105
+I0823 09:51:19.764582 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_86.tmp_0 is output of conv2d_106
+I0823 09:51:19.764587 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_33.tmp_0 is output of batch_norm_107
+I0823 09:51:19.764590 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_33.tmp_1 is output of batch_norm_107
+I0823 09:51:19.764592 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_33.tmp_2 is output of batch_norm_107
+I0823 09:51:19.764596 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_9 is output of elementwise_add_108
+I0823 09:51:19.764600 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_9.tmp_0 is output of relu_109
+I0823 09:51:19.764603 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_87.tmp_0 is output of conv2d_110
+I0823 09:51:19.764607 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_34.tmp_0 is output of batch_norm_111
+I0823 09:51:19.764611 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_34.tmp_1 is output of batch_norm_111
+I0823 09:51:19.764612 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_34.tmp_2 is output of batch_norm_111
+I0823 09:51:19.764616 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_34.tmp_3 is output of relu_112
+I0823 09:51:19.764619 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_88.tmp_0 is output of conv2d_113
+I0823 09:51:19.764623 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_35.tmp_0 is output of batch_norm_114
+I0823 09:51:19.764626 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_35.tmp_1 is output of batch_norm_114
+I0823 09:51:19.764628 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_35.tmp_2 is output of batch_norm_114
+I0823 09:51:19.764631 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_35.tmp_3 is output of relu_115
+I0823 09:51:19.764636 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_89.tmp_0 is output of conv2d_116
+I0823 09:51:19.764638 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_36.tmp_0 is output of batch_norm_117
+I0823 09:51:19.764640 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_36.tmp_1 is output of batch_norm_117
+I0823 09:51:19.764643 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_36.tmp_2 is output of batch_norm_117
+I0823 09:51:19.764647 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_10 is output of elementwise_add_118
+I0823 09:51:19.764650 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_10.tmp_0 is output of relu_119
+I0823 09:51:19.764653 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_90.tmp_0 is output of conv2d_120
+I0823 09:51:19.764657 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_37.tmp_0 is output of batch_norm_121
+I0823 09:51:19.764659 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_37.tmp_1 is output of batch_norm_121
+I0823 09:51:19.764662 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_37.tmp_2 is output of batch_norm_121
+I0823 09:51:19.764665 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_37.tmp_3 is output of relu_122
+I0823 09:51:19.764669 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_91.tmp_0 is output of conv2d_123
+I0823 09:51:19.764672 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_38.tmp_0 is output of batch_norm_124
+I0823 09:51:19.764675 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_38.tmp_1 is output of batch_norm_124
+I0823 09:51:19.764678 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_38.tmp_2 is output of batch_norm_124
+I0823 09:51:19.764683 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_38.tmp_3 is output of relu_125
+I0823 09:51:19.764686 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_92.tmp_0 is output of conv2d_126
+I0823 09:51:19.764690 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_39.tmp_0 is output of batch_norm_127
+I0823 09:51:19.764693 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_39.tmp_1 is output of batch_norm_127
+I0823 09:51:19.764695 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_39.tmp_2 is output of batch_norm_127
+I0823 09:51:19.764699 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_11 is output of elementwise_add_128
+I0823 09:51:19.764703 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_11.tmp_0 is output of relu_129
+I0823 09:51:19.764705 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_93.tmp_0 is output of conv2d_130
+I0823 09:51:19.764709 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_40.tmp_0 is output of batch_norm_131
+I0823 09:51:19.764712 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_40.tmp_1 is output of batch_norm_131
+I0823 09:51:19.764714 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_40.tmp_2 is output of batch_norm_131
+I0823 09:51:19.764719 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_40.tmp_3 is output of relu_132
+I0823 09:51:19.764721 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_94.tmp_0 is output of conv2d_133
+I0823 09:51:19.764725 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_41.tmp_0 is output of batch_norm_134
+I0823 09:51:19.764727 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_41.tmp_1 is output of batch_norm_134
+I0823 09:51:19.764730 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_41.tmp_2 is output of batch_norm_134
+I0823 09:51:19.764734 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_41.tmp_3 is output of relu_135
+I0823 09:51:19.764737 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_95.tmp_0 is output of conv2d_136
+I0823 09:51:19.764740 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_42.tmp_0 is output of batch_norm_137
+I0823 09:51:19.764743 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_42.tmp_1 is output of batch_norm_137
+I0823 09:51:19.764745 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_42.tmp_2 is output of batch_norm_137
+I0823 09:51:19.764750 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_12 is output of elementwise_add_138
+I0823 09:51:19.764752 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_12.tmp_0 is output of relu_139
+I0823 09:51:19.764756 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_96.tmp_0 is output of conv2d_140
+I0823 09:51:19.764760 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_43.tmp_0 is output of batch_norm_141
+I0823 09:51:19.764762 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_43.tmp_1 is output of batch_norm_141
+I0823 09:51:19.764765 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_43.tmp_2 is output of batch_norm_141
+I0823 09:51:19.764768 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_43.tmp_3 is output of relu_142
+I0823 09:51:19.764771 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_97.tmp_0 is output of conv2d_143
+I0823 09:51:19.764775 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_44.tmp_0 is output of batch_norm_144
+I0823 09:51:19.764777 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_44.tmp_1 is output of batch_norm_144
+I0823 09:51:19.764780 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_44.tmp_2 is output of batch_norm_144
+I0823 09:51:19.764783 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_44.tmp_3 is output of relu_145
+I0823 09:51:19.764787 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_98.tmp_0 is output of conv2d_146
+I0823 09:51:19.764793 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_45.tmp_0 is output of batch_norm_147
+I0823 09:51:19.764796 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_45.tmp_1 is output of batch_norm_147
+I0823 09:51:19.764798 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_45.tmp_2 is output of batch_norm_147
+I0823 09:51:19.764801 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_99.tmp_0 is output of conv2d_148
+I0823 09:51:19.764806 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_46.tmp_0 is output of batch_norm_149
+I0823 09:51:19.764807 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_46.tmp_1 is output of batch_norm_149
+I0823 09:51:19.764811 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_46.tmp_2 is output of batch_norm_149
+I0823 09:51:19.764813 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_13 is output of elementwise_add_150
+I0823 09:51:19.764817 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_13.tmp_0 is output of relu_151
+I0823 09:51:19.764820 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_100.tmp_0 is output of conv2d_152
+I0823 09:51:19.764824 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_47.tmp_0 is output of batch_norm_153
+I0823 09:51:19.764827 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_47.tmp_1 is output of batch_norm_153
+I0823 09:51:19.764829 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_47.tmp_2 is output of batch_norm_153
+I0823 09:51:19.764832 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_47.tmp_3 is output of relu_154
+I0823 09:51:19.764835 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_101.tmp_0 is output of conv2d_155
+I0823 09:51:19.764839 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_48.tmp_0 is output of batch_norm_156
+I0823 09:51:19.764842 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_48.tmp_1 is output of batch_norm_156
+I0823 09:51:19.764844 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_48.tmp_2 is output of batch_norm_156
+I0823 09:51:19.764847 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_48.tmp_3 is output of relu_157
+I0823 09:51:19.764850 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_102.tmp_0 is output of conv2d_158
+I0823 09:51:19.764854 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_49.tmp_0 is output of batch_norm_159
+I0823 09:51:19.764858 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_49.tmp_1 is output of batch_norm_159
+I0823 09:51:19.764859 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_49.tmp_2 is output of batch_norm_159
+I0823 09:51:19.764863 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_14 is output of elementwise_add_160
+I0823 09:51:19.764866 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_14.tmp_0 is output of relu_161
+I0823 09:51:19.764869 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_103.tmp_0 is output of conv2d_162
+I0823 09:51:19.764873 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_50.tmp_0 is output of batch_norm_163
+I0823 09:51:19.764875 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_50.tmp_1 is output of batch_norm_163
+I0823 09:51:19.764878 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_50.tmp_2 is output of batch_norm_163
+I0823 09:51:19.764881 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_50.tmp_3 is output of relu_164
+I0823 09:51:19.764885 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_104.tmp_0 is output of conv2d_165
+I0823 09:51:19.764889 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_51.tmp_0 is output of batch_norm_166
+I0823 09:51:19.764891 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_51.tmp_1 is output of batch_norm_166
+I0823 09:51:19.764896 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_51.tmp_2 is output of batch_norm_166
+I0823 09:51:19.764899 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_51.tmp_3 is output of relu_167
+I0823 09:51:19.764902 54709 auto_mixed_precision_pass.cc:509] var input ops: conv2d_105.tmp_0 is output of conv2d_168
+I0823 09:51:19.764906 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_52.tmp_0 is output of batch_norm_169
+I0823 09:51:19.764909 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_52.tmp_1 is output of batch_norm_169
+I0823 09:51:19.764911 54709 auto_mixed_precision_pass.cc:509] var input ops: batch_norm_52.tmp_2 is output of batch_norm_169
+I0823 09:51:19.764915 54709 auto_mixed_precision_pass.cc:509] var input ops: elementwise_add_15 is output of elementwise_add_170
+I0823 09:51:19.764919 54709 auto_mixed_precision_pass.cc:509] var input ops: relu_15.tmp_0 is output of relu_171
+I0823 09:51:19.764922 54709 auto_mixed_precision_pass.cc:509] var input ops: pool2d_1.tmp_0 is output of pool2d_172
+I0823 09:51:19.764925 54709 auto_mixed_precision_pass.cc:509] var input ops: reshape2_0.tmp_0 is output of reshape2_173
+I0823 09:51:19.764928 54709 auto_mixed_precision_pass.cc:509] var input ops: reshape2_0.tmp_1 is output of reshape2_173
+I0823 09:51:19.764931 54709 auto_mixed_precision_pass.cc:509] var input ops: linear_1.tmp_0 is output of matmul_174
+I0823 09:51:19.764935 54709 auto_mixed_precision_pass.cc:509] var input ops: linear_1.tmp_1 is output of elementwise_add_175
+I0823 09:51:19.764940 54709 auto_mixed_precision_pass.cc:509] var input ops: softmax_0.tmp_0 is output of softmax_176
+I0823 09:51:19.764943 54709 auto_mixed_precision_pass.cc:509] var input ops: save_infer_model/scale_0.tmp_1 is output of scale_177
+I0823 09:51:19.765121 54709 auto_mixed_precision_pass.cc:298] UpdateOpPrecision done
+I0823 09:51:19.765504 54709 auto_mixed_precision_pass.cc:300] SetVarPrecision done
+I0823 09:51:19.765578 54709 auto_mixed_precision_pass.cc:302] ConvertWeightsData done
+I0823 09:51:19.765640 54709 auto_mixed_precision_pass.cc:304] ProcessOpWithDtypeAttr done
+I0823 09:51:19.765645 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_0 run low precision: 1
+I0823 09:51:19.765650 54709 auto_mixed_precision_pass.cc:883] process var: inputs with type ::paddle::platform::float16
+I0823 09:51:19.765653 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_1 run low precision: 1
+I0823 09:51:19.765656 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_53.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765659 54709 auto_mixed_precision_pass.cc:870] process op: relu_2 run low precision: 0
+I0823 09:51:19.765662 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_0.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.765707 54709 auto_mixed_precision_pass.cc:870] process op: pool2d_3 run low precision: 1
+I0823 09:51:19.765710 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_0.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.765713 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_4 run low precision: 1
+I0823 09:51:19.765715 54709 auto_mixed_precision_pass.cc:883] process var: pool2d_0.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765718 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_5 run low precision: 1
+I0823 09:51:19.765722 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_54.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765724 54709 auto_mixed_precision_pass.cc:870] process op: relu_6 run low precision: 0
+I0823 09:51:19.765726 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_1.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.765741 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_7 run low precision: 1
+I0823 09:51:19.765744 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_1.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.765748 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_8 run low precision: 1
+I0823 09:51:19.765755 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_55.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765758 54709 auto_mixed_precision_pass.cc:870] process op: relu_9 run low precision: 0
+I0823 09:51:19.765761 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_2.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.765774 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_10 run low precision: 1
+I0823 09:51:19.765779 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_2.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.765781 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_11 run low precision: 1
+I0823 09:51:19.765784 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_56.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765786 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_12 run low precision: 1
+I0823 09:51:19.765789 54709 auto_mixed_precision_pass.cc:883] process var: pool2d_0.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765792 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_13 run low precision: 1
+I0823 09:51:19.765794 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_57.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765797 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_14 run low precision: 1
+I0823 09:51:19.765800 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_4.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.765802 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_3.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.765805 54709 auto_mixed_precision_pass.cc:870] process op: relu_15 run low precision: 0
+I0823 09:51:19.765808 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_0 with type ::paddle::platform::float16
+I0823 09:51:19.765821 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_16 run low precision: 1
+I0823 09:51:19.765825 54709 auto_mixed_precision_pass.cc:883] process var: relu_0.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765828 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_17 run low precision: 1
+I0823 09:51:19.765830 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_58.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765833 54709 auto_mixed_precision_pass.cc:870] process op: relu_18 run low precision: 0
+I0823 09:51:19.765836 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_5.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.765849 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_19 run low precision: 1
+I0823 09:51:19.765853 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_5.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.765856 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_20 run low precision: 1
+I0823 09:51:19.765858 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_59.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765861 54709 auto_mixed_precision_pass.cc:870] process op: relu_21 run low precision: 0
+I0823 09:51:19.765864 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_6.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.765877 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_22 run low precision: 1
+I0823 09:51:19.765880 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_6.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.765882 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_23 run low precision: 1
+I0823 09:51:19.765885 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_60.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765888 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_24 run low precision: 1
+I0823 09:51:19.765890 54709 auto_mixed_precision_pass.cc:883] process var: relu_0.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765897 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_7.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.765899 54709 auto_mixed_precision_pass.cc:870] process op: relu_25 run low precision: 0
+I0823 09:51:19.765902 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_1 with type ::paddle::platform::float16
+I0823 09:51:19.765915 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_26 run low precision: 1
+I0823 09:51:19.765918 54709 auto_mixed_precision_pass.cc:883] process var: relu_1.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765921 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_27 run low precision: 1
+I0823 09:51:19.765923 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_61.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765926 54709 auto_mixed_precision_pass.cc:870] process op: relu_28 run low precision: 0
+I0823 09:51:19.765929 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_8.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.765941 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_29 run low precision: 1
+I0823 09:51:19.765944 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_8.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.765947 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_30 run low precision: 1
+I0823 09:51:19.765949 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_62.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765952 54709 auto_mixed_precision_pass.cc:870] process op: relu_31 run low precision: 0
+I0823 09:51:19.765955 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_9.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.765967 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_32 run low precision: 1
+I0823 09:51:19.765970 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_9.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.765973 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_33 run low precision: 1
+I0823 09:51:19.765975 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_63.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765978 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_34 run low precision: 1
+I0823 09:51:19.765981 54709 auto_mixed_precision_pass.cc:883] process var: relu_1.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.765983 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_10.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.765986 54709 auto_mixed_precision_pass.cc:870] process op: relu_35 run low precision: 0
+I0823 09:51:19.765990 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_2 with type ::paddle::platform::float16
+I0823 09:51:19.766001 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_36 run low precision: 1
+I0823 09:51:19.766005 54709 auto_mixed_precision_pass.cc:883] process var: relu_2.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766007 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_37 run low precision: 1
+I0823 09:51:19.766009 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_64.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766012 54709 auto_mixed_precision_pass.cc:870] process op: relu_38 run low precision: 0
+I0823 09:51:19.766016 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_11.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766027 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_39 run low precision: 1
+I0823 09:51:19.766031 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_11.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766033 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_40 run low precision: 1
+I0823 09:51:19.766036 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_65.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766038 54709 auto_mixed_precision_pass.cc:870] process op: relu_41 run low precision: 0
+I0823 09:51:19.766043 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_12.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766057 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_42 run low precision: 1
+I0823 09:51:19.766059 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_12.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766062 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_43 run low precision: 1
+I0823 09:51:19.766064 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_66.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766067 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_44 run low precision: 1
+I0823 09:51:19.766069 54709 auto_mixed_precision_pass.cc:883] process var: relu_2.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766072 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_45 run low precision: 1
+I0823 09:51:19.766075 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_67.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766078 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_46 run low precision: 1
+I0823 09:51:19.766080 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_14.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766083 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_13.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766086 54709 auto_mixed_precision_pass.cc:870] process op: relu_47 run low precision: 0
+I0823 09:51:19.766089 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_3 with type ::paddle::platform::float16
+I0823 09:51:19.766100 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_48 run low precision: 1
+I0823 09:51:19.766104 54709 auto_mixed_precision_pass.cc:883] process var: relu_3.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766108 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_49 run low precision: 1
+I0823 09:51:19.766109 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_68.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766112 54709 auto_mixed_precision_pass.cc:870] process op: relu_50 run low precision: 0
+I0823 09:51:19.766114 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_15.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766126 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_51 run low precision: 1
+I0823 09:51:19.766130 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_15.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766132 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_52 run low precision: 1
+I0823 09:51:19.766135 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_69.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766139 54709 auto_mixed_precision_pass.cc:870] process op: relu_53 run low precision: 0
+I0823 09:51:19.766140 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_16.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766152 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_54 run low precision: 1
+I0823 09:51:19.766155 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_16.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766158 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_55 run low precision: 1
+I0823 09:51:19.766161 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_70.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766165 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_56 run low precision: 1
+I0823 09:51:19.766166 54709 auto_mixed_precision_pass.cc:883] process var: relu_3.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766170 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_17.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766172 54709 auto_mixed_precision_pass.cc:870] process op: relu_57 run low precision: 0
+I0823 09:51:19.766177 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_4 with type ::paddle::platform::float16
+I0823 09:51:19.766189 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_58 run low precision: 1
+I0823 09:51:19.766193 54709 auto_mixed_precision_pass.cc:883] process var: relu_4.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766196 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_59 run low precision: 1
+I0823 09:51:19.766198 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_71.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766201 54709 auto_mixed_precision_pass.cc:870] process op: relu_60 run low precision: 0
+I0823 09:51:19.766204 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_18.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766216 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_61 run low precision: 1
+I0823 09:51:19.766219 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_18.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766222 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_62 run low precision: 1
+I0823 09:51:19.766225 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_72.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766227 54709 auto_mixed_precision_pass.cc:870] process op: relu_63 run low precision: 0
+I0823 09:51:19.766230 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_19.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766242 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_64 run low precision: 1
+I0823 09:51:19.766247 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_19.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766248 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_65 run low precision: 1
+I0823 09:51:19.766252 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_73.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766254 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_66 run low precision: 1
+I0823 09:51:19.766256 54709 auto_mixed_precision_pass.cc:883] process var: relu_4.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766259 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_20.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766263 54709 auto_mixed_precision_pass.cc:870] process op: relu_67 run low precision: 0
+I0823 09:51:19.766264 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_5 with type ::paddle::platform::float16
+I0823 09:51:19.766276 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_68 run low precision: 1
+I0823 09:51:19.766279 54709 auto_mixed_precision_pass.cc:883] process var: relu_5.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766283 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_69 run low precision: 1
+I0823 09:51:19.766285 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_74.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766288 54709 auto_mixed_precision_pass.cc:870] process op: relu_70 run low precision: 0
+I0823 09:51:19.766290 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_21.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766301 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_71 run low precision: 1
+I0823 09:51:19.766305 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_21.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766309 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_72 run low precision: 1
+I0823 09:51:19.766310 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_75.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766314 54709 auto_mixed_precision_pass.cc:870] process op: relu_73 run low precision: 0
+I0823 09:51:19.766316 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_22.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766331 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_74 run low precision: 1
+I0823 09:51:19.766335 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_22.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766337 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_75 run low precision: 1
+I0823 09:51:19.766340 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_76.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766342 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_76 run low precision: 1
+I0823 09:51:19.766345 54709 auto_mixed_precision_pass.cc:883] process var: relu_5.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766347 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_23.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766350 54709 auto_mixed_precision_pass.cc:870] process op: relu_77 run low precision: 0
+I0823 09:51:19.766352 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_6 with type ::paddle::platform::float16
+I0823 09:51:19.766364 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_78 run low precision: 1
+I0823 09:51:19.766367 54709 auto_mixed_precision_pass.cc:883] process var: relu_6.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766371 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_79 run low precision: 1
+I0823 09:51:19.766372 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_77.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766376 54709 auto_mixed_precision_pass.cc:870] process op: relu_80 run low precision: 0
+I0823 09:51:19.766378 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_24.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766391 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_81 run low precision: 1
+I0823 09:51:19.766393 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_24.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766396 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_82 run low precision: 1
+I0823 09:51:19.766398 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_78.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766402 54709 auto_mixed_precision_pass.cc:870] process op: relu_83 run low precision: 0
+I0823 09:51:19.766404 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_25.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766415 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_84 run low precision: 1
+I0823 09:51:19.766418 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_25.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766422 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_85 run low precision: 1
+I0823 09:51:19.766424 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_79.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766427 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_86 run low precision: 1
+I0823 09:51:19.766429 54709 auto_mixed_precision_pass.cc:883] process var: relu_6.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766433 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_87 run low precision: 1
+I0823 09:51:19.766435 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_80.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766438 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_88 run low precision: 1
+I0823 09:51:19.766440 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_27.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766443 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_26.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766445 54709 auto_mixed_precision_pass.cc:870] process op: relu_89 run low precision: 0
+I0823 09:51:19.766448 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_7 with type ::paddle::platform::float16
+I0823 09:51:19.766460 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_90 run low precision: 1
+I0823 09:51:19.766465 54709 auto_mixed_precision_pass.cc:883] process var: relu_7.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766469 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_91 run low precision: 1
+I0823 09:51:19.766471 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_81.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766474 54709 auto_mixed_precision_pass.cc:870] process op: relu_92 run low precision: 0
+I0823 09:51:19.766477 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_28.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766489 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_93 run low precision: 1
+I0823 09:51:19.766492 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_28.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766495 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_94 run low precision: 1
+I0823 09:51:19.766497 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_82.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766500 54709 auto_mixed_precision_pass.cc:870] process op: relu_95 run low precision: 0
+I0823 09:51:19.766502 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_29.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766515 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_96 run low precision: 1
+I0823 09:51:19.766525 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_29.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766530 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_97 run low precision: 1
+I0823 09:51:19.766532 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_83.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766535 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_98 run low precision: 1
+I0823 09:51:19.766537 54709 auto_mixed_precision_pass.cc:883] process var: relu_7.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766541 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_30.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766543 54709 auto_mixed_precision_pass.cc:870] process op: relu_99 run low precision: 0
+I0823 09:51:19.766546 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_8 with type ::paddle::platform::float16
+I0823 09:51:19.766558 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_100 run low precision: 1
+I0823 09:51:19.766561 54709 auto_mixed_precision_pass.cc:883] process var: relu_8.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766564 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_101 run low precision: 1
+I0823 09:51:19.766567 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_84.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766570 54709 auto_mixed_precision_pass.cc:870] process op: relu_102 run low precision: 0
+I0823 09:51:19.766572 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_31.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766584 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_103 run low precision: 1
+I0823 09:51:19.766587 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_31.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766590 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_104 run low precision: 1
+I0823 09:51:19.766593 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_85.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766597 54709 auto_mixed_precision_pass.cc:870] process op: relu_105 run low precision: 0
+I0823 09:51:19.766598 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_32.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766610 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_106 run low precision: 1
+I0823 09:51:19.766613 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_32.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766619 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_107 run low precision: 1
+I0823 09:51:19.766623 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_86.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766625 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_108 run low precision: 1
+I0823 09:51:19.766628 54709 auto_mixed_precision_pass.cc:883] process var: relu_8.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766630 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_33.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766633 54709 auto_mixed_precision_pass.cc:870] process op: relu_109 run low precision: 0
+I0823 09:51:19.766635 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_9 with type ::paddle::platform::float16
+I0823 09:51:19.766649 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_110 run low precision: 1
+I0823 09:51:19.766651 54709 auto_mixed_precision_pass.cc:883] process var: relu_9.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766654 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_111 run low precision: 1
+I0823 09:51:19.766657 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_87.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766660 54709 auto_mixed_precision_pass.cc:870] process op: relu_112 run low precision: 0
+I0823 09:51:19.766662 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_34.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766674 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_113 run low precision: 1
+I0823 09:51:19.766677 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_34.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766680 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_114 run low precision: 1
+I0823 09:51:19.766683 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_88.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766686 54709 auto_mixed_precision_pass.cc:870] process op: relu_115 run low precision: 0
+I0823 09:51:19.766688 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_35.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766700 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_116 run low precision: 1
+I0823 09:51:19.766703 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_35.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766706 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_117 run low precision: 1
+I0823 09:51:19.766709 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_89.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766712 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_118 run low precision: 1
+I0823 09:51:19.766714 54709 auto_mixed_precision_pass.cc:883] process var: relu_9.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766717 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_36.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766719 54709 auto_mixed_precision_pass.cc:870] process op: relu_119 run low precision: 0
+I0823 09:51:19.766722 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_10 with type ::paddle::platform::float16
+I0823 09:51:19.766736 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_120 run low precision: 1
+I0823 09:51:19.766738 54709 auto_mixed_precision_pass.cc:883] process var: relu_10.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766741 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_121 run low precision: 1
+I0823 09:51:19.766743 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_90.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766746 54709 auto_mixed_precision_pass.cc:870] process op: relu_122 run low precision: 0
+I0823 09:51:19.766749 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_37.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766768 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_123 run low precision: 1
+I0823 09:51:19.766772 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_37.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766774 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_124 run low precision: 1
+I0823 09:51:19.766777 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_91.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766780 54709 auto_mixed_precision_pass.cc:870] process op: relu_125 run low precision: 0
+I0823 09:51:19.766782 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_38.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766795 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_126 run low precision: 1
+I0823 09:51:19.766798 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_38.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766803 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_127 run low precision: 1
+I0823 09:51:19.766804 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_92.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766808 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_128 run low precision: 1
+I0823 09:51:19.766810 54709 auto_mixed_precision_pass.cc:883] process var: relu_10.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766813 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_39.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766815 54709 auto_mixed_precision_pass.cc:870] process op: relu_129 run low precision: 0
+I0823 09:51:19.766819 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_11 with type ::paddle::platform::float16
+I0823 09:51:19.766831 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_130 run low precision: 1
+I0823 09:51:19.766835 54709 auto_mixed_precision_pass.cc:883] process var: relu_11.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766839 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_131 run low precision: 1
+I0823 09:51:19.766840 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_93.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766844 54709 auto_mixed_precision_pass.cc:870] process op: relu_132 run low precision: 0
+I0823 09:51:19.766846 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_40.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766857 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_133 run low precision: 1
+I0823 09:51:19.766861 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_40.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766865 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_134 run low precision: 1
+I0823 09:51:19.766866 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_94.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766870 54709 auto_mixed_precision_pass.cc:870] process op: relu_135 run low precision: 0
+I0823 09:51:19.766872 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_41.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766885 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_136 run low precision: 1
+I0823 09:51:19.766887 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_41.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766891 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_137 run low precision: 1
+I0823 09:51:19.766893 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_95.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766896 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_138 run low precision: 1
+I0823 09:51:19.766898 54709 auto_mixed_precision_pass.cc:883] process var: relu_11.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766901 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_42.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766903 54709 auto_mixed_precision_pass.cc:870] process op: relu_139 run low precision: 0
+I0823 09:51:19.766909 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_12 with type ::paddle::platform::float16
+I0823 09:51:19.766921 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_140 run low precision: 1
+I0823 09:51:19.766924 54709 auto_mixed_precision_pass.cc:883] process var: relu_12.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766927 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_141 run low precision: 1
+I0823 09:51:19.766930 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_96.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766933 54709 auto_mixed_precision_pass.cc:870] process op: relu_142 run low precision: 0
+I0823 09:51:19.766935 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_43.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766947 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_143 run low precision: 1
+I0823 09:51:19.766950 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_43.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766953 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_144 run low precision: 1
+I0823 09:51:19.766956 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_97.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766958 54709 auto_mixed_precision_pass.cc:870] process op: relu_145 run low precision: 0
+I0823 09:51:19.766961 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_44.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.766973 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_146 run low precision: 1
+I0823 09:51:19.766976 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_44.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.766979 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_147 run low precision: 1
+I0823 09:51:19.766981 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_98.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766984 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_148 run low precision: 1
+I0823 09:51:19.766988 54709 auto_mixed_precision_pass.cc:883] process var: relu_12.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766989 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_149 run low precision: 1
+I0823 09:51:19.766992 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_99.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.766995 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_150 run low precision: 1
+I0823 09:51:19.766999 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_46.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.767000 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_45.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.767004 54709 auto_mixed_precision_pass.cc:870] process op: relu_151 run low precision: 0
+I0823 09:51:19.767006 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_13 with type ::paddle::platform::float16
+I0823 09:51:19.767017 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_152 run low precision: 1
+I0823 09:51:19.767021 54709 auto_mixed_precision_pass.cc:883] process var: relu_13.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767024 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_153 run low precision: 1
+I0823 09:51:19.767026 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_100.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767030 54709 auto_mixed_precision_pass.cc:870] process op: relu_154 run low precision: 0
+I0823 09:51:19.767032 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_47.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.767043 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_155 run low precision: 1
+I0823 09:51:19.767047 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_47.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.767055 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_156 run low precision: 1
+I0823 09:51:19.767056 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_101.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767060 54709 auto_mixed_precision_pass.cc:870] process op: relu_157 run low precision: 0
+I0823 09:51:19.767061 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_48.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.767074 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_158 run low precision: 1
+I0823 09:51:19.767077 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_48.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.767081 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_159 run low precision: 1
+I0823 09:51:19.767082 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_102.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767086 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_160 run low precision: 1
+I0823 09:51:19.767088 54709 auto_mixed_precision_pass.cc:883] process var: relu_13.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767091 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_49.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.767093 54709 auto_mixed_precision_pass.cc:870] process op: relu_161 run low precision: 0
+I0823 09:51:19.767096 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_14 with type ::paddle::platform::float16
+I0823 09:51:19.767107 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_162 run low precision: 1
+I0823 09:51:19.767112 54709 auto_mixed_precision_pass.cc:883] process var: relu_14.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767114 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_163 run low precision: 1
+I0823 09:51:19.767117 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_103.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767119 54709 auto_mixed_precision_pass.cc:870] process op: relu_164 run low precision: 0
+I0823 09:51:19.767122 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_50.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.767134 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_165 run low precision: 1
+I0823 09:51:19.767138 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_50.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.767140 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_166 run low precision: 1
+I0823 09:51:19.767143 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_104.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767146 54709 auto_mixed_precision_pass.cc:870] process op: relu_167 run low precision: 0
+I0823 09:51:19.767148 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_51.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.767160 54709 auto_mixed_precision_pass.cc:870] process op: conv2d_168 run low precision: 1
+I0823 09:51:19.767163 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_51.tmp_3 with type ::paddle::platform::float16
+I0823 09:51:19.767166 54709 auto_mixed_precision_pass.cc:870] process op: batch_norm_169 run low precision: 1
+I0823 09:51:19.767168 54709 auto_mixed_precision_pass.cc:883] process var: conv2d_105.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767171 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_170 run low precision: 1
+I0823 09:51:19.767174 54709 auto_mixed_precision_pass.cc:883] process var: relu_14.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767176 54709 auto_mixed_precision_pass.cc:883] process var: batch_norm_52.tmp_2 with type ::paddle::platform::float16
+I0823 09:51:19.767179 54709 auto_mixed_precision_pass.cc:870] process op: relu_171 run low precision: 0
+I0823 09:51:19.767182 54709 auto_mixed_precision_pass.cc:883] process var: elementwise_add_15 with type ::paddle::platform::float16
+I0823 09:51:19.767197 54709 auto_mixed_precision_pass.cc:870] process op: pool2d_172 run low precision: 1
+I0823 09:51:19.767201 54709 auto_mixed_precision_pass.cc:883] process var: relu_15.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767203 54709 auto_mixed_precision_pass.cc:870] process op: reshape2_173 run low precision: 1
+I0823 09:51:19.767206 54709 auto_mixed_precision_pass.cc:883] process var: pool2d_1.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767210 54709 auto_mixed_precision_pass.cc:870] process op: matmul_174 run low precision: 1
+I0823 09:51:19.767211 54709 auto_mixed_precision_pass.cc:883] process var: reshape2_0.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767215 54709 auto_mixed_precision_pass.cc:870] process op: elementwise_add_175 run low precision: 1
+I0823 09:51:19.767217 54709 auto_mixed_precision_pass.cc:883] process var: linear_1.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767220 54709 auto_mixed_precision_pass.cc:870] process op: softmax_176 run low precision: 1
+I0823 09:51:19.767223 54709 auto_mixed_precision_pass.cc:883] process var: linear_1.tmp_1 with type ::paddle::platform::float16
+I0823 09:51:19.767226 54709 auto_mixed_precision_pass.cc:870] process op: scale_177 run low precision: 1
+I0823 09:51:19.767228 54709 auto_mixed_precision_pass.cc:883] process var: softmax_0.tmp_0 with type ::paddle::platform::float16
+I0823 09:51:19.767231 54709 auto_mixed_precision_pass.cc:870] process op: fetch run low precision: 1
+I0823 09:51:19.767235 54709 auto_mixed_precision_pass.cc:883] process var: save_infer_model/scale_0.tmp_1 with type ::paddle::platform::float16
+I0823 09:51:19.767237 54709 auto_mixed_precision_pass.cc:940] insert number of cast op: 49
+I0823 09:51:19.767241 54709 auto_mixed_precision_pass.cc:306] InsertCastOp done
+I0823 09:51:19.767257 54709 auto_mixed_precision_pass.cc:337] restore op type: feed ---> feed
+I0823 09:51:19.767261 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_0 ---> conv2d
+I0823 09:51:19.767263 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_1 ---> batch_norm
+I0823 09:51:19.767287 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_2 ---> relu
+I0823 09:51:19.767289 54709 auto_mixed_precision_pass.cc:337] restore op type: pool2d_3 ---> pool2d
+I0823 09:51:19.767292 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_4 ---> conv2d
+I0823 09:51:19.767294 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_5 ---> batch_norm
+I0823 09:51:19.767318 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_6 ---> relu
+I0823 09:51:19.767320 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_7 ---> conv2d
+I0823 09:51:19.767323 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_8 ---> batch_norm
+I0823 09:51:19.767344 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_9 ---> relu
+I0823 09:51:19.767347 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_10 ---> conv2d
+I0823 09:51:19.767349 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_11 ---> batch_norm
+I0823 09:51:19.767352 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_12 ---> conv2d
+I0823 09:51:19.767354 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_13 ---> batch_norm
+I0823 09:51:19.767357 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_14 ---> elementwise_add
+I0823 09:51:19.767376 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_15 ---> relu
+I0823 09:51:19.767378 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_16 ---> conv2d
+I0823 09:51:19.767381 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_17 ---> batch_norm
+I0823 09:51:19.767403 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_18 ---> relu
+I0823 09:51:19.767406 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_19 ---> conv2d
+I0823 09:51:19.767408 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_20 ---> batch_norm
+I0823 09:51:19.767431 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_21 ---> relu
+I0823 09:51:19.767434 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_22 ---> conv2d
+I0823 09:51:19.767436 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_23 ---> batch_norm
+I0823 09:51:19.767439 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_24 ---> elementwise_add
+I0823 09:51:19.767457 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_25 ---> relu
+I0823 09:51:19.767460 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_26 ---> conv2d
+I0823 09:51:19.767462 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_27 ---> batch_norm
+I0823 09:51:19.767483 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_28 ---> relu
+I0823 09:51:19.767485 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_29 ---> conv2d
+I0823 09:51:19.767488 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_30 ---> batch_norm
+I0823 09:51:19.767506 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_31 ---> relu
+I0823 09:51:19.767509 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_32 ---> conv2d
+I0823 09:51:19.767511 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_33 ---> batch_norm
+I0823 09:51:19.767514 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_34 ---> elementwise_add
+I0823 09:51:19.767540 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_35 ---> relu
+I0823 09:51:19.767544 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_36 ---> conv2d
+I0823 09:51:19.767546 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_37 ---> batch_norm
+I0823 09:51:19.767566 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_38 ---> relu
+I0823 09:51:19.767570 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_39 ---> conv2d
+I0823 09:51:19.767571 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_40 ---> batch_norm
+I0823 09:51:19.767590 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_41 ---> relu
+I0823 09:51:19.767593 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_42 ---> conv2d
+I0823 09:51:19.767596 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_43 ---> batch_norm
+I0823 09:51:19.767598 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_44 ---> conv2d
+I0823 09:51:19.767601 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_45 ---> batch_norm
+I0823 09:51:19.767603 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_46 ---> elementwise_add
+I0823 09:51:19.767621 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_47 ---> relu
+I0823 09:51:19.767624 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_48 ---> conv2d
+I0823 09:51:19.767627 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_49 ---> batch_norm
+I0823 09:51:19.767647 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_50 ---> relu
+I0823 09:51:19.767649 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_51 ---> conv2d
+I0823 09:51:19.767652 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_52 ---> batch_norm
+I0823 09:51:19.767670 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_53 ---> relu
+I0823 09:51:19.767673 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_54 ---> conv2d
+I0823 09:51:19.767676 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_55 ---> batch_norm
+I0823 09:51:19.767678 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_56 ---> elementwise_add
+I0823 09:51:19.767695 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_57 ---> relu
+I0823 09:51:19.767699 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_58 ---> conv2d
+I0823 09:51:19.767701 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_59 ---> batch_norm
+I0823 09:51:19.767724 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_60 ---> relu
+I0823 09:51:19.767727 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_61 ---> conv2d
+I0823 09:51:19.767729 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_62 ---> batch_norm
+I0823 09:51:19.767750 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_63 ---> relu
+I0823 09:51:19.767752 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_64 ---> conv2d
+I0823 09:51:19.767755 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_65 ---> batch_norm
+I0823 09:51:19.767757 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_66 ---> elementwise_add
+I0823 09:51:19.767774 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_67 ---> relu
+I0823 09:51:19.767777 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_68 ---> conv2d
+I0823 09:51:19.767779 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_69 ---> batch_norm
+I0823 09:51:19.767800 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_70 ---> relu
+I0823 09:51:19.767802 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_71 ---> conv2d
+I0823 09:51:19.767805 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_72 ---> batch_norm
+I0823 09:51:19.767823 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_73 ---> relu
+I0823 09:51:19.767827 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_74 ---> conv2d
+I0823 09:51:19.767829 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_75 ---> batch_norm
+I0823 09:51:19.767832 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_76 ---> elementwise_add
+I0823 09:51:19.767848 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_77 ---> relu
+I0823 09:51:19.767850 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_78 ---> conv2d
+I0823 09:51:19.767853 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_79 ---> batch_norm
+I0823 09:51:19.767872 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_80 ---> relu
+I0823 09:51:19.767875 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_81 ---> conv2d
+I0823 09:51:19.767879 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_82 ---> batch_norm
+I0823 09:51:19.767897 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_83 ---> relu
+I0823 09:51:19.767900 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_84 ---> conv2d
+I0823 09:51:19.767902 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_85 ---> batch_norm
+I0823 09:51:19.767905 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_86 ---> conv2d
+I0823 09:51:19.767907 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_87 ---> batch_norm
+I0823 09:51:19.767910 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_88 ---> elementwise_add
+I0823 09:51:19.767926 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_89 ---> relu
+I0823 09:51:19.767930 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_90 ---> conv2d
+I0823 09:51:19.767931 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_91 ---> batch_norm
+I0823 09:51:19.767951 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_92 ---> relu
+I0823 09:51:19.767952 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_93 ---> conv2d
+I0823 09:51:19.767956 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_94 ---> batch_norm
+I0823 09:51:19.767974 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_95 ---> relu
+I0823 09:51:19.767976 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_96 ---> conv2d
+I0823 09:51:19.767979 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_97 ---> batch_norm
+I0823 09:51:19.767982 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_98 ---> elementwise_add
+I0823 09:51:19.767999 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_99 ---> relu
+I0823 09:51:19.768004 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_100 ---> conv2d
+I0823 09:51:19.768007 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_101 ---> batch_norm
+I0823 09:51:19.768025 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_102 ---> relu
+I0823 09:51:19.768028 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_103 ---> conv2d
+I0823 09:51:19.768030 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_104 ---> batch_norm
+I0823 09:51:19.768049 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_105 ---> relu
+I0823 09:51:19.768051 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_106 ---> conv2d
+I0823 09:51:19.768054 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_107 ---> batch_norm
+I0823 09:51:19.768056 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_108 ---> elementwise_add
+I0823 09:51:19.768074 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_109 ---> relu
+I0823 09:51:19.768076 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_110 ---> conv2d
+I0823 09:51:19.768079 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_111 ---> batch_norm
+I0823 09:51:19.768098 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_112 ---> relu
+I0823 09:51:19.768100 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_113 ---> conv2d
+I0823 09:51:19.768103 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_114 ---> batch_norm
+I0823 09:51:19.768123 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_115 ---> relu
+I0823 09:51:19.768126 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_116 ---> conv2d
+I0823 09:51:19.768128 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_117 ---> batch_norm
+I0823 09:51:19.768131 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_118 ---> elementwise_add
+I0823 09:51:19.768146 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_119 ---> relu
+I0823 09:51:19.768149 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_120 ---> conv2d
+I0823 09:51:19.768152 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_121 ---> batch_norm
+I0823 09:51:19.768170 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_122 ---> relu
+I0823 09:51:19.768173 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_123 ---> conv2d
+I0823 09:51:19.768177 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_124 ---> batch_norm
+I0823 09:51:19.768195 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_125 ---> relu
+I0823 09:51:19.768198 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_126 ---> conv2d
+I0823 09:51:19.768200 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_127 ---> batch_norm
+I0823 09:51:19.768203 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_128 ---> elementwise_add
+I0823 09:51:19.768220 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_129 ---> relu
+I0823 09:51:19.768224 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_130 ---> conv2d
+I0823 09:51:19.768225 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_131 ---> batch_norm
+I0823 09:51:19.768244 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_132 ---> relu
+I0823 09:51:19.768247 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_133 ---> conv2d
+I0823 09:51:19.768249 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_134 ---> batch_norm
+I0823 09:51:19.768268 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_135 ---> relu
+I0823 09:51:19.768271 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_136 ---> conv2d
+I0823 09:51:19.768273 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_137 ---> batch_norm
+I0823 09:51:19.768276 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_138 ---> elementwise_add
+I0823 09:51:19.768296 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_139 ---> relu
+I0823 09:51:19.768298 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_140 ---> conv2d
+I0823 09:51:19.768301 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_141 ---> batch_norm
+I0823 09:51:19.768321 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_142 ---> relu
+I0823 09:51:19.768322 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_143 ---> conv2d
+I0823 09:51:19.768325 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_144 ---> batch_norm
+I0823 09:51:19.768344 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_145 ---> relu
+I0823 09:51:19.768347 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_146 ---> conv2d
+I0823 09:51:19.768349 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_147 ---> batch_norm
+I0823 09:51:19.768352 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_148 ---> conv2d
+I0823 09:51:19.768354 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_149 ---> batch_norm
+I0823 09:51:19.768357 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_150 ---> elementwise_add
+I0823 09:51:19.768374 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_151 ---> relu
+I0823 09:51:19.768378 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_152 ---> conv2d
+I0823 09:51:19.768379 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_153 ---> batch_norm
+I0823 09:51:19.768399 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_154 ---> relu
+I0823 09:51:19.768400 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_155 ---> conv2d
+I0823 09:51:19.768404 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_156 ---> batch_norm
+I0823 09:51:19.768422 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_157 ---> relu
+I0823 09:51:19.768425 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_158 ---> conv2d
+I0823 09:51:19.768427 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_159 ---> batch_norm
+I0823 09:51:19.768430 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_160 ---> elementwise_add
+I0823 09:51:19.768446 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_161 ---> relu
+I0823 09:51:19.768450 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_162 ---> conv2d
+I0823 09:51:19.768452 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_163 ---> batch_norm
+I0823 09:51:19.768471 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_164 ---> relu
+I0823 09:51:19.768473 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_165 ---> conv2d
+I0823 09:51:19.768476 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_166 ---> batch_norm
+I0823 09:51:19.768496 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_167 ---> relu
+I0823 09:51:19.768498 54709 auto_mixed_precision_pass.cc:337] restore op type: conv2d_168 ---> conv2d
+I0823 09:51:19.768500 54709 auto_mixed_precision_pass.cc:337] restore op type: batch_norm_169 ---> batch_norm
+I0823 09:51:19.768503 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_170 ---> elementwise_add
+I0823 09:51:19.768560 54709 auto_mixed_precision_pass.cc:337] restore op type: relu_171 ---> relu
+I0823 09:51:19.768564 54709 auto_mixed_precision_pass.cc:337] restore op type: pool2d_172 ---> pool2d
+I0823 09:51:19.768566 54709 auto_mixed_precision_pass.cc:337] restore op type: reshape2_173 ---> reshape2
+I0823 09:51:19.768569 54709 auto_mixed_precision_pass.cc:337] restore op type: matmul_174 ---> matmul
+I0823 09:51:19.768571 54709 auto_mixed_precision_pass.cc:337] restore op type: elementwise_add_175 ---> elementwise_add
+I0823 09:51:19.768574 54709 auto_mixed_precision_pass.cc:337] restore op type: softmax_176 ---> softmax
+I0823 09:51:19.768576 54709 auto_mixed_precision_pass.cc:337] restore op type: scale_177 ---> scale
+I0823 09:51:19.768594 54709 auto_mixed_precision_pass.cc:337] restore op type: fetch ---> fetch
+I0823 09:51:19.768599 54709 auto_mixed_precision_pass.cc:308] RestoreOpOriginType done
+I0823 09:51:19.768600 54709 auto_mixed_precision_pass.cc:309] The number of ops run at low precision [131/180]
