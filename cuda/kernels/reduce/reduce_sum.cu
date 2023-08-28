@@ -128,7 +128,7 @@ __global__ void reduceSumOnGPU_V4(const DATA_TYPE* d_x,
                                   const int N) {
   const int idx = threadIdx.x + blockDim.x * blockIdx.x;
   DATA_TYPE val = idx < N ? d_x[idx] : 0.0;
-  val = blockReduce<DATA_TYPE, SumOp>(val);
+  val = blockReduce<DATA_TYPE, AddOp>(val);
   if (threadIdx.x == 0) {
     atomicAdd(d_y, val);
   }
@@ -150,7 +150,7 @@ __global__ void reduceSumOnGPU_V5(const DATA_TYPE* d_x,
     // val += d_x[idx + 2 * blockDim.x];
     // val += d_x[idx + 3 * blockDim.x];
   }
-  val = blockReduce<DATA_TYPE, SumOp>(val);
+  val = blockReduce<DATA_TYPE, AddOp>(val);
   if (threadIdx.x == 0) {
     atomicAdd(d_y, val);
   }
@@ -169,7 +169,7 @@ __global__ void reduceSumOnGPU_V6(const DATA_TYPE* d_x,
     val += d_x[idx];
     idx += stride;
   }
-  val = blockReduce<DATA_TYPE, SumOp>(val);
+  val = blockReduce<DATA_TYPE, AddOp>(val);
 
   if (threadIdx.x == 0) {
     d_y[blockIdx.x] = val;

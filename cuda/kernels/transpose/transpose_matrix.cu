@@ -35,7 +35,7 @@ void transposeMatrixOnCPU(const DATA_TYPE* A,
   }
 }
 
-// Copy matrix A to B of size (M x N) as row
+// Copy matrix A(M x N) to B(N x M) as row
 __global__ void matrixCopyRow(const DATA_TYPE* A,
                               DATA_TYPE* B,
                               const uint32_t M,
@@ -48,7 +48,7 @@ __global__ void matrixCopyRow(const DATA_TYPE* A,
   }
 }
 
-// Copy matrix A to B of size (M x N) as col
+// Copy matrix A(M x N) to B(N x M) as col
 __global__ void matrixCopyCol(const DATA_TYPE* A,
                               DATA_TYPE* B,
                               const uint32_t M,
@@ -61,7 +61,7 @@ __global__ void matrixCopyCol(const DATA_TYPE* A,
   }
 }
 
-// Transpose matrix A to B of size (M x N)
+// Transpose matrix A(M x N) to B(N x M)
 __global__ void transposeMatrix_V1(const DATA_TYPE* A,
                                    DATA_TYPE* B,
                                    const uint32_t M,
@@ -74,20 +74,20 @@ __global__ void transposeMatrix_V1(const DATA_TYPE* A,
   }
 }
 
-// Transpose matrix A to B of size (M x N)
+// Transpose matrix A(M x N) to B(N x M)
 __global__ void transposeMatrix_V2(const DATA_TYPE* A,
                                    DATA_TYPE* B,
                                    const uint32_t M,
                                    const uint32_t N) {
-  const int nx = threadIdx.x + blockIdx.x * kBlockDimX;
-  const int ny = threadIdx.y + blockIdx.y * kBlockDimY;
-  if (nx < N && ny < M) {
+  const int nx = threadIdx.x + blockIdx.y * kBlockDimY;
+  const int ny = threadIdx.y + blockIdx.x * kBlockDimX;
+  if (nx < M && ny < N) {
     // 写合并 读非合并
-    B[ny + nx * M] = A[nx + ny * N];
+    B[nx + ny * M] = A[ny + nx * N];
   }
 }
 
-// Transpose matrix A to B of size (M x N)
+// Transpose matrix A(M x N) to B(N x M)
 // 使用共享内存
 __global__ void transposeMatrix_V3(const DATA_TYPE* A,
                                    DATA_TYPE* B,
@@ -110,7 +110,7 @@ __global__ void transposeMatrix_V3(const DATA_TYPE* A,
   }
 }
 
-// Transpose matrix A to B of size (M x N)
+// Transpose matrix A(M x N) to B(N x M)
 // 避免共享内存的 bank conflict
 __global__ void transposeMatrix_V4(const DATA_TYPE* A,
                                    DATA_TYPE* B,
