@@ -105,7 +105,7 @@ __global__ void transposeMatrix_V3(const DATA_TYPE* A,
   nx = threadIdx.x + blockIdx.y * kBlockDimY;
   ny = threadIdx.y + blockIdx.x * kBlockDimX;
   if (nx < M && ny < N) {
-    // 写合并 读(共享内存)非合并 从而导致 bank conflict
+    // 写合并 读(共享内存)存在 bank conflict
     B[nx + ny * M] = S[threadIdx.x][threadIdx.y];
   }
 }
@@ -127,7 +127,7 @@ __global__ void transposeMatrix_V4(const DATA_TYPE* A,
   nx = threadIdx.x + blockIdx.y * kBlockDimY;
   ny = threadIdx.y + blockIdx.x * kBlockDimX;
   if (nx < M && ny < N) {
-    // 写合并 读(共享内存)非合并 但 bank conflict 已被避免
+    // 写合并 读(共享内存)的 bank conflict 已被避免
     B[nx + ny * M] = S[threadIdx.x][threadIdx.y];
   }
 }
