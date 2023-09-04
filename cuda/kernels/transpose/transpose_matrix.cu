@@ -97,7 +97,7 @@ __global__ void transposeMatrix_V3(const DATA_TYPE* A,
   int nx = threadIdx.x + blockIdx.x * kBlockDimX;
   int ny = threadIdx.y + blockIdx.y * kBlockDimY;
   if (nx < N && ny < M) {
-    // 写(共享内存)合并
+    // 读合并 写(共享内存)无 bank conflict
     S[threadIdx.y][threadIdx.x] = A[nx + ny * N];
   }
   __syncthreads();

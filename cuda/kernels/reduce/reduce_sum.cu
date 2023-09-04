@@ -73,8 +73,7 @@ __global__ void reduceSumOnGPU_V2(const DATA_TYPE* d_x,
                                   const int N) {
   extern __shared__ DATA_TYPE s_y[];
   const int tid = threadIdx.x;
-  const int bid = blockIdx.x;
-  const int idx = tid + blockDim.x * bid;
+  const int idx = tid + blockDim.x * blockIdx.x;
   s_y[tid] = idx < N ? d_x[idx] : 0.0;
   __syncthreads();
 
