@@ -10,9 +10,7 @@ constexpr DATA_TYPE a = 1.23;
 
 // 数值错误
 // Add x[start...end] 左闭右闭
-DATA_TYPE reduceSumOnCPU_V1(const DATA_TYPE* x,
-                            const int start,
-                            const int end) {
+DATA_TYPE reduceSumOnCPU_V1(const DATA_TYPE* x, int start, int end) {
   DATA_TYPE sum{0.0};
   for (int i = start; i <= end; i++) {
     // 大数加小数
@@ -23,12 +21,10 @@ DATA_TYPE reduceSumOnCPU_V1(const DATA_TYPE* x,
 
 // 数值正确 不修改原数组
 // Add x[start...end] 左闭右闭
-DATA_TYPE reduceSumOnCPU_V2(const DATA_TYPE* x,
-                            const int start,
-                            const int end) {
+DATA_TYPE reduceSumOnCPU_V2(const DATA_TYPE* x, int start, int end) {
   if (start > end) return DATA_TYPE{};
   if (start == end) return x[start];
-  const int p = (start + end) / 2;
+  int p = (start + end) / 2;
   // 递归
   return reduceSumOnCPU_V2(x, start, p) + reduceSumOnCPU_V2(x, p + 1, end);
 }
@@ -50,8 +46,8 @@ DATA_TYPE reduceSumOnCPU_V3(DATA_TYPE* x, int start, int end) {
 // 数值错误 要求数据个数为 kBlockSize 的整数倍 改变原数组
 // 每个 block 负责一块内存数据的 reduce
 __global__ void reduceSumOnGPU_V1(DATA_TYPE* d_x, DATA_TYPE* d_y) {
-  const int tid = threadIdx.x;
-  const int bid = blockIdx.x;
+  int tid = threadIdx.x;
+  int bid = blockIdx.x;
   DATA_TYPE* x = d_x + blockDim.x * bid;
 
   for (int offset = blockDim.x >> 1; offset > 0; offset >>= 1) {
@@ -68,12 +64,10 @@ __global__ void reduceSumOnGPU_V1(DATA_TYPE* d_x, DATA_TYPE* d_y) {
 
 // 数值错误 不要求数据个数为 kBlockSize 的整数倍 不改变原数组
 // 每个 block 负责一块内存数据 使用动态共享内存
-__global__ void reduceSumOnGPU_V2(const DATA_TYPE* d_x,
-                                  DATA_TYPE* d_y,
-                                  const int N) {
+__global__ void reduceSumOnGPU_V2(const DATA_TYPE* d_x, DATA_TYPE* d_y, int N) {
   extern __shared__ DATA_TYPE s_y[];
-  const int tid = threadIdx.x;
-  const int idx = tid + blockDim.x * blockIdx.x;
+  int tid = threadIdx.x;
+  int idx = tid + blockDim.x * blockIdx.x;
   s_y[tid] = idx < N ? d_x[idx] : 0.0;
   __syncthreads();
 
@@ -92,12 +86,10 @@ __global__ void reduceSumOnGPU_V2(const DATA_TYPE* d_x,
 // 数值错误 不要求数据个数为 kBlockSize 的整数倍 不改变原数组
 // 每个 block 负责一块内存数据 使用动态共享内存 使用 __syncwarp 替换
 // __syncthreads
-__global__ void reduceSumOnGPU_V3(const DATA_TYPE* d_x,
-                                  DATA_TYPE* d_y,
-                                  const int N) {
+__global__ void reduceSumOnGPU_V3(const DATA_TYPE* d_x, DATA_TYPE* d_y, int N) {
   extern __shared__ DATA_TYPE s_y[];
-  const int tid = threadIdx.x;
-  const int idx = tid + blockDim.x * blockIdx.x;
+  int tid = threadIdx.x;
+  int idx = tid + blockDim.x * blockIdx.x;
   s_y[tid] = idx < N ? d_x[idx] : 0.0;
   __syncthreads();
 
@@ -122,10 +114,8 @@ __global__ void reduceSumOnGPU_V3(const DATA_TYPE* d_x,
 
 // 数值错误 不要求数据个数为 kBlockSize 的整数倍 不改变原数组
 // 每个 block 负责一块内存数据的 reduce 调用 block reduce function
-__global__ void reduceSumOnGPU_V4(const DATA_TYPE* d_x,
-                                  DATA_TYPE* d_y,
-                                  const int N) {
-  const int idx = threadIdx.x + blockDim.x * blockIdx.x;
+__global__ void reduceSumOnGPU_V4(const DATA_TYPE* d_x, DATA_TYPE* d_y, int N) {
+  int idx = threadIdx.x + blockDim.x * blockIdx.x;
   DATA_TYPE val = idx < N ? d_x[idx] : 0.0;
   val = blockReduce<DATA_TYPE, AddOp>(val);
   if (threadIdx.x == 0) {
@@ -136,10 +126,8 @@ __global__ void reduceSumOnGPU_V4(const DATA_TYPE* d_x,
 // 此 kernel 的计算结果似乎有问题 但没想明白哪里的问题 待定!!!
 // 数值错误 不要求数据个数为 kBlockSize 的整数倍 不改变原数组
 // 每个 block 负责连续的两块内存数据的 reduce 调用 block reduce function
-__global__ void reduceSumOnGPU_V5(const DATA_TYPE* d_x,
-                                  DATA_TYPE* d_y,
-                                  const int N) {
-  const int idx = threadIdx.x + 2 * blockDim.x * blockIdx.x;
+__global__ void reduceSumOnGPU_V5(const DATA_TYPE* d_x, DATA_TYPE* d_y, int N) {
+  int idx = threadIdx.x + 2 * blockDim.x * blockIdx.x;
   DATA_TYPE val = 0.0;
   if (idx < N) {
     val += d_x[idx];
@@ -158,11 +146,9 @@ __global__ void reduceSumOnGPU_V5(const DATA_TYPE* d_x,
 // 数值正确 需二次 reduce 不要求数据个数为 kBlockSize 的整数倍 不改变原数组
 // 每个 block 负责不连续的多块内存数据的 reduce 其中每个线程负责跨度为整个 grid
 // 的内存 调用 warp/block reduce function
-__global__ void reduceSumOnGPU_V6(const DATA_TYPE* d_x,
-                                  DATA_TYPE* d_y,
-                                  const int N) {
+__global__ void reduceSumOnGPU_V6(const DATA_TYPE* d_x, DATA_TYPE* d_y, int N) {
   DATA_TYPE val = 0.0;
-  const int stride = gridDim.x * blockDim.x;
+  int stride = gridDim.x * blockDim.x;
   int idx = blockIdx.x * blockDim.x + threadIdx.x;
   while (idx < N) {
     val += d_x[idx];

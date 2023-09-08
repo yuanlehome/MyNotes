@@ -9,14 +9,10 @@ constexpr int kTileDim = 32;
 // Naive solution as baseline
 // block(kTileDim, kTileDim)
 // grid(N / kTileDim, M / kTileDim)
-__global__ void matrixMultiplyKernel_V1(const float* A,
-                                        const float* B,
-                                        float* C,
-                                        const int M,
-                                        const int N,
-                                        const int K) {
-  const int col = threadIdx.x + blockIdx.x * blockDim.x;
-  const int row = threadIdx.y + blockIdx.y * blockDim.y;
+__global__ void matrixMultiplyKernel_V1(
+    const float* A, const float* B, float* C, int M, int N, int K) {
+  int col = threadIdx.x + blockIdx.x * blockDim.x;
+  int row = threadIdx.y + blockIdx.y * blockDim.y;
 
   if (col < N && row < M) {
     float sum = 0.0;
@@ -30,16 +26,12 @@ __global__ void matrixMultiplyKernel_V1(const float* A,
 // Use shared memory
 // block(kTileDim, kTileDim)
 // grid(N / kTileDim, M / kTileDim)
-__global__ void matrixMultiplyKernel_V2(const float* A,
-                                        const float* B,
-                                        float* C,
-                                        const int M,
-                                        const int N,
-                                        const int K) {
+__global__ void matrixMultiplyKernel_V2(
+    const float* A, const float* B, float* C, int M, int N, int K) {
   __shared__ float s_a[kTileDim][kTileDim];
   __shared__ float s_b[kTileDim][kTileDim + 1];
-  const int col = threadIdx.x + blockIdx.x * blockDim.x;
-  const int row = threadIdx.y + blockIdx.y * blockDim.y;
+  int col = threadIdx.x + blockIdx.x * blockDim.x;
+  int row = threadIdx.y + blockIdx.y * blockDim.y;
 
   if (col < N && row < M) {
     float sum = 0.0;

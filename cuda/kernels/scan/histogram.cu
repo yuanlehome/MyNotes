@@ -24,7 +24,7 @@ __global__ void histOnGPU_V2(const int8_t* d_h, int* d_hist, const int N) {
   s_hist[threadIdx.x] = 0;
   __syncthreads();
 
-  const uint32_t idx = threadIdx.x + blockDim.x * blockIdx.x;
+  uint32_t idx = threadIdx.x + blockDim.x * blockIdx.x;
   if (idx < N) {
     atomicAdd(&s_hist[d_h[idx]], 1);
   }
@@ -38,7 +38,7 @@ __global__ void histOnGPU_V3(const int8_t* d_h, int* d_hist, const int N) {
   __syncthreads();
 
   uint32_t idx = threadIdx.x + blockDim.x * blockIdx.x;
-  const uint32_t stride = gridDim.x * blockDim.x;
+  uint32_t stride = gridDim.x * blockDim.x;
   while (idx < N) {
     atomicAdd(&s_hist[d_h[idx]], 1);
     idx += stride;
