@@ -1,5 +1,3 @@
-#include "dbg.h"
-
 #include "common.h"
 #include "kernel_caller_declare.h"
 #include "kernel_utils.cu.h"
@@ -178,7 +176,7 @@ void reduceSum() {
   //   cpu_timer.stop();
   //   total_time += cpu_timer.elapsedTime();
   // }
-  // dbg(sum_on_cpu);
+  // DBG(sum_on_cpu);
   // std::printf("reduceSumOnCPU_V1 cost time: %f ms\n", total_time / repeats);
 
   // total_time = 0.0;
@@ -188,7 +186,7 @@ void reduceSum() {
   //   cpu_timer.stop();
   //   total_time += cpu_timer.elapsedTime();
   // }
-  // dbg(sum_on_cpu);
+  // DBG(sum_on_cpu);
   // std::printf("reduceSumOnCPU_V2 cost time: %f ms\n", total_time / repeats);
 
   // total_time = 0.0;
@@ -199,12 +197,12 @@ void reduceSum() {
   //   total_time += cpu_timer.elapsedTime();
   //   std::fill_n(h_x, N, a);  // 恢复原数组
   // }
-  // dbg(sum_on_cpu);
+  // DBG(sum_on_cpu);
   // std::printf("reduceSumOnCPU_V3 cost time: %f ms\n", total_time / repeats);
 
   const uint32_t block_size = kBlockSize;
   const uint32_t grid_size = (N + block_size - 1) / block_size;
-  dbg(block_size, grid_size);
+  DBG(block_size, grid_size);
   dim3 block(block_size);
   dim3 grid(grid_size);
 
@@ -227,9 +225,9 @@ void reduceSum() {
     CUDA_CHECK(
         cudaMemcpy(d_x, h_x, SIZE, cudaMemcpyHostToDevice));  // 恢复原数组
   }
-  dbg(total_time, gpu_timer.totalTime());
+  DBG(total_time, gpu_timer.totalTime());
   CUDA_CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
-  dbg(y);
+  DBG(y);
   std::printf("reduceSumOnGPU_V1 cost time: %f ms\n", total_time / repeats);
 
   y = 0.0;
@@ -243,9 +241,9 @@ void reduceSum() {
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();
   }
-  dbg(total_time, gpu_timer.totalTime());
+  DBG(total_time, gpu_timer.totalTime());
   CUDA_CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
-  dbg(y);
+  DBG(y);
   std::printf("reduceSumOnGPU_V2 (dynamic shared memory) cost time: %f ms\n",
               total_time / repeats);
 
@@ -260,9 +258,9 @@ void reduceSum() {
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();
   }
-  dbg(total_time, gpu_timer.totalTime());
+  DBG(total_time, gpu_timer.totalTime());
   CUDA_CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
-  dbg(y);
+  DBG(y);
   std::printf("reduceSumOnGPU_V3 (__syncwarp) cost time: %f ms\n",
               total_time / repeats);
 
@@ -276,9 +274,9 @@ void reduceSum() {
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();
   }
-  dbg(total_time, gpu_timer.totalTime());
+  DBG(total_time, gpu_timer.totalTime());
   CUDA_CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
-  dbg(y);
+  DBG(y);
   std::printf("reduceSumOnGPU_V4 (warp/block reduce) cost time: %f ms\n",
               total_time / repeats);
 
@@ -293,9 +291,9 @@ void reduceSum() {
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();
   }
-  dbg(total_time, gpu_timer.totalTime());
+  DBG(total_time, gpu_timer.totalTime());
   CUDA_CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
-  dbg(y);
+  DBG(y);
   std::printf("reduceSumOnGPU_V5 (连续两块) cost time: %f ms\n",
               total_time / repeats);
 
@@ -313,9 +311,9 @@ void reduceSum() {
     CUDA_CHECK(
         cudaMemcpy(d_x, h_x, SIZE, cudaMemcpyHostToDevice));  // 恢复原数组
   }
-  dbg(total_time, gpu_timer.totalTime());
+  DBG(total_time, gpu_timer.totalTime());
   CUDA_CHECK(cudaMemcpy(&y, d_y, sizeof(DATA_TYPE), cudaMemcpyDeviceToHost));
-  dbg(y);
+  DBG(y);
   std::printf("reduceSumOnGPU_V6 (提高线程利用率) cost time: %f ms\n",
               total_time / repeats);
 }

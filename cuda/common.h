@@ -10,6 +10,8 @@
 
 #include <cuda_runtime_api.h>
 
+#include "dbg.h"
+
 #ifdef WITH_DOUBLE
 using DATA_TYPE = double;
 #else
@@ -20,7 +22,7 @@ constexpr size_t repeats = 10;
 
 constexpr DATA_TYPE EPSILON = 1.0e-8;
 
-#define CUDA_CHECK(call)                                \
+#define CUDA_CHECK(call)                           \
   do {                                             \
     const cudaError_t error_code = call;           \
     if (error_code != cudaSuccess) {               \

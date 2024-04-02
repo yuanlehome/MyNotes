@@ -1,8 +1,6 @@
 #include <algorithm>
 #include <cstdint>
 
-#include "dbg.h"
-
 #include "common.h"
 #include "kernel_caller_declare.h"
 #include "kernel_utils.cu.h"
@@ -63,9 +61,9 @@ void addArray() {
     cpu_timer.stop();
     total_time += cpu_timer.elapsedTime();
   }
-  dbg(total_time, cpu_timer.totalTime());
+  DBG(total_time, cpu_timer.totalTime());
   std::printf("addArrayOnCPU cost time: %f ms\n", total_time / repeats);
-  dbg(checkEqual(h_z, N, c));
+  DBG(checkEqual(h_z, N, c));
 
   GPUMallocWrapper gpu_allocator;
   DATA_TYPE* d_x = (DATA_TYPE*)gpu_allocator.allocate(SIZE);
@@ -77,7 +75,7 @@ void addArray() {
 
   const uint32_t block_size = 512;
   const uint32_t grid_size = (N + block_size - 1) / block_size;
-  dbg(block_size, grid_size);
+  DBG(block_size, grid_size);
   dim3 block(block_size);
   dim3 grid(grid_size);
 
@@ -91,7 +89,7 @@ void addArray() {
   }
   std::printf("addArrayOnGPU_V1 cost time: %f ms\n", total_time / repeats);
   CUDA_CHECK(cudaMemcpy(h_z, d_z, SIZE, cudaMemcpyDeviceToHost));
-  dbg(checkEqual(h_z, N, c));
+  DBG(checkEqual(h_z, N, c));
 
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
@@ -103,5 +101,5 @@ void addArray() {
   }
   std::printf("addArrayOnGPU_V2 cost time: %f ms\n", total_time / repeats);
   CUDA_CHECK(cudaMemcpy(h_z, d_z, SIZE, cudaMemcpyDeviceToHost));
-  dbg(checkEqual(h_z, N, c));
+  DBG(checkEqual(h_z, N, c));
 }
