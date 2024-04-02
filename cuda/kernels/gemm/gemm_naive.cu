@@ -1,5 +1,5 @@
 #include "common.h"
-#include "kernel_caller_declare.h"
+#include "all.h"
 #include "kernel_utils.cu.h"
 
 constexpr int kTileDim = 32;
@@ -45,4 +45,8 @@ __global__ void matrixMultiplyKernel_V2(
     }
     C[col + row * N] = sum;
   }
+}
+
+void gemm_naive() {
+
 }

@@ -16,8 +16,11 @@ int main(void) {
   // printHeader("from transposeMatrix", std::cout);
   // transposeMatrix();
 
-  printHeader("from reduceSum", std::cout);
-  reduceSum();
+  // printHeader("from reduceSum", std::cout);
+  // reduceSum();
+
+  printHeader("from matrixMultiply", std::cout);
+  matrixMultiply();
 
   return 0;
 }

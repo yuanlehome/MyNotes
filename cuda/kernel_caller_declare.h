@@ -9,3 +9,5 @@ void deviceQuery();
 void transposeMatrix();
 
 void reduceSum();
+
+void matrixMultiply();

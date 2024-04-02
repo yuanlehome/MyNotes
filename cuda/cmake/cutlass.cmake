@@ -1,8 +1,7 @@
 set(CUTLASS_PREFIX_DIR ${THIRD_PARTY_PATH}/cutlass)
-set(CUTLASS_INCLUDE_DIR ${CUTLASS_PREFIX_DIR}/include)
 set(CUTLASS_SOURCE_DIR ${PROJECT_SOURCE_DIR}/third_party/cutlass)
 
-include_directories(${CUTLASS_INCLUDE_DIR})
+include_directories(${CUTLASS_SOURCE_DIR}/include)
 
 set(CUTLASS_TAG v3.4.1)
 
