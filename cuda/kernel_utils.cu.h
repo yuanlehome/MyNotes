@@ -6,6 +6,8 @@ constexpr unsigned int kMask = 0xffffffff;
 constexpr unsigned int kWrapSize = 32;
 constexpr unsigned int kNumWaves = 32;
 
+#define FETCH_FLOAT4(x) (reinterpret_cast<float4*>(&(x))[0])
+
 template <typename T>
 struct AddOp {
   __device__ __forceinline__ T operator()(const T& a, const T& b) const {
@@ -39,20 +41,20 @@ __forceinline__ __device__ T warpReduce(T value) {
 template <typename T, template <typename> class BinaryOp>
 __forceinline__ __device__ T blockReduce(T value) {
   __shared__ T smem[kWrapSize];
-  const int lane = threadIdx.x % warpSize;
-  const int warp = threadIdx.x / warpSize;
+  const int lane_id = threadIdx.x % kWrapSize;
+  const int warp_id = threadIdx.x / kWrapSize;
 
   value = warpReduce<T, BinaryOp>(value);
   __syncthreads();
 
-  if (lane == 0) {
-    smem[warp] = value;
+  if (lane_id == 0) {
+    smem[warp_id] = value;
   }
   __syncthreads();
 
-  value = (threadIdx.x < blockDim.x / warpSize) ? smem[threadIdx.x] : 0;
+  value = (threadIdx.x < blockDim.x / kWrapSize) ? smem[threadIdx.x] : 0;
 
-  if (warp == 0) {
+  if (warp_id == 0) {
     value = warpReduce<T, BinaryOp>(value);
   }
 
