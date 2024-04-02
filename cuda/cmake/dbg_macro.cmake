@@ -2,7 +2,7 @@ set(DEBUG_MACRO_PREFIX_DIR ${THIRD_PARTY_PATH}/dbg_macro)
 set(DEBUG_MACRO_INSTALL_DIR ${THIRD_PARTY_PATH}/dbg_macro)
 set(DEBUG_MACRO_SOURCE_DIR ${PROJECT_SOURCE_DIR}/third_party/dbg_macro)
 
-include_directories(${DEBUG_MACRO_SOURCE_DIR}/include)
+include_directories(${DEBUG_MACRO_INSTALL_DIR}/include)
 
 add_definitions(-DDBG_MACRO_NO_WARNING)
 
