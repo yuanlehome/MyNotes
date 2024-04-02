@@ -3,4 +3,3 @@ tensorrt/python/__pycache__/
 test
 cuda/.cache/
 cuda/build
-link_favorites

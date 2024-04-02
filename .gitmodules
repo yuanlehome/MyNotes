@@ -1,3 +1,6 @@
 [submodule "cuda/third_party/dbg_macro"]
 	path = cuda/third_party/dbg_macro
 	url = https://github.com/sharkdp/dbg-macro.git
+[submodule "cuda/third_party/cutlass"]
+	path = cuda/third_party/cutlass
+	url = https://github.com/NVIDIA/cutlass.git
