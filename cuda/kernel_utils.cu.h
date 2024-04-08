@@ -5,6 +5,7 @@
 constexpr unsigned int kMask = 0xffffffff;
 constexpr unsigned int kWrapSize = 32;
 constexpr unsigned int kNumWaves = 32;
+constexpr unsigned int kBlockSize = 128;
 
 #define FETCH_FLOAT4(x) (reinterpret_cast<float4*>(&(x))[0])
 
@@ -87,4 +88,13 @@ inline uint32_t getNumBlocks(uint64_t n, uint32_t block_size) {
       1,
       std::min<uint64_t>((n + block_size - 1) / block_size,
                          sm_count * tpm / block_size * kNumWaves));
+}
+
+static __global__ void fillNKernel(DATA_TYPE* d_ptr,
+                                   size_t N,
+                                   DATA_TYPE value) {
+  int tid = blockIdx.x * blockDim.x + threadIdx.x;
+  if (tid < N) {
+    d_ptr[tid] = value;
+  }
 }

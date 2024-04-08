@@ -2,8 +2,6 @@
 #include "kernel_caller_declare.h"
 #include "kernel_utils.cu.h"
 
-constexpr int kBlockSize = 128;
-
 constexpr DATA_TYPE a = 1.23;
 
 // 数值错误

@@ -18,7 +18,7 @@ using DATA_TYPE = double;
 using DATA_TYPE = float;
 #endif
 
-constexpr size_t repeats = 10;
+constexpr size_t repeats = 50;
 
 constexpr DATA_TYPE EPSILON = 1.0e-8;
 
@@ -174,15 +174,25 @@ static bool checkEqual(const DATA_TYPE* x,
 }
 
 // Check x[i] == y[i]
-static bool checkEqual(const DATA_TYPE* x,
-                       const DATA_TYPE* y,
-                       const uint32_t N) {
+static bool checkEqual(const DATA_TYPE* x, const DATA_TYPE* y, const size_t N) {
   bool has_error = false;
   for (size_t i = 0; i < N; i++) {
+    // std::cout << "a: " << x[i] << " b: " << y[i] << std::endl;
     if (fabs(x[i] - y[i]) > EPSILON) {
       has_error = true;
       break;
     }
   }
   return !has_error;
+}
+
+static void matrixMultiplyOnCPU(
+    const float* A, const float* B, float* C, int M, int N, int K) {
+  for (int i = 0; i < M; ++i) {
+    for (int j = 0; j < N; ++j) {
+      for (int k = 0; k < K; ++k) {
+        C[i * N + j] += A[i * K + k] * B[k * N + j];
+      }
+    }
+  }
 }
