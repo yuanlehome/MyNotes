@@ -4,22 +4,22 @@
 #include "kernel_caller_declare.h"
 
 int main(void) {
-  // printHeader("from printHelloWorld", std::cout);
+  // utils::printHeader("from printHelloWorld", std::cout);
   // printHelloWorld();
 
-  // printHeader("from addArray", std::cout);
+  // utils::printHeader("from addArray", std::cout);
   // addArray();
 
-  // printHeader("from deviceQuery", std::cout);
+  // utils::printHeader("from deviceQuery", std::cout);
   // deviceQuery();
 
-  // printHeader("from transposeMatrix", std::cout);
+  // utils::printHeader("from transposeMatrix", std::cout);
   // transposeMatrix();
 
-  // printHeader("from reduceSum", std::cout);
+  // utils::printHeader("from reduceSum", std::cout);
   // reduceSum();
 
-  printHeader("from matrixMultiply", std::cout);
+  utils::printHeader("from matrixMultiply", std::cout);
   matrixMultiply();
 
   return 0;

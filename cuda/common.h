@@ -34,13 +34,6 @@ constexpr DATA_TYPE EPSILON = 1.0e-8;
     }                                              \
   } while (0)
 
-static void printHeader(const std::string& header, std::ostream& os) {
-  unsigned padding = (80 - header.size()) / 2;
-  os << "===" << std::string(73, '-') << "===\n";
-  os << std::string(padding, ' ') << header << "\n";
-  os << "===" << std::string(73, '-') << "===\n";
-}
-
 //===----------------------------------------------------------------------===//
 // MallocWrapper
 //===----------------------------------------------------------------------===//
@@ -159,6 +152,15 @@ class GPUTimer {
   cudaEvent_t stop_;
 };
 
+namespace utils {
+
+static void printHeader(const std::string& header, std::ostream& os) {
+  unsigned padding = (80 - header.size()) / 2;
+  os << "===" << std::string(73, '-') << "===\n";
+  os << std::string(padding, ' ') << header << "\n";
+  os << "===" << std::string(73, '-') << "===\n";
+}
+
 // Check x[i] == y
 static bool checkEqual(const DATA_TYPE* x,
                        const uint32_t N,
@@ -167,6 +169,8 @@ static bool checkEqual(const DATA_TYPE* x,
   for (size_t i = 0; i < N; i++) {
     if (fabs(x[i] - y) > EPSILON) {
       has_error = true;
+      std::cout << "Error[" << i << "/" << N << "]: " << x[i] << " vs " << y
+                << std::endl;
       break;
     }
   }
@@ -177,16 +181,17 @@ static bool checkEqual(const DATA_TYPE* x,
 static bool checkEqual(const DATA_TYPE* x, const DATA_TYPE* y, const size_t N) {
   bool has_error = false;
   for (size_t i = 0; i < N; i++) {
-    // std::cout << "a: " << x[i] << " b: " << y[i] << std::endl;
     if (fabs(x[i] - y[i]) > EPSILON) {
       has_error = true;
+      std::cout << "Error[" << i << "/" << N << "]: " << x[i] << " vs " << y[i]
+                << std::endl;
       break;
     }
   }
   return !has_error;
 }
 
-static void matrixMultiplyOnCPU(
+static void matrixMultiply(
     const float* A, const float* B, float* C, int M, int N, int K) {
   for (int i = 0; i < M; ++i) {
     for (int j = 0; j < N; ++j) {
@@ -196,3 +201,5 @@ static void matrixMultiplyOnCPU(
     }
   }
 }
+
+}  // namespace utils

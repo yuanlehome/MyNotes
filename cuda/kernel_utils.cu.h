@@ -62,6 +62,8 @@ __forceinline__ __device__ T blockReduce(T value) {
   return value;
 }
 
+namespace utils {
+
 /**
  * @brief Get the Number of Blocks
  *
@@ -98,3 +100,9 @@ static __global__ void fillNKernel(DATA_TYPE* d_ptr,
     d_ptr[tid] = value;
   }
 }
+
+inline void fill_n(DATA_TYPE* d_ptr, size_t N, DATA_TYPE value) {
+  fillNKernel<<<1024, (N + 1024 - 1) / 1024>>>(d_ptr, N, value);
+}
+
+}  // namespace utils

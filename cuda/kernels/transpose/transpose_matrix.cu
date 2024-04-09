@@ -173,7 +173,7 @@ void transposeMatrix() {
   dbg(total_time, gpu_timer.totalTime());
   std::printf("matrixCopyRow cost time: %f ms\n", total_time / repeats);
   CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
-  dbg(checkEqual(h_x, h_y, M * N));
+  dbg(utils::checkEqual(h_x, h_y, M * N));
 
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
@@ -185,7 +185,7 @@ void transposeMatrix() {
   dbg(total_time, gpu_timer.totalTime());
   std::printf("matrixCopyCol cost time: %f ms\n", total_time / repeats);
   CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
-  dbg(checkEqual(h_x, h_y, M * N));
+  dbg(utils::checkEqual(h_x, h_y, M * N));
 
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
@@ -197,7 +197,7 @@ void transposeMatrix() {
   dbg(total_time, gpu_timer.totalTime());
   std::printf("transposeMatrix_V1 cost time: %f ms\n", total_time / repeats);
   CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
-  dbg(checkEqual(h_y_base, h_y, M * N));
+  dbg(utils::checkEqual(h_y_base, h_y, M * N));
 
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
@@ -209,7 +209,7 @@ void transposeMatrix() {
   dbg(total_time, gpu_timer.totalTime());
   std::printf("transposeMatrix_V2 cost time: %f ms\n", total_time / repeats);
   CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
-  dbg(checkEqual(h_y_base, h_y, M * N));
+  dbg(utils::checkEqual(h_y_base, h_y, M * N));
 
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
@@ -221,7 +221,7 @@ void transposeMatrix() {
   dbg(total_time, gpu_timer.totalTime());
   std::printf("transposeMatrix_V3 cost time: %f ms\n", total_time / repeats);
   CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
-  dbg(checkEqual(h_y_base, h_y, M * N));
+  dbg(utils::checkEqual(h_y_base, h_y, M * N));
 
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
@@ -234,5 +234,5 @@ void transposeMatrix() {
   std::printf("transposeMatrix_V4 cost time: %f ms\n", total_time / repeats);
 
   CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
-  dbg(checkEqual(h_y_base, h_y, M * N));
+  dbg(utils::checkEqual(h_y_base, h_y, M * N));
 }

@@ -6,7 +6,7 @@ constexpr int kTileDim = 32;
 
 // Naive solution as baseline
 // block(kTileDim, kTileDim)
-// grid(N / kTileDim, M / kTileDim)
+// grid(M / kTileDim, N / kTileDim)
 __global__ void matrixMultiplyKernel_V1(
     const float* A, const float* B, float* C, int M, int N, int K) {
   int col = threadIdx.x + blockIdx.x * blockDim.x;
@@ -23,7 +23,7 @@ __global__ void matrixMultiplyKernel_V1(
 
 // Use shared memory
 // block(kTileDim, kTileDim)
-// grid(N / kTileDim, M / kTileDim)
+// grid(M / kTileDim, N / kTileDim)
 __global__ void matrixMultiplyKernel_V2(
     const float* A, const float* B, float* C, int M, int N, int K) {
   __shared__ float s_a[kTileDim][kTileDim];
@@ -49,8 +49,9 @@ __global__ void matrixMultiplyKernel_V2(
 
 void gemm_naive() {
   constexpr uint32_t M = 1024;
-  constexpr uint32_t N = 2048;
+  constexpr uint32_t N = 1024;
   constexpr uint32_t K = 512;
+  dbg(M, N, K);
 
   constexpr uint32_t A_SIZE = sizeof(DATA_TYPE) * M * K;
   constexpr uint32_t B_SIZE = sizeof(DATA_TYPE) * K * N;
@@ -70,42 +71,41 @@ void gemm_naive() {
   DATA_TYPE* d_c = (DATA_TYPE*)gpu_allocator.allocate(C_SIZE);
   CUDA_CHECK(cudaMemcpy(d_a, h_a, A_SIZE, cudaMemcpyHostToDevice));
   CUDA_CHECK(cudaMemcpy(d_b, h_b, B_SIZE, cudaMemcpyHostToDevice));
+  utils::fill_n(d_c, M * N, 0.0);
 
   // CPU results
   DATA_TYPE* real_c = (DATA_TYPE*)cpu_allocator.allocate(C_SIZE);
   std::fill_n(real_c, M * N, 0.0);
-  matrixMultiplyOnCPU(h_a, h_b, real_c, M, N, K);
+  utils::matrixMultiply(h_a, h_b, real_c, M, N, K);
 
   // GPU results
-  dim3 block(32, 32);
-  dim3 grid(M / 32, N / 32);
+  dim3 block(kTileDim, kTileDim);
+  dim3 grid((M + kTileDim - 1) / kTileDim, (N + kTileDim - 1) / kTileDim);
 
   GPUTimer gpu_timer;
   float total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
-    fillNKernel<<<1024, (M * N + 1024 - 1) / 1024>>>(d_c, M * N, 0.0);
+    utils::fill_n(d_c, M * N, 0.0);
     gpu_timer.start();
     matrixMultiplyKernel_V1<<<grid, block>>>(d_a, d_b, d_c, M, N, K);
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();
   }
-  dbg(total_time, gpu_timer.totalTime());
   CUDA_CHECK(cudaMemcpy(h_c, d_c, C_SIZE, cudaMemcpyDeviceToHost));
-  dbg(checkEqual(h_c, real_c, M * N));
+  dbg(utils::checkEqual(h_c, real_c, M * N));
   std::printf("matrixMultiplyKernel_V1 cost time: %f ms\n",
               total_time / repeats);
 
   total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
-    fillNKernel<<<1024, (M * N + 1024 - 1) / 1024>>>(d_c, M * N, 0.0);
+    utils::fill_n(d_c, M * N, 0.0);
     gpu_timer.start();
     matrixMultiplyKernel_V2<<<grid, block>>>(d_a, d_b, d_c, M, N, K);
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();
   }
-  dbg(total_time, gpu_timer.totalTime());
   CUDA_CHECK(cudaMemcpy(h_c, d_c, C_SIZE, cudaMemcpyDeviceToHost));
-  dbg(checkEqual(h_c, real_c, M * N));
+  dbg(utils::checkEqual(h_c, real_c, M * N));
   std::printf("matrixMultiplyKernel_V2 cost time: %f ms\n",
               total_time / repeats);
 }

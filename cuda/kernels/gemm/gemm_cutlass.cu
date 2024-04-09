@@ -5,17 +5,17 @@
 #include "cutlass/gemm/device/gemm.h"
 #include "cutlass/layout/matrix.h"
 
-cudaError_t cutlassKernel(int M,
-                          int N,
-                          int K,
-                          DATA_TYPE alpha,
-                          DATA_TYPE const* A,
-                          int lda,
-                          DATA_TYPE const* B,
-                          int ldb,
-                          DATA_TYPE beta,
-                          DATA_TYPE* C,
-                          int ldc) {
+cutlass::Status matrixMultiplyKernel_CUTLASS(int M,
+                                             int N,
+                                             int K,
+                                             DATA_TYPE alpha,
+                                             DATA_TYPE const* A,
+                                             int lda,
+                                             DATA_TYPE const* B,
+                                             int ldb,
+                                             DATA_TYPE beta,
+                                             DATA_TYPE* C,
+                                             int ldc) {
   // Define type definition for single-precision CUTLASS GEMM with column-major
   // input matrices and 128x128x8 threadblock tile size (chosen by default).
   //
@@ -44,7 +44,7 @@ cudaError_t cutlassKernel(int M,
       RowMajor,
       DATA_TYPE,
       cutlass::arch::OpClassSimt,
-      cutlass::arch::Sm80,
+      cutlass::arch::Sm86,
       cutlass::gemm::GemmShape<128, 128, 8>,
       cutlass::gemm::GemmShape<64, 64, 8>,
       cutlass::gemm::GemmShape<1, 1, 1>,
@@ -81,21 +81,14 @@ cudaError_t cutlassKernel(int M,
 
   cutlass::Status status = gemm(args);
 
-  //
-  // Return a cudaError_t if the CUTLASS GEMM operator returned an error code.
-  //
-
-  if (status != cutlass::Status::kSuccess) {
-    return cudaErrorUnknown;
-  }
-
-  return cudaSuccess;
+  return status;
 }
 
 void gemm_cutlass() {
   constexpr uint32_t M = 1024;
-  constexpr uint32_t N = 2048;
+  constexpr uint32_t N = 1024;
   constexpr uint32_t K = 512;
+  dbg(M, N, K);
 
   constexpr uint32_t A_SIZE = sizeof(DATA_TYPE) * M * K;
   constexpr uint32_t B_SIZE = sizeof(DATA_TYPE) * K * N;
@@ -115,23 +108,27 @@ void gemm_cutlass() {
   DATA_TYPE* d_c = (DATA_TYPE*)gpu_allocator.allocate(C_SIZE);
   CUDA_CHECK(cudaMemcpy(d_a, h_a, A_SIZE, cudaMemcpyHostToDevice));
   CUDA_CHECK(cudaMemcpy(d_b, h_b, B_SIZE, cudaMemcpyHostToDevice));
+  utils::fill_n(d_c, M * N, 0.0);
 
   // CPU results
   DATA_TYPE* real_c = (DATA_TYPE*)cpu_allocator.allocate(C_SIZE);
   std::fill_n(real_c, M * N, 0.0);
-  matrixMultiplyOnCPU(h_a, h_b, real_c, M, N, K);
+  utils::matrixMultiply(h_a, h_b, real_c, M, N, K);
 
   GPUTimer gpu_timer;
   float total_time = 0.0;
+  cutlass::Status status;
   for (size_t i = 0; i < repeats; i++) {
-    fillNKernel<<<1024, (M * N + 1024 - 1) / 1024>>>(d_c, M * N, 0.0);
+    utils::fill_n(d_c, M * N, 0.0);
     gpu_timer.start();
-    CUDA_CHECK(cutlassKernel(M, N, K, 1.0, d_a, K, d_b, N, 0.0, d_c, N));
+    status =
+        matrixMultiplyKernel_CUTLASS(M, N, K, 1.0, d_a, K, d_b, N, 0.0, d_c, N);
     gpu_timer.stop();
     total_time += gpu_timer.elapsedTime();
   }
-  dbg(total_time, gpu_timer.totalTime());
+  dbg(cutlass::cutlassGetStatusString(status));
   CUDA_CHECK(cudaMemcpy(h_c, d_c, C_SIZE, cudaMemcpyDeviceToHost));
-  dbg(checkEqual(h_c, real_c, M * N));
-  std::printf("cutlassKernel cost time: %f ms\n", total_time / repeats);
+  dbg(utils::checkEqual(h_c, real_c, M * N));
+  std::printf("matrixMultiplyKernel_CUTLASS cost time: %f ms\n",
+              total_time / repeats);
 }
