@@ -6,7 +6,7 @@ cd build
 rm -rf *
 
 # compile target
-cmake .. -G Ninja -DWITH_DOUBLE=OFF -DWITH_DEBUG_MACRO=ON -DWITH_CUTLASS=ON
+cmake .. -G Ninja -DWITH_DEBUG_MACRO=ON -DWITH_CUTLASS=ON
 ninja -j8
 
 # cuda-memcheck ./kernel_caller

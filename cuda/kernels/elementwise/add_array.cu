@@ -45,7 +45,7 @@ void addArray() {
   constexpr uint32_t N = 1e8 + 1;
   constexpr uint32_t SIZE = sizeof(DATA_TYPE) * N;
 
-  MallocWrapper cpu_allocator;
+  CPUMallocWrapper cpu_allocator;
   DATA_TYPE* h_x = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
   DATA_TYPE* h_y = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
   DATA_TYPE* h_z = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
@@ -53,17 +53,12 @@ void addArray() {
   std::fill_n(h_x, N, a);
   std::fill_n(h_y, N, b);
 
-  Timer cpu_timer;
-  float total_time = 0.0;
-  for (size_t i = 0; i < repeats; i++) {
-    cpu_timer.start();
-    addArrayOnCPU(h_x, h_y, h_z, N);
-    cpu_timer.stop();
-    total_time += cpu_timer.elapsedTime();
-  }
-  dbg(total_time, cpu_timer.totalTime());
-  std::printf("addArrayOnCPU cost time: %f ms\n", total_time / repeats);
-  dbg(utils::checkEqual(h_z, N, c));
+  utils::performance<CPUTimer>(
+      "addArrayOnCPU",
+      repeats,
+      [&] {},
+      [&] { addArrayOnCPU(h_x, h_y, h_z, N); },
+      [&] { dbg(utils::checkEqual(h_z, N, c)); });
 
   GPUMallocWrapper gpu_allocator;
   DATA_TYPE* d_x = (DATA_TYPE*)gpu_allocator.allocate(SIZE);
@@ -79,27 +74,26 @@ void addArray() {
   dim3 block(block_size);
   dim3 grid(grid_size);
 
-  GPUTimer gpu_timer;
-  total_time = 0.0;
-  for (size_t i = 0; i < repeats; i++) {
-    gpu_timer.start();
-    addArrayOnGPU_V1<<<grid, block>>>(d_x, d_y, d_z, N);
-    gpu_timer.stop();
-    total_time += gpu_timer.elapsedTime();
-  }
-  std::printf("addArrayOnGPU_V1 cost time: %f ms\n", total_time / repeats);
-  CUDA_CHECK(cudaMemcpy(h_z, d_z, SIZE, cudaMemcpyDeviceToHost));
-  dbg(utils::checkEqual(h_z, N, c));
+  utils::performance<GPUTimer>(
+      "addArrayOnGPU_V1",
+      repeats,
+      [&] {},
+      [&] { addArrayOnGPU_V1<<<grid, block>>>(d_x, d_y, d_z, N); },
+      [&] {
+        CUDA_CHECK(cudaMemcpy(h_z, d_z, SIZE, cudaMemcpyDeviceToHost));
+        dbg(utils::checkEqual(h_z, N, c));
+      });
 
-  total_time = 0.0;
-  for (size_t i = 0; i < repeats; i++) {
-    CUDA_CHECK(cudaMemcpy(d_z, h_x, SIZE, cudaMemcpyHostToDevice));  // 清空结果
-    gpu_timer.start();
-    addArrayOnGPU_V2<<<10240, block_size>>>(d_x, d_y, d_z, N);
-    gpu_timer.stop();
-    total_time += gpu_timer.elapsedTime();
-  }
-  std::printf("addArrayOnGPU_V2 cost time: %f ms\n", total_time / repeats);
-  CUDA_CHECK(cudaMemcpy(h_z, d_z, SIZE, cudaMemcpyDeviceToHost));
-  dbg(utils::checkEqual(h_z, N, c));
+  utils::performance<GPUTimer>(
+      "addArrayOnGPU_V2",
+      repeats,
+      [&] {
+        // 清空结果
+        CUDA_CHECK(cudaMemcpy(d_z, h_x, SIZE, cudaMemcpyHostToDevice));
+      },
+      [&] { addArrayOnGPU_V2<<<10240, block_size>>>(d_x, d_y, d_z, N); },
+      [&] {
+        CUDA_CHECK(cudaMemcpy(h_z, d_z, SIZE, cudaMemcpyDeviceToHost));
+        dbg(utils::checkEqual(h_z, N, c));
+      });
 }

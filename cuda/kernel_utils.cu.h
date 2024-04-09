@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+
 #include "common.h"
 
 constexpr unsigned int kMask = 0xffffffff;
@@ -103,6 +105,25 @@ static __global__ void fillNKernel(DATA_TYPE* d_ptr,
 
 inline void fill_n(DATA_TYPE* d_ptr, size_t N, DATA_TYPE value) {
   fillNKernel<<<1024, (N + 1024 - 1) / 1024>>>(d_ptr, N, value);
+}
+
+template <typename CPUTimer>
+static void performance(const std::string& tag,
+                        size_t repeats,
+                        const std::function<void()>& pre_process,
+                        const std::function<void()>& kernel,
+                        const std::function<void()>& post_process) {
+  CPUTimer timer;
+  float total_time = 0.0;
+  pre_process();
+  for (size_t i = 0; i < repeats; i++) {
+    timer.start();
+    kernel();
+    timer.stop();
+    total_time += timer.elapsedTime();
+  }
+  post_process();
+  std::printf("%s cost time: %f ms\n", tag.c_str(), total_time / repeats);
 }
 
 }  // namespace utils

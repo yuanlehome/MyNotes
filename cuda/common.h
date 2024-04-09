@@ -12,11 +12,7 @@
 
 #include "dbg.h"
 
-#ifdef WITH_DOUBLE
-using DATA_TYPE = double;
-#else
 using DATA_TYPE = float;
-#endif
 
 constexpr size_t repeats = 50;
 
@@ -35,18 +31,18 @@ constexpr DATA_TYPE EPSILON = 1.0e-8;
   } while (0)
 
 //===----------------------------------------------------------------------===//
-// MallocWrapper
+// CPUMallocWrapper
 //===----------------------------------------------------------------------===//
-class MallocWrapper {
+class CPUMallocWrapper {
  public:
-  MallocWrapper() = default;
+  CPUMallocWrapper() = default;
 
   void* allocate(size_t size) {
     ptrs_.push_back(std::malloc(size));
     return ptrs_.back();
   }
 
-  ~MallocWrapper() {
+  ~CPUMallocWrapper() {
     for (void* ptr : ptrs_) {
       if (ptr) std::free(ptr);
     }
@@ -81,13 +77,13 @@ class GPUMallocWrapper {
 };
 
 //===----------------------------------------------------------------------===//
-// Timer
+// CPUTimer
 //===----------------------------------------------------------------------===//
-class Timer {
+class CPUTimer {
  public:
-  Timer() = default;
+  CPUTimer() = default;
 
-  ~Timer() = default;
+  ~CPUTimer() = default;
 
   void start() { start_time_ = std::chrono::steady_clock::now(); }
 

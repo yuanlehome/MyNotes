@@ -5,6 +5,7 @@
 #include "cutlass/gemm/device/gemm.h"
 #include "cutlass/layout/matrix.h"
 
+// C = alpha * A * B + beta * C
 cutlass::Status matrixMultiplyKernel_CUTLASS(int M,
                                              int N,
                                              int K,
@@ -88,13 +89,12 @@ void gemm_cutlass() {
   constexpr uint32_t M = 1024;
   constexpr uint32_t N = 1024;
   constexpr uint32_t K = 512;
-  dbg(M, N, K);
 
   constexpr uint32_t A_SIZE = sizeof(DATA_TYPE) * M * K;
   constexpr uint32_t B_SIZE = sizeof(DATA_TYPE) * K * N;
   constexpr uint32_t C_SIZE = sizeof(DATA_TYPE) * M * N;
 
-  MallocWrapper cpu_allocator;
+  CPUMallocWrapper cpu_allocator;
   DATA_TYPE* h_a = (DATA_TYPE*)cpu_allocator.allocate(A_SIZE);
   DATA_TYPE* h_b = (DATA_TYPE*)cpu_allocator.allocate(B_SIZE);
   DATA_TYPE* h_c = (DATA_TYPE*)cpu_allocator.allocate(C_SIZE);
@@ -115,20 +115,20 @@ void gemm_cutlass() {
   std::fill_n(real_c, M * N, 0.0);
   utils::matrixMultiply(h_a, h_b, real_c, M, N, K);
 
-  GPUTimer gpu_timer;
-  float total_time = 0.0;
-  cutlass::Status status;
-  for (size_t i = 0; i < repeats; i++) {
-    utils::fill_n(d_c, M * N, 0.0);
-    gpu_timer.start();
-    status =
+  utils::performance<GPUTimer>(
+      "matrixMultiplyKernel_CUTLASS",
+      repeats,
+      [&] { utils::fill_n(d_c, M * N, 0.0); },
+      [&] {
         matrixMultiplyKernel_CUTLASS(M, N, K, 1.0, d_a, K, d_b, N, 0.0, d_c, N);
-    gpu_timer.stop();
-    total_time += gpu_timer.elapsedTime();
-  }
-  dbg(cutlass::cutlassGetStatusString(status));
-  CUDA_CHECK(cudaMemcpy(h_c, d_c, C_SIZE, cudaMemcpyDeviceToHost));
-  dbg(utils::checkEqual(h_c, real_c, M * N));
-  std::printf("matrixMultiplyKernel_CUTLASS cost time: %f ms\n",
-              total_time / repeats);
+      },
+      [&] {
+        utils::fill_n(d_c, M * N, 0.0);
+        cutlass::Status status;
+        status = matrixMultiplyKernel_CUTLASS(
+            M, N, K, 1.0, d_a, K, d_b, N, 0.0, d_c, N);
+        dbg(cutlass::cutlassGetStatusString(status));
+        CUDA_CHECK(cudaMemcpy(h_c, d_c, C_SIZE, cudaMemcpyDeviceToHost));
+        dbg(utils::checkEqual(h_c, real_c, M * N));
+      });
 }

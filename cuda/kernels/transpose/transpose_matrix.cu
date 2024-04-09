@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "kernel_caller_declare.h"
+#include "kernel_utils.cu.h"
 
 constexpr DATA_TYPE a = 1.23;
 constexpr DATA_TYPE b = 2.34;
@@ -135,7 +136,7 @@ void transposeMatrix() {
   constexpr uint32_t N = 2e3;
   constexpr uint32_t SIZE = sizeof(DATA_TYPE) * M * N;
 
-  MallocWrapper cpu_allocator;
+  CPUMallocWrapper cpu_allocator;
   DATA_TYPE* h_x = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
   DATA_TYPE* h_y = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
   DATA_TYPE* h_y_base = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
@@ -162,77 +163,63 @@ void transposeMatrix() {
   dim3 block(block_size_x, block_size_y);
   dim3 grid(grid_size_x, grid_size_y);
 
-  GPUTimer gpu_timer;
-  float total_time = 0.0;
-  for (size_t i = 0; i < repeats; i++) {
-    gpu_timer.start();
-    matrixCopyRow<<<grid, block>>>(d_x, d_y, M, N);
-    gpu_timer.stop();
-    total_time += gpu_timer.elapsedTime();
-  }
-  dbg(total_time, gpu_timer.totalTime());
-  std::printf("matrixCopyRow cost time: %f ms\n", total_time / repeats);
-  CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
-  dbg(utils::checkEqual(h_x, h_y, M * N));
+  utils::performance<GPUTimer>(
+      "matrixCopyRow",
+      repeats,
+      [&] {},
+      [&] { matrixCopyRow<<<grid, block>>>(d_x, d_y, M, N); },
+      [&] {
+        CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
+        dbg(utils::checkEqual(h_x, h_y, M * N));
+      });
 
-  total_time = 0.0;
-  for (size_t i = 0; i < repeats; i++) {
-    gpu_timer.start();
-    matrixCopyCol<<<grid, block>>>(d_x, d_y, M, N);
-    gpu_timer.stop();
-    total_time += gpu_timer.elapsedTime();
-  }
-  dbg(total_time, gpu_timer.totalTime());
-  std::printf("matrixCopyCol cost time: %f ms\n", total_time / repeats);
-  CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
-  dbg(utils::checkEqual(h_x, h_y, M * N));
+  utils::performance<GPUTimer>(
+      "matrixCopyCol",
+      repeats,
+      [&] {},
+      [&] { matrixCopyCol<<<grid, block>>>(d_x, d_y, M, N); },
+      [&] {
+        CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
+        dbg(utils::checkEqual(h_x, h_y, M * N));
+      });
 
-  total_time = 0.0;
-  for (size_t i = 0; i < repeats; i++) {
-    gpu_timer.start();
-    transposeMatrix_V1<<<grid, block>>>(d_x, d_y, M, N);
-    gpu_timer.stop();
-    total_time += gpu_timer.elapsedTime();
-  }
-  dbg(total_time, gpu_timer.totalTime());
-  std::printf("transposeMatrix_V1 cost time: %f ms\n", total_time / repeats);
-  CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
-  dbg(utils::checkEqual(h_y_base, h_y, M * N));
+  utils::performance<GPUTimer>(
+      "transposeMatrix_V1",
+      repeats,
+      [&] {},
+      [&] { transposeMatrix_V1<<<grid, block>>>(d_x, d_y, M, N); },
+      [&] {
+        CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
+        dbg(utils::checkEqual(h_y_base, h_y, M * N));
+      });
 
-  total_time = 0.0;
-  for (size_t i = 0; i < repeats; i++) {
-    gpu_timer.start();
-    transposeMatrix_V2<<<grid, block>>>(d_x, d_y, M, N);
-    gpu_timer.stop();
-    total_time += gpu_timer.elapsedTime();
-  }
-  dbg(total_time, gpu_timer.totalTime());
-  std::printf("transposeMatrix_V2 cost time: %f ms\n", total_time / repeats);
-  CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
-  dbg(utils::checkEqual(h_y_base, h_y, M * N));
+  utils::performance<GPUTimer>(
+      "transposeMatrix_V2",
+      repeats,
+      [&] {},
+      [&] { transposeMatrix_V2<<<grid, block>>>(d_x, d_y, M, N); },
+      [&] {
+        CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
+        dbg(utils::checkEqual(h_y_base, h_y, M * N));
+      });
 
-  total_time = 0.0;
-  for (size_t i = 0; i < repeats; i++) {
-    gpu_timer.start();
-    transposeMatrix_V3<<<grid, block>>>(d_x, d_y, M, N);
-    gpu_timer.stop();
-    total_time += gpu_timer.elapsedTime();
-  }
-  dbg(total_time, gpu_timer.totalTime());
-  std::printf("transposeMatrix_V3 cost time: %f ms\n", total_time / repeats);
-  CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
-  dbg(utils::checkEqual(h_y_base, h_y, M * N));
+  utils::performance<GPUTimer>(
+      "transposeMatrix_V3",
+      repeats,
+      [&] {},
+      [&] { transposeMatrix_V3<<<grid, block>>>(d_x, d_y, M, N); },
+      [&] {
+        CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
+        dbg(utils::checkEqual(h_y_base, h_y, M * N));
+      });
 
-  total_time = 0.0;
-  for (size_t i = 0; i < repeats; i++) {
-    gpu_timer.start();
-    transposeMatrix_V4<<<grid, block>>>(d_x, d_y, M, N);
-    gpu_timer.stop();
-    total_time += gpu_timer.elapsedTime();
-  }
-  dbg(total_time, gpu_timer.totalTime());
-  std::printf("transposeMatrix_V4 cost time: %f ms\n", total_time / repeats);
-
-  CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
-  dbg(utils::checkEqual(h_y_base, h_y, M * N));
+  utils::performance<GPUTimer>(
+      "transposeMatrix_V4",
+      repeats,
+      [&] {},
+      [&] { transposeMatrix_V4<<<grid, block>>>(d_x, d_y, M, N); },
+      [&] {
+        CUDA_CHECK(cudaMemcpy(h_y, d_y, SIZE, cudaMemcpyDeviceToHost));
+        dbg(utils::checkEqual(h_y_base, h_y, M * N));
+      });
 }

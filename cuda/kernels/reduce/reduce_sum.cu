@@ -161,42 +161,41 @@ void reduceSum() {
   constexpr uint32_t N = 1e8;
   constexpr uint32_t SIZE = sizeof(DATA_TYPE) * N;
 
-  MallocWrapper cpu_allocator;
+  CPUMallocWrapper cpu_allocator;
   DATA_TYPE* h_x = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
   std::fill_n(h_x, N, a);
 
-  // Timer cpu_timer;
-  // float total_time = 0.0;
-  // DATA_TYPE sum_on_cpu;
-  // for (size_t i = 0; i < repeats; i++) {
-  //   cpu_timer.start();
-  //   sum_on_cpu = reduceSumOnCPU_V1(h_x, 0, N - 1);
-  //   cpu_timer.stop();
-  //   total_time += cpu_timer.elapsedTime();
-  // }
-  // dbg(sum_on_cpu);
-  // std::printf("reduceSumOnCPU_V1 cost time: %f ms\n", total_time / repeats);
+  utils::performance<CPUTimer>(
+      "reduceSumOnCPU_V1",
+      repeats,
+      [&] {},
+      [&] { reduceSumOnCPU_V1(h_x, 0, N - 1); },
+      [&] {
+        auto sum = reduceSumOnCPU_V1(h_x, 0, N - 1);
+        dbg(sum);
+      });
 
-  // total_time = 0.0;
-  // for (size_t i = 0; i < repeats; i++) {
-  //   cpu_timer.start();
-  //   sum_on_cpu = reduceSumOnCPU_V2(h_x, 0, N - 1);
-  //   cpu_timer.stop();
-  //   total_time += cpu_timer.elapsedTime();
-  // }
-  // dbg(sum_on_cpu);
-  // std::printf("reduceSumOnCPU_V2 cost time: %f ms\n", total_time / repeats);
+  utils::performance<CPUTimer>(
+      "reduceSumOnCPU_V2",
+      repeats,
+      [&] {},
+      [&] { reduceSumOnCPU_V2(h_x, 0, N - 1); },
+      [&] {
+        auto sum = reduceSumOnCPU_V2(h_x, 0, N - 1);
+        dbg(sum);
+      });
 
-  // total_time = 0.0;
-  // for (size_t i = 0; i < repeats; i++) {
-  //   cpu_timer.start();
-  //   sum_on_cpu = reduceSumOnCPU_V3(h_x, 0, N - 1);
-  //   cpu_timer.stop();
-  //   total_time += cpu_timer.elapsedTime();
-  //   std::fill_n(h_x, N, a);  // 恢复原数组
-  // }
-  // dbg(sum_on_cpu);
-  // std::printf("reduceSumOnCPU_V3 cost time: %f ms\n", total_time / repeats);
+  utils::performance<CPUTimer>(
+      "reduceSumOnCPU_V3",
+      repeats,
+      [&] {},
+      [&] { reduceSumOnCPU_V3(h_x, 0, N - 1); },
+      [&] {
+        std::fill_n(h_x, N, a);  // 恢复原数组
+        auto sum = reduceSumOnCPU_V3(h_x, 0, N - 1);
+        dbg(sum);
+        std::fill_n(h_x, N, a);  // 恢复原数组
+      });
 
   const uint32_t block_size = kBlockSize;
   const uint32_t grid_size = (N + block_size - 1) / block_size;
