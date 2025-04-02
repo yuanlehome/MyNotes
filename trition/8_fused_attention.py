@@ -243,7 +243,6 @@ def op_test():
 
 try:
     from flash_attn.flash_attn_interface import flash_attn_func
-
     HAS_FLASH = True
 except BaseException:
     HAS_FLASH = False

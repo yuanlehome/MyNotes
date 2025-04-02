@@ -31,18 +31,18 @@ constexpr DATA_TYPE EPSILON = 1.0e-8;
   } while (0)
 
 //===----------------------------------------------------------------------===//
-// CPUMallocWrapper
+// CpuMallocWrapper
 //===----------------------------------------------------------------------===//
-class CPUMallocWrapper {
+class CpuMallocWrapper {
  public:
-  CPUMallocWrapper() = default;
+  CpuMallocWrapper() = default;
 
   void* allocate(size_t size) {
     ptrs_.push_back(std::malloc(size));
     return ptrs_.back();
   }
 
-  ~CPUMallocWrapper() {
+  ~CpuMallocWrapper() {
     for (void* ptr : ptrs_) {
       if (ptr) std::free(ptr);
     }
@@ -53,11 +53,11 @@ class CPUMallocWrapper {
 };
 
 //===----------------------------------------------------------------------===//
-// GPUMallocWrapper
+// GpuMallocWrapper
 //===----------------------------------------------------------------------===//
-class GPUMallocWrapper {
+class GpuMallocWrapper {
  public:
-  GPUMallocWrapper() = default;
+  GpuMallocWrapper() = default;
 
   void* allocate(size_t size) {
     void* ptr{nullptr};
@@ -66,7 +66,7 @@ class GPUMallocWrapper {
     return ptr;
   }
 
-  ~GPUMallocWrapper() {
+  ~GpuMallocWrapper() {
     for (void* ptr : ptrs_) {
       if (ptr) CUDA_CHECK(cudaFree(ptr));
     }
@@ -77,13 +77,13 @@ class GPUMallocWrapper {
 };
 
 //===----------------------------------------------------------------------===//
-// CPUTimer
+// CpuTimer
 //===----------------------------------------------------------------------===//
-class CPUTimer {
+class CpuTimer {
  public:
-  CPUTimer() = default;
+  CpuTimer() = default;
 
-  ~CPUTimer() = default;
+  ~CpuTimer() = default;
 
   void start() { start_time_ = std::chrono::steady_clock::now(); }
 
@@ -107,16 +107,16 @@ class CPUTimer {
 };
 
 //===----------------------------------------------------------------------===//
-// GPUTimer
+// GpuTimer
 //===----------------------------------------------------------------------===//
-class GPUTimer {
+class GpuTimer {
  public:
-  GPUTimer() {
+  GpuTimer() {
     CUDA_CHECK(cudaEventCreate(&start_));
     CUDA_CHECK(cudaEventCreate(&stop_));
   }
 
-  ~GPUTimer() {
+  ~GpuTimer() {
     CUDA_CHECK(cudaEventDestroy(start_));
     CUDA_CHECK(cudaEventDestroy(stop_));
   }

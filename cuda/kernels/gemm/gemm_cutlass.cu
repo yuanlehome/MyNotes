@@ -33,8 +33,8 @@ cutlass::Status matrixMultiplyKernel_CUTLASS(int M,
   using ColumnMajor = cutlass::layout::ColumnMajor;
   using RowMajor = cutlass::layout::RowMajor;
 
-  using EpilogueOutputOp =
-      cutlass::epilogue::thread::LinearCombination<float, 1, float, float>;
+  using EpilogueOutputOp = cutlass::epilogue::thread::
+      LinearCombination<DATA_TYPE, 1, DATA_TYPE, DATA_TYPE>;
 
   using Gemm = cutlass::gemm::device::Gemm<
       DATA_TYPE,  // Data-type of A matrix
@@ -94,7 +94,7 @@ void gemm_cutlass() {
   constexpr uint32_t B_SIZE = sizeof(DATA_TYPE) * K * N;
   constexpr uint32_t C_SIZE = sizeof(DATA_TYPE) * M * N;
 
-  CPUMallocWrapper cpu_allocator;
+  CpuMallocWrapper cpu_allocator;
   DATA_TYPE* h_a = (DATA_TYPE*)cpu_allocator.allocate(A_SIZE);
   DATA_TYPE* h_b = (DATA_TYPE*)cpu_allocator.allocate(B_SIZE);
   DATA_TYPE* h_c = (DATA_TYPE*)cpu_allocator.allocate(C_SIZE);
@@ -102,7 +102,7 @@ void gemm_cutlass() {
   std::fill_n(h_b, K * N, 0.3);
   std::fill_n(h_c, M * N, 0.0);
 
-  GPUMallocWrapper gpu_allocator;
+  GpuMallocWrapper gpu_allocator;
   DATA_TYPE* d_a = (DATA_TYPE*)gpu_allocator.allocate(A_SIZE);
   DATA_TYPE* d_b = (DATA_TYPE*)gpu_allocator.allocate(B_SIZE);
   DATA_TYPE* d_c = (DATA_TYPE*)gpu_allocator.allocate(C_SIZE);
@@ -115,7 +115,7 @@ void gemm_cutlass() {
   std::fill_n(real_c, M * N, 0.0);
   utils::matrixMultiply(h_a, h_b, real_c, M, N, K);
 
-  utils::performance<GPUTimer>(
+  utils::performance<GpuTimer>(
       "matrixMultiplyKernel_CUTLASS",
       repeats,
       [&] { utils::fill_n(d_c, M * N, 0.0); },

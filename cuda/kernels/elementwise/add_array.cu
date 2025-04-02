@@ -45,7 +45,7 @@ void addArray() {
   constexpr uint32_t N = 1e8 + 1;
   constexpr uint32_t SIZE = sizeof(DATA_TYPE) * N;
 
-  CPUMallocWrapper cpu_allocator;
+  CpuMallocWrapper cpu_allocator;
   DATA_TYPE* h_x = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
   DATA_TYPE* h_y = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
   DATA_TYPE* h_z = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
@@ -53,14 +53,14 @@ void addArray() {
   std::fill_n(h_x, N, a);
   std::fill_n(h_y, N, b);
 
-  utils::performance<CPUTimer>(
+  utils::performance<CpuTimer>(
       "addArrayOnCPU",
       repeats,
       [&] {},
       [&] { addArrayOnCPU(h_x, h_y, h_z, N); },
       [&] { dbg(utils::checkEqual(h_z, N, c)); });
 
-  GPUMallocWrapper gpu_allocator;
+  GpuMallocWrapper gpu_allocator;
   DATA_TYPE* d_x = (DATA_TYPE*)gpu_allocator.allocate(SIZE);
   DATA_TYPE* d_y = (DATA_TYPE*)gpu_allocator.allocate(SIZE);
   DATA_TYPE* d_z = (DATA_TYPE*)gpu_allocator.allocate(SIZE);
@@ -74,7 +74,7 @@ void addArray() {
   dim3 block(block_size);
   dim3 grid(grid_size);
 
-  utils::performance<GPUTimer>(
+  utils::performance<GpuTimer>(
       "addArrayOnGPU_V1",
       repeats,
       [&] {},
@@ -84,7 +84,7 @@ void addArray() {
         dbg(utils::checkEqual(h_z, N, c));
       });
 
-  utils::performance<GPUTimer>(
+  utils::performance<GpuTimer>(
       "addArrayOnGPU_V2",
       repeats,
       [&] {

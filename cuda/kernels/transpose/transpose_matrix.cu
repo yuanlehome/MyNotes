@@ -136,7 +136,7 @@ void transposeMatrix() {
   constexpr uint32_t N = 2e3;
   constexpr uint32_t SIZE = sizeof(DATA_TYPE) * M * N;
 
-  CPUMallocWrapper cpu_allocator;
+  CpuMallocWrapper cpu_allocator;
   DATA_TYPE* h_x = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
   DATA_TYPE* h_y = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
   DATA_TYPE* h_y_base = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
@@ -148,7 +148,7 @@ void transposeMatrix() {
 
   transposeMatrixOnCPU(h_x, h_y_base, M, N);
 
-  GPUMallocWrapper gpu_allocator;
+  GpuMallocWrapper gpu_allocator;
   DATA_TYPE* d_x = (DATA_TYPE*)gpu_allocator.allocate(SIZE);
   DATA_TYPE* d_y = (DATA_TYPE*)gpu_allocator.allocate(SIZE);
 
@@ -163,7 +163,7 @@ void transposeMatrix() {
   dim3 block(block_size_x, block_size_y);
   dim3 grid(grid_size_x, grid_size_y);
 
-  utils::performance<GPUTimer>(
+  utils::performance<GpuTimer>(
       "matrixCopyRow",
       repeats,
       [&] {},
@@ -173,7 +173,7 @@ void transposeMatrix() {
         dbg(utils::checkEqual(h_x, h_y, M * N));
       });
 
-  utils::performance<GPUTimer>(
+  utils::performance<GpuTimer>(
       "matrixCopyCol",
       repeats,
       [&] {},
@@ -183,7 +183,7 @@ void transposeMatrix() {
         dbg(utils::checkEqual(h_x, h_y, M * N));
       });
 
-  utils::performance<GPUTimer>(
+  utils::performance<GpuTimer>(
       "transposeMatrix_V1",
       repeats,
       [&] {},
@@ -193,7 +193,7 @@ void transposeMatrix() {
         dbg(utils::checkEqual(h_y_base, h_y, M * N));
       });
 
-  utils::performance<GPUTimer>(
+  utils::performance<GpuTimer>(
       "transposeMatrix_V2",
       repeats,
       [&] {},
@@ -203,7 +203,7 @@ void transposeMatrix() {
         dbg(utils::checkEqual(h_y_base, h_y, M * N));
       });
 
-  utils::performance<GPUTimer>(
+  utils::performance<GpuTimer>(
       "transposeMatrix_V3",
       repeats,
       [&] {},
@@ -213,7 +213,7 @@ void transposeMatrix() {
         dbg(utils::checkEqual(h_y_base, h_y, M * N));
       });
 
-  utils::performance<GPUTimer>(
+  utils::performance<GpuTimer>(
       "transposeMatrix_V4",
       repeats,
       [&] {},

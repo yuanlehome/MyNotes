@@ -107,13 +107,13 @@ inline void fill_n(DATA_TYPE* d_ptr, size_t N, DATA_TYPE value) {
   fillNKernel<<<1024, (N + 1024 - 1) / 1024>>>(d_ptr, N, value);
 }
 
-template <typename CPUTimer>
+template <typename CpuTimer>
 static void performance(const std::string& tag,
                         size_t repeats,
                         const std::function<void()>& pre_process,
                         const std::function<void()>& kernel,
                         const std::function<void()>& post_process) {
-  CPUTimer timer;
+  CpuTimer timer;
   float total_time = 0.0;
   pre_process();
   for (size_t i = 0; i < repeats; i++) {

@@ -161,11 +161,11 @@ void reduceSum() {
   constexpr uint32_t N = 1e8;
   constexpr uint32_t SIZE = sizeof(DATA_TYPE) * N;
 
-  CPUMallocWrapper cpu_allocator;
+  CpuMallocWrapper cpu_allocator;
   DATA_TYPE* h_x = (DATA_TYPE*)cpu_allocator.allocate(SIZE);
   std::fill_n(h_x, N, a);
 
-  utils::performance<CPUTimer>(
+  utils::performance<CpuTimer>(
       "reduceSumOnCPU_V1",
       repeats,
       [&] {},
@@ -175,7 +175,7 @@ void reduceSum() {
         dbg(sum);
       });
 
-  utils::performance<CPUTimer>(
+  utils::performance<CpuTimer>(
       "reduceSumOnCPU_V2",
       repeats,
       [&] {},
@@ -185,7 +185,7 @@ void reduceSum() {
         dbg(sum);
       });
 
-  utils::performance<CPUTimer>(
+  utils::performance<CpuTimer>(
       "reduceSumOnCPU_V3",
       repeats,
       [&] {},
@@ -203,13 +203,13 @@ void reduceSum() {
   dim3 block(block_size);
   dim3 grid(grid_size);
 
-  GPUMallocWrapper gpu_allocator;
+  GpuMallocWrapper gpu_allocator;
   DATA_TYPE* d_x = (DATA_TYPE*)gpu_allocator.allocate(SIZE);
   CUDA_CHECK(cudaMemcpy(d_x, h_x, SIZE, cudaMemcpyHostToDevice));
 
   DATA_TYPE* d_y = (DATA_TYPE*)gpu_allocator.allocate(sizeof(DATA_TYPE));
 
-  GPUTimer gpu_timer;
+  GpuTimer gpu_timer;
   DATA_TYPE y = 0.0;
   float total_time = 0.0;
   for (size_t i = 0; i < repeats; i++) {
